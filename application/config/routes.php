@@ -53,3 +53,4 @@ $route['layout_login'] = 'login';
 $route['default_controller'] = 'template';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['daftar_pkl'] = 'Daftar_pkl';
