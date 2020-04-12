@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>List Perusahaan</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,7 +17,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body>
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -141,47 +141,205 @@
       </li>
     </ul>
   </nav>
-   <li class="nav-item">
-                <a href="<?php echo base_url(); ?>assets/AdminLTE/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url(); ?>assets/AdminLTE/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-header">EXAMPLES</li>
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>assets/AdminLTE/calendar.html" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>assets/AdminLTE/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-        </li>
+ 
+  <!-- /.navbar -->
+
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Daftar Perusahaan</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Blank Page</li>
+            </ol>
+          </div>
         </div>
-        </body>
-        </html>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+ 
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+
+ <!-- Daftar perusahaan nya -->
+	<table cellspacing="7">
+		  <tr>
+		    <td scope="col" width="5%">
+		    <div class="card" style="width: 18rem;">
+ 			<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+   			<h5 class="card-title">Bukalapak.com</h5>
+    		<p class="card-text">Ini perusahaan Bukalapak.com</p>
+   			<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>
+			</td>
+		 
+			<td scope="col" width="5%">
+			<div class="card" style="width: 18rem;">
+			<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+    		<h5 class="card-title">Toko Pedia</h5>
+    		<p class="card-text">Ini perusahaan Tokopedia</p>
+    		<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+		    </div>        
+			</div>	
+		 	</td>
+
+			<td scope="col" width="5%">
+		 	<div class="card" style="width: 18rem;">
+		 	<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+    		<h5 class="card-title">Toko Pedia</h5>
+    		<p class="card-text">Ini perusahaan Tokopedia</p>
+    		<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>        
+			</div>	
+			</td>
+		 </tr>
+
+		 <tr>
+		 	<td>
+		 	<div class="card" style="width: 18rem;">
+ 		 	<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+   			<h5 class="card-title">Bukalapak.com</h5>
+    		<p class="card-text">Ini perusahaan Bukalapak.com</p>
+   			<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>
+		 	</td>
+		 
+		 
+		 	<td>
+		 	<div class="card" style="width: 18rem;">
+		 	<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+    		<h5 class="card-title">Toko Pedia</h5>
+    		<p class="card-text">Ini perusahaan Tokopedia</p>
+    		<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>        
+			</div>	
+			</td>
+
+			<td>
+		 	<div class="card" style="width: 18rem;">
+		 	<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+    		<h5 class="card-title">Toko Pedia</h5>
+    		<p class="card-text">Ini perusahaan Tokopedia</p>
+    		<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>        
+			</div>	
+			</td>
+		 </tr>
+
+		<tr>
+		    <td scope="col" width="5%">
+		    <div class="card" style="width: 18rem;">
+ 			<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+   			<h5 class="card-title">Bukalapak.com</h5>
+    		<p class="card-text">Ini perusahaan Bukalapak.com</p>
+   			<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>
+			</td>
+		 
+			<td scope="col" width="5%">
+			<div class="card" style="width: 18rem;">
+			<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+    		<h5 class="card-title">Toko Pedia</h5>
+    		<p class="card-text">Ini perusahaan Tokopedia</p>
+    		<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+		    </div>        
+			</div>	
+		 	</td>
+
+			<td scope="col" width="5%">
+		 	<div class="card" style="width: 18rem;">
+		 	<img class="card-img-top" src="..." alt="Card image cap">
+  			<div class="card-body">
+    		<h5 class="card-title">Toko Pedia</h5>
+    		<p class="card-text">Ini perusahaan Tokopedia</p>
+    		<a href="#" class="btn btn-primary">Lihat</a>
+  			</div>
+			</div>        
+			</div>	
+			</td>
+		 </tr>
+
+	</table>
+
+
+
+		
+
+		
+
+<!-- end daftar perusahaannya -->
+
+        <!-- /.card-body -->
+        <div class="card-footer">
+          Footer
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.3-pre
+    </div>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/demo.js"></script>
+</body>
+</html>
