@@ -117,6 +117,7 @@
       </li>
     </ul>
   </nav>
+<<<<<<< HEAD
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -149,7 +150,7 @@
                 Dashboard
               </p>
             </a>
-          </li>
+   		    </li>
 
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>assets/AdminLTE/gallery.html" class="nav-link">
@@ -206,8 +207,5 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-        
-
-  
+        </body>
+        </html>
