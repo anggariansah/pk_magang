@@ -59,3 +59,5 @@ $route['perusahaan_list'] = 'ListPerusahaan';
 
 $route['daftar_pkl'] = 'Daftar_pkl';
 
+$route['riwayat_bimbingan'] = 'Riwayat_Bimbingan';
+
