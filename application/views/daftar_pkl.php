@@ -19,7 +19,6 @@
 <body>
 
 
-
 <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -68,11 +67,14 @@
       </div>
               <!-- /.card-body -->
 
+    <div class="card-footer">
+        <button type="daftar" class="btn btn-primary">Daftar</button>
+      </div>
+    </form>
+    </div>
+    <!-- /.card -->
+
+
 </body>
 
-              <div class="card-footer">
-                <button type="daftar" class="btn btn-primary">Daftar</button>
-              </div>
-            </form>
-          </div>
-          <!-- /.card -->
+ 

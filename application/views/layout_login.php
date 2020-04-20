@@ -33,7 +33,7 @@
             <div class="row">
               <div class="media">
               <img src="<?php echo base_url(); ?>assets/image/undraw_quitting_time_dm8t.png" alt="User Avatar">
-              <img src="<?php echo base_url(); ?>assets/image/himatik.jpeg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <!-- <img src="<?php echo base_url(); ?>assets/image/himatik.jpeg" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
               <div class="col-lg-7">
               <div class="col-lg-7">
                 <div class="p-5">
