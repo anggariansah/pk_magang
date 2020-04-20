@@ -56,6 +56,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['perusahaan_list'] = 'ListPerusahaan';
+$route['detail_mahasiswa'] = 'DetailMahasiswa';
 
 $route['daftar_pkl'] = 'Daftar_pkl';
 
