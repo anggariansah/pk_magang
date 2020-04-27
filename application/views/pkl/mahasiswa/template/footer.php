@@ -1,5 +1,4 @@
-
-    </section>
+   </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
