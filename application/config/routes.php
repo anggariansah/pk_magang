@@ -53,9 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// $route['list_perusahaan'] = 'list_perusahaan';
-// $route['daftar'] = 'daftar';
-// $route['login'] = 'login';
+
 $route['default_controller'] = 'welcome';
-// $route['(:any)'] = 'halaman_mahasiswa/view/$1';
+
 
