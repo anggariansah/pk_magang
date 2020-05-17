@@ -25,7 +25,7 @@ class PKL_Pembimbing extends CI_Controller {
 		$data['title'] = "List Mahasiswa";
 		$this->load->view('pkl/pembimbing/template/header');
 		$this->load->view('pkl/pembimbing/template/sidebar', $data);
-        $this->load->view('pkl/pembimbing/pages/dashboard');
+        $this->load->view('pkl/pembimbing/pages/list_mahasiswa');
         $this->load->view('pkl/pembimbing/template/footer');
 	}
 
@@ -34,7 +34,7 @@ class PKL_Pembimbing extends CI_Controller {
 		$data['title'] = "Nilai";
 		$this->load->view('pkl/pembimbing/template/header');
 		$this->load->view('pkl/pembimbing/template/sidebar', $data);
-        $this->load->view('pkl/pembimbing/pages/dashboard');
+        $this->load->view('pkl/pembimbing/pages/nilai');
         $this->load->view('pkl/pembimbing/template/footer');
 	}
 
