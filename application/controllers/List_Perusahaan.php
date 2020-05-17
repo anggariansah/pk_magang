@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ListPerusahaan extends CI_Controller {
+class List_Perusahaan extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,6 @@ class ListPerusahaan extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('layout_perusahaan');
+		$this->load->view('mahasiswa/pages/list_perusahaan');
 	}
 }

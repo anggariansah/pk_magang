@@ -20,6 +20,6 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('layout_login.php');
+		$this->load->view('mahasiswa/pages/login.php');
 	}
 }
