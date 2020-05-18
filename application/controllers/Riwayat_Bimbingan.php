@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class riwayat_bimbingan extends CI_Controller {
+class Riwayat_Bimbingan extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,6 @@ class riwayat_bimbingan extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('riwayat_bimbingan');
+		$this->load->view('mahasiswa/pages/riwayat_bimbingan');
 	}
 }

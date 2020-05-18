@@ -49,7 +49,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="<?php echo site_url("pkl_mahasiswa/bimbingan")?>" class="nav-link">
+            <a href="<?php echo site_url("pkl_mahasiswa/riwayat_bimbingan")?>" class="nav-link">
               <i class="nav-icon far fa-history"></i>
               <p>
                 Riwayat Bimbingan

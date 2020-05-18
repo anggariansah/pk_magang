@@ -57,5 +57,3 @@ $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'welcome';
 
 
-$route['riwayat_bimbingan'] = 'Riwayat_Bimbingan';
-
