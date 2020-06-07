@@ -1,8 +1,5 @@
 
-
  <!-- Content Wrapper. Contains page content -->
-  
-   
     <!-- Main content -->
     <section class="content">
 
@@ -21,123 +18,29 @@
  <!-- Daftar perusahaan nya -->
 	<table cellspacing="7">
 		  <tr>
-		    <td scope="col" width="5%">
-		    <div class="card" style="width: 18rem;">
- 			<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-   			<h5 class="card-title">Bukalapak.com</h5>
-    		<p class="card-text">Ini perusahaan Bukalapak.com</p>
-   			<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>
-			</td>
-		 
-			<td scope="col" width="5%">
-			<div class="card" style="width: 18rem;">
-			<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-    		<h5 class="card-title">Toko Pedia</h5>
-    		<p class="card-text">Ini perusahaan Tokopedia</p>
-    		<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-		    </div>        
-			</div>	
-		 	</td>
-
-			<td scope="col" width="5%">
-		 	<div class="card" style="width: 18rem;">
-		 	<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-    		<h5 class="card-title">Toko Pedia</h5>
-    		<p class="card-text">Ini perusahaan Tokopedia</p>
-    		<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>        
-			</div>	
-			</td>
-		 </tr>
-
-		 <tr>
-		 	<td>
-		 	<div class="card" style="width: 18rem;">
- 		 	<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-   			<h5 class="card-title">Bukalapak.com</h5>
-    		<p class="card-text">Ini perusahaan Bukalapak.com</p>
-   			<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>
-		 	</td>
-		 
-		 
-		 	<td>
-		 	<div class="card" style="width: 18rem;">
-		 	<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-    		<h5 class="card-title">Toko Pedia</h5>
-    		<p class="card-text">Ini perusahaan Tokopedia</p>
-    		<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>        
-			</div>	
-			</td>
-
-			<td>
-		 	<div class="card" style="width: 18rem;">
-		 	<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-    		<h5 class="card-title">Toko Pedia</h5>
-    		<p class="card-text">Ini perusahaan Tokopedia</p>
-    		<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>        
-			</div>	
-			</td>
-		 </tr>
-
-		<tr>
-		    <td scope="col" width="5%">
-		    <div class="card" style="width: 18rem;">
- 			<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-   			<h5 class="card-title">Bukalapak.com</h5>
-    		<p class="card-text">Ini perusahaan Bukalapak.com</p>
-   			<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>
-			</td>
-		 
-			<td scope="col" width="5%">
-			<div class="card" style="width: 18rem;">
-			<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-    		<h5 class="card-title">Toko Pedia</h5>
-    		<p class="card-text">Ini perusahaan Tokopedia</p>
-    		<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-		    </div>        
-			</div>	
-		 	</td>
-
-			<td scope="col" width="5%">
-		 	<div class="card" style="width: 18rem;">
-		 	<img class="card-img-top" src="..." alt="Card image cap">
-  			<div class="card-body">
-    		<h5 class="card-title">Toko Pedia</h5>
-    		<p class="card-text">Ini perusahaan Tokopedia</p>
-    		<a href="#" class="btn btn-primary">Lihat</a>
-  			</div>
-			</div>        
-			</div>	
-			</td>
+		  
 		 </tr>
 
 	</table>
-
-
-
-		
-
-		
-
 <!-- end daftar perusahaannya -->
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+
+		function getPerusahaan()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'getPerusahaan'},
+				success:function(data)
+				{
+					$('tr').html(data);
+				}
+			});
+		}
+
+		getPerusahaan();
+	});
+
+</script>

@@ -260,6 +260,53 @@ class Test_api extends CI_Controller {
 
 			
 		}
+
+		//Mahasiswa
+
+		if($data_action == "getPerusahaan")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getPerusahaan";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<tr>
+								<td scope="col" width="5%">
+									<div class="card" style="width: 18rem;">
+									<div class="card-body">
+									<h5 class="card-title"><b>'.$row->nama_perusahaan.'</b></h5>
+									<p class="card-text">'.$row->alamat.'</p>
+									<p class="card-text">'.$row->tlpn_hotline.'</p>
+									<a href="#" class="btn btn-primary">Detail</a>
+									</div>
+									</div>        
+									</div>	
+								</td>
+							<tr>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+					echo $output;
+			}
+
+
 	}
 
 }

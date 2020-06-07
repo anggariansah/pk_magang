@@ -9,6 +9,14 @@ class Model_pkl extends CI_Model
 	}
 	
 
+
+	//Mahasiswa
+	function get_perusahaan()
+	{
+		$query = $this->db->get('industri');
+		return $query;
+	}
+
 	//Pembimbing
 	function get_nilai()
 	{
