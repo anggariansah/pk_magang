@@ -19,6 +19,18 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($data->result_array());
 	}
 
+	function jumlahMahasiswa()
+	{
+		$data = $this->model_pkl->jumlah_mahasiswa();
+		echo json_encode($data->result_array());
+	}
+
+	function jumlahBimbingan()
+	{
+		$data = $this->model_pkl->jumlah_bimbingan();
+		echo json_encode($data->result_array());
+	}
+
 	function getMahasiswa()
 	{
 		$data = $this->model_pkl->get_mahasiswa();
@@ -29,13 +41,18 @@ class PKL_Api extends CI_Controller {
 	function getSidang()
 	{
 		$data = $this->model_pkl->get_sidang();
+
+	function getRiwayatBimbingan()
+	{
+		$data = $this->model_pkl->get_riwayat_bimbingan();
+
 		echo json_encode($data->result_array());
 	}
  
 	function insertNilai()
 	{
-		$this->form_validation->set_rules("nim", "Nim", "required");
-		$this->form_validation->set_rules("nilai", "Nilai", "required");
+		$this->form_validation->set_rules("nim", "nim", "required");
+		$this->form_validation->set_rules("nilai", "nilai", "required");
 		$array = array();
 		if($this->form_validation->run())
 		{
@@ -58,6 +75,7 @@ class PKL_Api extends CI_Controller {
 		}
 		echo json_encode($array, true);
 	}
+
 
 	// function insertSidang()
 	// {
@@ -91,6 +109,40 @@ class PKL_Api extends CI_Controller {
 	// 	}
 	// 	echo json_encode($array, true);
 	// }
+
+	function deleteNilai()
+	{
+		if($this->input->post('id'))
+		{
+			if($this->model_pkl->delete_nilai($this->input->post('id')))
+			{
+				$array = array(
+				'success' => true
+				);
+			}
+			else
+			{
+				$array = array(
+				'error' => true
+				);
+			}
+			echo json_encode($array);
+		}
+	}
+
+	function tampilSingleNilai()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->api_model->tampil_single_nilai($this->input->post('id'));
+			foreach($data as $row)
+			{
+				$output['nim'] = $row["nim"];
+				$output['nilai'] = $row["nilai"];
+			}
+			echo json_encode($output);
+		}
+	}
 
 	// function fetch_single()
 	// {
@@ -131,24 +183,6 @@ class PKL_Api extends CI_Controller {
 	// 	echo json_encode($array, true);
 	// }
 
-	// function delete()
-	// {
-	// 	if($this->input->post('id'))
-	// 	{
-	// 		if($this->api_model->delete_single_user($this->input->post('id')))
-	// 		{
-	// 			$array = array(
-	// 			'success' => true
-	// 			);
-	// 		}
-	// 		else
-	// 		{
-	// 			$array = array(
-	// 			'error' => true
-	// 			);
-	// 		}
-	// 		echo json_encode($array);
-	// 	}
-	// }
+	
  
 }
