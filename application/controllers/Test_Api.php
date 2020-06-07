@@ -300,6 +300,43 @@ class Test_api extends CI_Controller {
 					echo $output;
 			}
 
+			if($data_action == "listmhs_dosen")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/mahasiswa_dosen";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<tr>
+							<td>'.$row->nama.'</td>
+							<td>'.$row->nip.'</td>
+							<td>
+							<a href="#" class="btn btn-sm btn-primary">Lihat</a>		
+							</td>
+							</tr>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+					echo $output;
+			}
+
 
 			// if($data_action == "insertSidang")
 			// {
