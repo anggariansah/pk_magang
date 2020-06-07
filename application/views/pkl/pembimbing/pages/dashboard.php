@@ -5,8 +5,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>5</h3>
-
+                <h3 id="jmh_mahasiswa"> </h3>
                 <p>Jumlah mahasiswa</p>
               </div>
               <div class="icon">
@@ -20,8 +19,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>30</h3>
-
+                <h3 id="jmh_bimbingan"></h3>
                 <p>Riwayat Bimbingan</p>
               </div>
               <div class="icon">
@@ -33,3 +31,43 @@
 
 		</div>
 </div>
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+
+		function getJumlahMahasiswa()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'jumlahMahasiswa'},
+				success:function(data)
+				{
+					$('#jmh_mahasiswa').html(data);
+				}
+			});
+		}
+
+		getJumlahMahasiswa();
+	});
+
+	$(document).ready(function(){
+		
+		function getJumlahBimbingan()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'jumlahBimbingan'},
+				success:function(data)
+				{
+					$('#jmh_bimbingan').html(data);
+				}
+			});
+		}
+
+		getJumlahBimbingan();
+	});
+
+
+</script>

@@ -42,7 +42,7 @@ class PKL_Pembimbing extends CI_Controller {
 		$data['title'] = "Bimbingan";
 		$this->load->view('pkl/pembimbing/template/header');
 		$this->load->view('pkl/pembimbing/template/sidebar', $data);
-        $this->load->view('pkl/pembimbing/pages/dashboard');
+        $this->load->view('pkl/pembimbing/pages/riwayat_bimbingan');
         $this->load->view('pkl/pembimbing/template/footer');
 	}
 

@@ -38,7 +38,7 @@ class PKL_Mahasiswa extends CI_Controller {
 	}
 
 	public function riwayat_bimbingan(){
-		$data['title'] = "riwayat_bimbingan";
+		$data['title'] = "Riwayat Bimbingan";
 		$this->load->view('pkl/mahasiswa/template/header');
 		$this->load->view('pkl/mahasiswa/template/sidebar', $data);
         $this->load->view('pkl/mahasiswa/pages/riwayat_bimbingan');
