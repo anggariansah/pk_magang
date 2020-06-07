@@ -258,6 +258,71 @@ class Test_api extends CI_Controller {
 
 			}
 
+			// PANITIA
+
+			if($data_action == "getSidang")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getSidang";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<tr>
+							<td>'.$row->tanggal_sidang.'</td>
+							<td>'.$row->dosen.'</td>
+							<td>'.$row->ruangan.'</td>
+							<td>'.$row->mahasiswa.'</td>
+							<td>
+								<a href="#" class="btn btn-sm btn-primary">Edit</a>
+								<a href="#" class="btn btn-sm btn-danger">Delete</a>
+							</td>
+								</tr>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+					echo $output;
+			}
+
+
+			// if($data_action == "insertSidang")
+			// {
+			// 	$api_url = "http://localhost/pk_magang/pkl_api/insertSidang";
+				
+			// 	$form_data = array(
+			// 	'tanggal_sidang'  => $this->input->post('tanggal_sidang'),
+			// 	'dosen'  => $this->input->post('dosen'),
+			// 	'ruangan'  => $this->input->post('ruangan'),
+			// 	'mahasiswa'  => $this->input->post('mahasiswa')
+			// 	);
+
+			// 	$client = curl_init($api_url);
+			// 	curl_setopt($client, CURLOPT_POST, true);
+			// 	curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+			// 	curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+			// 	$response = curl_exec($client);
+			// 	curl_close($client);
+
+			// 	echo $response;
+
+			// }
+
 			
 		}
 

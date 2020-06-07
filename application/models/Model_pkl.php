@@ -49,11 +49,38 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+
+	//Panitia
+	function get_sidang()
+	{
+		$query = $this->db->get('sidang_pkl');
+		return $query;
+	}
+
+	// function insert_sidang($data)
+	// {
+	// 	$this->db->insert('sidang_pkl', $data);
+	// 	if($this->db->affected_rows() > 0)
+	// 	{
+	// 		return true;
+	// 	}
+	// 	else
+	// 	{
+	// 		return false;
+	// 	}
+	// }
+
+	
+	
+
+
 	function get_mahasiswa()
 	{
 		$query = $this->db->get('mahasiswa');
 		return $query;
 	}
+
+	
 
 	function get_riwayat_bimbingan()
 	{

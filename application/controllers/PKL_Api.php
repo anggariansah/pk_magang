@@ -45,9 +45,15 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($data->result_array());
 	}
 
+
+	function getSidang()
+	{
+		$data = $this->model_pkl->get_sidang();
+
 	function getRiwayatBimbingan()
 	{
 		$data = $this->model_pkl->get_riwayat_bimbingan();
+
 		echo json_encode($data->result_array());
 	}
  
@@ -77,6 +83,40 @@ class PKL_Api extends CI_Controller {
 		}
 		echo json_encode($array, true);
 	}
+
+
+	// function insertSidang()
+	// {
+	// 	$this->form_validation->set_rules("tanggal_sidang", "Tanggal Sidang", "required");
+	// 	$this->form_validation->set_rules("dosen", "Dosen", "required");
+	// 	$this->form_validation->set_rules("ruangan", "Ruangan", "required");
+	// 	$this->form_validation->set_rules("mahasiswa", "Mahasiswa", "required");
+	// 	$array = array();
+	// 	if($this->form_validation->run())
+	// 	{
+	// 		$data = array(
+	// 			'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
+	// 			'dosen'  => trim($this->input->post('dosen')),
+	// 			'ruangan'  => trim($this->input->post('ruangan')),
+	// 			'mahasiswa'  => trim($this->input->post('mahasiswa'))
+	// 		);
+	// 		$this->model_pkl->insert_nilai($data);
+	// 		$array = array(
+	// 			'success'  => true
+	// 		);
+	// 	}
+	// 	else
+	// 	{
+	// 		$array = array(
+	// 			'error'    => true,
+	// 			'tanggal_sidang' => form_error('tanggal_sidang'),
+	// 			'dosen' => form_error('dosen'),
+	// 			'ruangan' => form_error('ruangan'),
+	// 			'mahasiswa' => form_error('mahasiswa')
+	// 		);
+	// 	}
+	// 	echo json_encode($array, true);
+	// }
 
 	function deleteNilai()
 	{
