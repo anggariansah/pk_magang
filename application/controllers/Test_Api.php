@@ -175,8 +175,7 @@ class Test_api extends CI_Controller {
 							<td>'.$row->kelas_kodeklas.'</td>
 							<td>'.$row->tlp_bpk.'</td>
 							<td>
-							<a href="#" class="btn btn-sm btn-primary">Edit</a>
-							<a href="#" class="btn btn-sm btn-danger">Delete</a>			
+							<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-detail">Detail</a>
 							</td>
 							</tr>
 

@@ -59,7 +59,7 @@
       <div class="custom-file">
       <input type="perusahaan" class="form-control" id="perusahaan" placeholder="Nama Perusahaan">
       <div class="input-group-append">
-      <span class="input-group-text" id="">Tambah</span>
+      <span class="input-group-text" id="" data-toggle="modal" data-target="#modal-tambah">Tambah</span>
       </div>
       </div>
       </div>
@@ -73,6 +73,36 @@
     </form>
     </div>
     <!-- /.card -->
+
+		<!-- MODAL TAMBAH DATA -->
+<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form method="post" id="user_add">
+		<div class="form-group">
+			<input type="number" id="nim" name="nim" class="form-control" placeholder="Nim" value="">
+		</div>
+		<div class="form-group">
+			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<input type="submit" id="action" name="action" class="btn btn-primary" values="Save changes">
+		</div>
+		</form>
+	</div>
+	</div>
+</div>
+</div>
+
+<!-- TUTUP MODAL TAMBAH DATA -->
 
 
 </body>
