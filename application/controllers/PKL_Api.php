@@ -141,6 +141,26 @@ class PKL_Api extends CI_Controller {
 		}
 	}
 
+	function deleteSidang()
+	{
+		if($this->input->post('id'))
+		{
+			if($this->model_pkl->delete_sidang($this->input->post('id')))
+			{
+				$array = array(
+				'success' => true
+				);
+			}
+			else
+			{
+				$array = array(
+				'error' => true
+				);
+			}
+			echo json_encode($array);
+		}
+	}
+
 	function tampilSingleNilai()
 	{
 		if($this->input->post('id'))
