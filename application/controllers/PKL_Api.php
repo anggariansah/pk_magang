@@ -11,6 +11,14 @@ class PKL_Api extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
+	//Mahasiswa
+	function getPerusahaan()
+	{
+		$data = $this->model_pkl->get_perusahaan();
+		echo json_encode($data->result_array());
+	}
+
+
 	//Pembimbing
 
 	function getNilai()
@@ -41,6 +49,9 @@ class PKL_Api extends CI_Controller {
 	function getSidang()
 	{
 		$data = $this->model_pkl->get_sidang();
+		echo json_encode($data->result_array());
+
+	}
 
 	function getRiwayatBimbingan()
 	{
