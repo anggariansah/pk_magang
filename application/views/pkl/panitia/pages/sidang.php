@@ -11,7 +11,6 @@
   <table class="table table-bordered table-striped" id="example1">
   <thead>
       <tr>
-        <th>No.</th>
         <th>Tanggal Sidang</th>
         <th>Dosen</th>
         <th>Ruangan</th>
@@ -81,3 +80,5 @@
 
               getSidang();
             });
+
+						</script>

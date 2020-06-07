@@ -277,15 +277,15 @@ class Test_api extends CI_Controller {
 					{
 							$output .= '
 							<tr>
-							<td>'.$row->tanggal_sidang.'</td>
-							<td>'.$row->dosen.'</td>
-							<td>'.$row->ruangan.'</td>
-							<td>'.$row->mahasiswa.'</td>
-							<td>
-								<a href="#" class="btn btn-sm btn-primary">Edit</a>
-								<a href="#" class="btn btn-sm btn-danger">Delete</a>
-							</td>
-								</tr>
+								<td>'.$row->tanggal_sidang.'</td>
+								<td>'.$row->dosen.'</td>
+								<td>'.$row->ruangan.'</td>
+								<td>'.$row->mahasiswa.'</td>
+								<td>
+									<a href="#" class="btn btn-sm btn-primary">Edit</a>
+									<a href="#" class="btn btn-sm btn-danger">Delete</a>
+								</td>
+							</tr>
 
 								';
 						}

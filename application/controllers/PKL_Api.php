@@ -49,6 +49,9 @@ class PKL_Api extends CI_Controller {
 	function getSidang()
 	{
 		$data = $this->model_pkl->get_sidang();
+		echo json_encode($data->result_array());
+
+	}
 
 	function getRiwayatBimbingan()
 	{
