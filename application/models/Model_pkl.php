@@ -69,6 +69,19 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function insert_sidang($data)
+	{
+		$this->db->insert('sidang_pkl', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 	//Panitia
 	function get_sidang()
@@ -79,18 +92,7 @@ class Model_pkl extends CI_Model
 
 
 
-	// function insert_sidang($data)
-	// {
-	// 	$this->db->insert('sidang_pkl', $data);
-	// 	if($this->db->affected_rows() > 0)
-	// 	{
-	// 		return true;
-	// 	}
-	// 	else
-	// 	{
-	// 		return false;
-	// 	}
-	// }
+	
 
 	
 	
@@ -128,6 +130,20 @@ class Model_pkl extends CI_Model
 	{
 		$this->db->where("id", $id);
 		$this->db->delete("sidang_pkl");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function delete_perusahaan($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("industri");
 		if($this->db->affected_rows() > 0)
 		{
 			return true;

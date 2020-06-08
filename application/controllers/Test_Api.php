@@ -48,6 +48,23 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "deletePerusahaan")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deletePerusahaan";
+				$form_data = array(
+				'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+
+			}
+
 			if($data_action == "Edit")
 			{
 				$api_url = "http://localhost/tutorial/codeigniter/api/update";
@@ -352,6 +369,30 @@ class Test_api extends CI_Controller {
 					echo $output;
 			}
 
+
+			if($data_action == "insertSidang")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertSidang";
+				
+				$form_data = array(
+				'tanggal_sidang'  => $this->input->post('tanggal_sidang'),
+				'dosen'  => $this->input->post('dosen'),
+				'ruangan'  => $this->input->post('ruangan'),
+				'mahasiswa'  => $this->input->post('mahasiswa')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+
 			if($data_action == "listmhs_dosen")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/mahasiswa_dosen";
@@ -390,27 +431,7 @@ class Test_api extends CI_Controller {
 			}
 
 
-			// if($data_action == "insertSidang")
-			// {
-			// 	$api_url = "http://localhost/pk_magang/pkl_api/insertSidang";
-				
-			// 	$form_data = array(
-			// 	'tanggal_sidang'  => $this->input->post('tanggal_sidang'),
-			// 	'dosen'  => $this->input->post('dosen'),
-			// 	'ruangan'  => $this->input->post('ruangan'),
-			// 	'mahasiswa'  => $this->input->post('mahasiswa')
-			// 	);
-
-			// 	$client = curl_init($api_url);
-			// 	curl_setopt($client, CURLOPT_POST, true);
-			// 	curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
-			// 	curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-			// 	$response = curl_exec($client);
-			// 	curl_close($client);
-
-			// 	echo $response;
-
-			// }
+			
 
 
 			

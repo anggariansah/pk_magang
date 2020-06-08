@@ -177,14 +177,14 @@
             $.ajax({
                 url:"<?php echo base_url(); ?>test_api/action",
                 method:"POST",
-                data:{id:id, data_action:'deleteNilai'},
+                data:{id:id, data_action:'deletePerusahaan'},
                 dataType:"JSON",
                 success:function(data)
                 {
                     if(data.success)
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getNilaiMahasiswa();
+                        getPerusahaan();
                     }
                 }
             })

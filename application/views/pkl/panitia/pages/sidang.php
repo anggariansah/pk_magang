@@ -4,7 +4,7 @@
  <div class="card-body">
   <span id="success_message"></span>
   <br>
-  <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-circle"></i> Tambah Data</a>
+  <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-circle"></i> Tambah Data</a>
   <br>
   <br>
 
@@ -26,10 +26,10 @@
 </div>
 
          <!-- MODAL TAMBAH DATA -->
-          <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
+          <div class="modal fade" id="modal-tambah">
+<div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -38,13 +38,13 @@
             <div class="modal-body">
               <form class="form" action="" id="userform" method="POST">
               <div class="form-group">
-                <input type="date" name="nilai" class="form-control" placeholder="Tanggal Sidang" value="">
+                <input type="date" name="tanggal_sidang" class="form-control" placeholder="Tanggal Sidang" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="nilai" class="form-control" placeholder="Dosen" value="">
+                <input type="text" name="dosen" class="form-control" placeholder="Dosen" value="">
               </div>
               <div class="form-group">
-              <select name="" class="custom-select">
+              <select name="ruangan" class="custom-select">
                 <option selected>Ruangan</option>
                 <option>AA201</option>
                 <option>AA202</option>
@@ -58,14 +58,16 @@
               </select>
               </div>
               <div class="form-group">
-                <input type="text" name="nilai" class="form-control" placeholder="Mahasiswa" value="">
+                <input type="text" name="mahasiswa" class="form-control" placeholder="Mahasiswa" value="">
               </div>
 
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" id="action" name="action" class="btn btn-primary" values="Save changes">
-              </div>
+      <input type="hidden" name="id" id="id" />
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <input type="hidden" name="data_action" id="data_action" value="Insert" />
+            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+    </div>
               </form>
             </div>
             </div>
@@ -92,6 +94,45 @@
               getSidang();
             });
 
+
+
+
+          $('#add-button').click(function(){
+            $('#user_form')[0].reset();
+            $('#action').val('Add');
+            $('#data_action').val("insertSidang");
+            $('#modal-tambah').modal('show');
+        });
+
+        $(document).on('submit', '#user_form', function(event){
+          event.preventDefault();
+          $.ajax({
+              url:"<?php echo base_url() . 'test_api/action' ?>",
+              method:"POST",
+              data:$(this).serialize(),
+              dataType:"json",
+              success:function(data)
+              {
+                  if(data.success)
+                  {
+                      $('#user_form')[0].reset();
+                      $('#modal-tambah').modal('hide');
+                      getSidang();
+                      if($('#data_action').val() == "insertSidang")
+                      {
+                          $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
+                      }
+                  }
+
+                  if(data.error)
+                  {
+                      $('#first_name_error').html(data.first_name_error);
+                      $('#last_name_error').html(data.last_name_error);
+                  }
+              }
+          })
+      });
+
             $(document).on('click', '.delete', function(){
             var id = $(this).attr('id');
             if(confirm("Are you sure you want to delete this?"))
@@ -112,5 +153,7 @@
                 })
             }
               });
+          
+          
 
 						</script>
