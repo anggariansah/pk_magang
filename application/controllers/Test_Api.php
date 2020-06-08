@@ -526,8 +526,44 @@ class Test_api extends CI_Controller {
 				echo $output;
 			}
 
+			if($data_action == "getListPerusahaan")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getPerusahaan";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<select id="perusahaan" name="perusahaan" class="custom-select" class="custom-select">
+								<option value="'.$row->industri_id.'">'.$row->nama_perusahaan.'</option>
+							</select>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<select name="perusahaan" id="perusahaan" class="custom-select">
+							<option>No Data</option>
+						</select>
+						';
+				}
+					echo $output;
+			}
+
+
 			
 		}
+
+		
 
 
 	}
