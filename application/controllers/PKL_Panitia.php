@@ -41,7 +41,7 @@ class PKL_Panitia extends CI_Controller {
 		$data['title'] = "Dosen";
 		$this->load->view('pkl/panitia/template/header');
 		$this->load->view('pkl/panitia/template/sidebar', $data);
-        $this->load->view('pkl/panitia/pages/dashboard');
+        $this->load->view('pkl/panitia/pages/dosen');
         $this->load->view('pkl/panitia/template/footer');
 	}
 

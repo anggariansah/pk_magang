@@ -77,6 +77,8 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
+
+
 	// function insert_sidang($data)
 	// {
 	// 	$this->db->insert('sidang_pkl', $data);
@@ -127,6 +129,11 @@ class Model_pkl extends CI_Model
 		$this->db->where("id", $id);
 		$query = $this->db->get('nilai_pkl');
 		return $query->result_array();
+	}
+
+	function tampil_data_dosen_mhs($id)
+	{
+		$query = $this->db->query('SELECT r.id as id, r.nama as nama FROM dsn_indstri r JOIN pkl_mhs_dosen m ON m.staff_nip = m.nip, m.mahasiswa_nim');
 	}
 
 

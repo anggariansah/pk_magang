@@ -123,6 +123,12 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($array, true);
 	}
 
+	function mahasiswa_dosen()
+	{
+		$data = $this->model_pkl->tampil_data_dosen_mhs();
+		echo json_encode($data->result_array());
+	}
+
 
 	// function insertSidang()
 	// {
@@ -191,6 +197,7 @@ class PKL_Api extends CI_Controller {
 		}
 	}
 
+
 	// function fetch_single()
 	// {
 	// 	if($this->input->post('id'))
@@ -231,5 +238,5 @@ class PKL_Api extends CI_Controller {
 	// }
 
 	
- 
+	}
 }
