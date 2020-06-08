@@ -31,6 +31,23 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "deleteSidang")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deleteSidang";
+				$form_data = array(
+				'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+
+			}
+
 			if($data_action == "Edit")
 			{
 				$api_url = "http://localhost/tutorial/codeigniter/api/update";
@@ -317,8 +334,8 @@ class Test_api extends CI_Controller {
 								<td>'.$row->ruangan.'</td>
 								<td>'.$row->mahasiswa.'</td>
 								<td>
-									<a href="#" class="btn btn-sm btn-primary">Edit</a>
-									<a href="#" class="btn btn-sm btn-danger">Delete</a>
+									<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'" data-toggle="modal" data-target="#modal-edit">Edit</button>
+								<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>
 								</td>
 							</tr>
 
@@ -419,7 +436,9 @@ class Test_api extends CI_Controller {
 					{
 							$output .= '
 
+							
 							<tr>
+
 								<td scope="col" width="5%">
 									<div class="card" style="width: 18rem;">
 									<div class="card-body">
@@ -431,7 +450,7 @@ class Test_api extends CI_Controller {
 									</div>        
 									</div>	
 								</td>
-							<tr>
+
 
 								';
 						}

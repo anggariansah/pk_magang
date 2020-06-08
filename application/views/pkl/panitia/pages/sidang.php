@@ -38,13 +38,24 @@
             <div class="modal-body">
               <form class="form" action="" id="userform" method="POST">
               <div class="form-group">
-                <input type="text" name="nilai" class="form-control" placeholder="Tanggal Sidang" value="">
+                <input type="date" name="nilai" class="form-control" placeholder="Tanggal Sidang" value="">
               </div>
               <div class="form-group">
                 <input type="text" name="nilai" class="form-control" placeholder="Dosen" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="nilai" class="form-control" placeholder="Ruangan" value="">
+              <select name="" class="custom-select">
+                <option selected>Ruangan</option>
+                <option>AA201</option>
+                <option>AA202</option>
+                <option>AA203</option>
+                <option>AA204</option>
+                <option>AA301</option>
+                <option>AA302</option>
+                <option>AA303</option>
+                <option>AA304</option>
+                <option>AA304</option>
+              </select>
               </div>
               <div class="form-group">
                 <input type="text" name="nilai" class="form-control" placeholder="Mahasiswa" value="">
@@ -80,5 +91,26 @@
 
               getSidang();
             });
+
+            $(document).on('click', '.delete', function(){
+            var id = $(this).attr('id');
+            if(confirm("Are you sure you want to delete this?"))
+            {
+                $.ajax({
+                    url:"<?php echo base_url(); ?>test_api/action",
+                    method:"POST",
+                    data:{id:id, data_action:'deleteSidang'},
+                    dataType:"JSON",
+                    success:function(data)
+                    {
+                        if(data.success)
+                        {
+                            $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+                            getSidang();
+                        }
+                    }
+                })
+            }
+              });
 
 						</script>
