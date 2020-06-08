@@ -4,10 +4,11 @@
 	<table class="table table-bordered table-striped" id="example1">
 	<thead>
 			<tr>
-				<th>No.</th>
+				<th>Id PKL.</th>
 				<th>Nama Dosen</th>
-				<th>NIP</th>
 				<th>Mahasiswa yang Dibimbing</th>
+				<th>Dosen Industri</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>

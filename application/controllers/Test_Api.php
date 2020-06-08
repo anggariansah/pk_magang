@@ -352,8 +352,10 @@ class Test_api extends CI_Controller {
 					{
 							$output .= '
 							<tr>
-							<td>'.$row->nama.'</td>
-							<td>'.$row->nip.'</td>
+							<td>'.$row->id.'</td>
+							<td>'.$row->dosen_pembimbing.'</td>
+							<td>'.$row->nama_mhs.'</td>
+							<td>'.$row->dosen_industri.'</td>
 							<td>
 							<a href="#" class="btn btn-sm btn-primary">Lihat</a>		
 							</td>
