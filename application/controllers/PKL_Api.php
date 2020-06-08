@@ -18,6 +18,42 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($data->result_array());
 	}
 
+	function jumlahIndustri()
+	{
+		$data = $this->model_pkl->jumlah_industri();
+		echo json_encode($data->result_array());
+	}
+
+	function insertPerusahaan()
+	{
+		// $this->form_validation->set_rules("nama", "nama", "required");
+		// $this->form_validation->set_rules("alamat", "alamat", "required");
+		// $this->form_validation->set_rules("no_telp", "no_telp", "required");
+		$array = array();
+		// if($this->form_validation->run())
+		// {
+			$data = array(
+				'nama' => trim($this->input->post('nama')),
+				'alamat'  => trim($this->input->post('alamat')),
+				'no_telp'  => trim($this->input->post('no_telp'))
+			);
+			$this->model_pkl->insert_nilai($data);
+			$array = array(
+				'success'  => true
+			);
+		// }
+		// else
+		// {
+		// 	$array = array(
+		// 		'error'    => true,
+		// 		'nama' => form_error('nama'),
+		// 		'alamat' => form_error('alamat'),
+		// 		'no_telp' => form_error('no_telp')
+		// 	);
+		// }
+		echo json_encode($array, true);
+	}
+
 
 	//Pembimbing
 

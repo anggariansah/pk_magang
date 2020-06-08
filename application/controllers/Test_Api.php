@@ -54,7 +54,7 @@ class Test_api extends CI_Controller {
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/tampilSingleNilai";
 				$form_data = array(
-				'id'  => $this->input->post('id')
+					'id'  => $this->input->post('id')
 				);
 
 				$client = curl_init($api_url);
@@ -112,6 +112,42 @@ class Test_api extends CI_Controller {
 			}
 
 
+			if($data_action == "getNim")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getMahasiswa";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<select id="nim" name="nim" class="custom-select" class="custom-select">
+								<option value="'.$row->nim.'">'.$row->nim.'</option>
+							</select>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<select name="nim" id="nim" class="custom-select">
+							<option>No Data</option>
+						</select>
+						';
+				}
+					echo $output;
+			}
+
+			
+
+
 			if($data_action == "getNilai")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getNilai";
@@ -134,7 +170,7 @@ class Test_api extends CI_Controller {
 							<td>'.$row->nama_kelas.'</td>
 							<td>'.$row->nilai.'</td>
 							<td>
-								<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'" data-toggle="modal" data-target="#modal-edit">Edit</button>
+								<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
 								<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button></td>
 							</td>
 								</tr>
@@ -322,13 +358,13 @@ class Test_api extends CI_Controller {
 
 			// }
 
+
 			
-		}
 
 		//Mahasiswa
 
 		if($data_action == "getPerusahaan")
-			{
+		{
 				$api_url = "http://localhost/pk_magang/pkl_api/getPerusahaan";
 				$client = curl_init($api_url);
 				
@@ -343,6 +379,7 @@ class Test_api extends CI_Controller {
 					foreach($result as $row)
 					{
 							$output .= '
+
 							<tr>
 								<td scope="col" width="5%">
 									<div class="card" style="width: 18rem;">
@@ -368,7 +405,90 @@ class Test_api extends CI_Controller {
 						';
 				}
 					echo $output;
+		}
+
+		if($data_action == "getPerusahaanTabel")
+		{
+				$api_url = "http://localhost/pk_magang/pkl_api/getPerusahaan";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<tr>
+								<td>'.$row->industri_id.'</td>
+								<td>'.$row->nama_perusahaan.'</td>
+								<td>'.$row->alamat.'</td>
+								<td>'.$row->tlpn_hotline.'</td>
+								<td>
+									<a href="#" class="btn btn-sm btn-primary">Edit</a>
+									<a href="#" class="btn btn-sm btn-danger">Delete</a>
+								</td>
+							</tr>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+					echo $output;
+		}
+
+		if($data_action == "insertPerusahaan")
+		{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertPerusahaan";
+
+				$form_data = array(
+					'nama_perusahaan' => $this->input->post('nama'),
+					'alamat'  => $this->input->post('alamat'),
+					'tlpn_hotline'  => $this->input->post('no_telp')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+		}
+
+		if($data_action == "jumlahIndustri")
+		{
+				$api_url = "http://localhost/pk_magang/pkl_api/jumlahIndustri";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+
+				$output = '';
+
+				$output .= '
+				 <h3>'.count($result).'</h3>
+				';
+
+				echo $output;
 			}
+
+			
+		}
 
 
 	}

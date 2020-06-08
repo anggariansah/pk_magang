@@ -25,7 +25,7 @@ class PKL_Panitia extends CI_Controller {
 		$data['title'] = "Mahasiswa";
 		$this->load->view('pkl/panitia/template/header');
 		$this->load->view('pkl/panitia/template/sidebar', $data);
-        $this->load->view('pkl/panitia/pages/dashboard');
+        $this->load->view('pkl/panitia/pages/list_mahasiswa');
         $this->load->view('pkl/panitia/template/footer');
 	}
 
@@ -42,6 +42,14 @@ class PKL_Panitia extends CI_Controller {
 		$this->load->view('pkl/panitia/template/header');
 		$this->load->view('pkl/panitia/template/sidebar', $data);
         $this->load->view('pkl/panitia/pages/dashboard');
+        $this->load->view('pkl/panitia/template/footer');
+	}
+
+	public function perusahaan(){
+		$data['title'] = "Perusahaan";
+		$this->load->view('pkl/panitia/template/header');
+		$this->load->view('pkl/panitia/template/sidebar', $data);
+        $this->load->view('pkl/panitia/pages/perusahaan');
         $this->load->view('pkl/panitia/template/footer');
 	}
 

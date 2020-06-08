@@ -2,11 +2,6 @@ img {
   height : 500px;
   width : 500px;
 }
-
-h3{
-  color: black;
-}
-
 .steps-form {
     display: table;
     width: 100%;
@@ -41,6 +36,4 @@ h3{
     margin-top: 0;
     }
 
- .active {
- 	background-color: #0000FF 
- }
+

@@ -17,6 +17,12 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
+	function jumlah_industri()
+	{
+		$query = $this->db->get('industri');
+		return $query;
+	}
+
 	//Pembimbing
 	function get_nilai()
 	{
@@ -39,6 +45,20 @@ class Model_pkl extends CI_Model
 	function insert_nilai($data)
 	{
 		$this->db->insert('nilai_pkl', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	function insert_perusahaan($data)
+	{
+		$this->db->insert('industri', $data);
 		if($this->db->affected_rows() > 0)
 		{
 			return true;
