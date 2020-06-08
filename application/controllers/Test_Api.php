@@ -360,7 +360,6 @@ class Test_api extends CI_Controller {
 					foreach($result as $row)
 					{
 							$output .= '
-							<tr>
 								<td scope="col" width="5%">
 									<div class="card" style="width: 18rem;">
 									<div class="card-body">
@@ -372,7 +371,7 @@ class Test_api extends CI_Controller {
 									</div>        
 									</div>	
 								</td>
-							<tr>
+
 
 								';
 						}
