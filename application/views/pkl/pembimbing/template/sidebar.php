@@ -23,7 +23,7 @@
          
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_pembimbing/dashboard")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
               </p>
@@ -32,7 +32,7 @@
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_pembimbing/list_mahasiswa")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 List Mahasiswa
               </p>
@@ -41,7 +41,7 @@
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_pembimbing/nilai")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-book-open"></i>
               <p>
                 Nilai
               </p>
@@ -50,7 +50,7 @@
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_pembimbing/bimbingan")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-history"></i>
               <p>
                 Riwayat Bimbingan
               </p>

@@ -4,17 +4,17 @@
  <div class="card-body">
  	<span id="success_message"></span>
 	<br>
-	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Nilai</button>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Industri</button>
 	<br>
 	<br>
 
 	<table class="table table-bordered table-striped" id="example1">
 	<thead>
 			<tr>
-				<th>Nim</th>
-				<th>Nama Mahasiswa</th>
-				<th>Kelas</th>
-				<th>Nilai</th>
+				<th>Id Industri</th>
+				<th>Nama</th>
+				<th>Alamat</th>
+				<th>No Telp</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -31,7 +31,7 @@
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+		<h5 class="modal-title" id="exampleModalLabel">Tambah Perusahaan</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
@@ -39,18 +39,19 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<select id="nim" name="nim" class="custom-select">
-				
-			</select>
+			<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
 		<div class="form-group">
-			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
+			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
+		</div>
+		<div class="form-group">
+			<input type="number" id="no_telp" name="no_telp" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />
-            <input type="hidden" name="data_action" id="data_action" value="Insert" />
-            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <input type="hidden" name="data_action" id="data_action" value="Insert" />
+			<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 		</div>
 		</form>
@@ -102,12 +103,12 @@
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 
-		function getNilaiMahasiswa()
+		function getPerusahaanTabel()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getNilai'},
+				data:{data_action:'getPerusahaanTabel'},
 				success:function(data)
 				{
 					$('tbody').html(data);
@@ -128,7 +129,7 @@
 			});
 		}
 
-		getNilaiMahasiswa();
+		getPerusahaanTabel();
 		getNim();
 
 

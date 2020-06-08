@@ -17,6 +17,12 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
+	function jumlah_industri()
+	{
+		$query = $this->db->get('industri');
+		return $query;
+	}
+
 	//Pembimbing
 	function get_nilai()
 	{
@@ -50,12 +56,28 @@ class Model_pkl extends CI_Model
 	}
 
 
+	function insert_perusahaan($data)
+	{
+		$this->db->insert('industri', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
 	//Panitia
 	function get_sidang()
 	{
 		$query = $this->db->get('sidang_pkl');
 		return $query;
 	}
+
+
 
 	// function insert_sidang($data)
 	// {
@@ -121,6 +143,11 @@ class Model_pkl extends CI_Model
 		$this->db->where("id", $id);
 		$query = $this->db->get('nilai_pkl');
 		return $query->result_array();
+	}
+
+	function tampil_data_dosen_mhs($id)
+	{
+		$query = $this->db->query('SELECT r.id as id, r.nama as nama FROM dsn_indstri r JOIN pkl_mhs_dosen m ON m.staff_nip = m.nip, m.mahasiswa_nim');
 	}
 
 

@@ -10,6 +10,11 @@
 <div class="container-fluid"> 
  <!-- Small boxes (Stat box) -->
  <div class="card-body">
+ <span id="success_message"></span>
+  <br>
+  <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-circle"></i> Tambah Data</a>
+  <br>
+  <br>
 	<table class="table table-bordered table-striped" id="example1">
 	<thead>
 			<tr>
@@ -27,7 +32,7 @@
 </div>
 </div>
 
-<!-- MODAL TAMBAH DATA -->
+<!-- MODAL DETAIL DATA -->
 <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
@@ -87,7 +92,7 @@
 </div>
 </div>
 
-<!-- TUTUP MODAL TAMBAH DATA -->
+<!-- TUTUP DETAIL TAMBAH DATA -->
 
 
 

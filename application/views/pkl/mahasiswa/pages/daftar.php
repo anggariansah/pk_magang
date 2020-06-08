@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Daftar PKL</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE/dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body>
-
 
 <section class="content">
+<span id="success_message"></span>
     <div class="container-fluid">
       <div class="row">
         <!-- left column -->
@@ -54,12 +35,12 @@
       </div>
 
       <div class="form-group">
-      <label for="perusahaan"></label>
+      	<label for="perusahaan"></label>
       <div class="input-group">
       <div class="custom-file">
-      <input type="perusahaan" class="form-control" id="perusahaan" placeholder="Nama Perusahaan">
+      	<input type="perusahaan" class="form-control" id="perusahaan" placeholder="Nama Perusahaan">
       <div class="input-group-append">
-      <span class="input-group-text" id="" data-toggle="modal" data-target="#modal-tambah">Tambah</span>
+			<button id="add-button" type="button" class="btn btn-sm btn-primary">Tambah</button>
       </div>
       </div>
       </div>
@@ -75,26 +56,32 @@
     <!-- /.card -->
 
 		<!-- MODAL TAMBAH DATA -->
-<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+<div class="modal fade" id="modal-tambah">
+<div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+		<h5 class="modal-title" id="exampleModalLabel">Tambah Perusahaan</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
 	<div class="modal-body">
-		<form method="post" id="user_add">
+		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="number" id="nim" name="nim" class="form-control" placeholder="Nim" value="">
+			<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
 		<div class="form-group">
-			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
+			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
+		</div>
+		<div class="form-group">
+			<input type="number" id="no_telp" name="no_telp" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="submit" id="action" name="action" class="btn btn-primary" values="Save changes">
+			<input type="hidden" name="user_id" id="user_id" />
+      <input type="hidden" name="data_action" id="data_action" value="Insert" />
+			<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
 		</div>
 		</form>
 	</div>
@@ -102,9 +89,68 @@
 </div>
 </div>
 
+
+
 <!-- TUTUP MODAL TAMBAH DATA -->
 
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
 
-</body>
+		function getNilaiMahasiswa()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'getNilai'},
+				success:function(data)
+				{
+					$('tbody').html(data);
+				}
+			});
+		}
+
+
+		getNilaiMahasiswa();
+
+	$('#add-button').click(function(){
+        $('#user_form')[0].reset();
+        $('#action').val('Add');
+        $('#data_action').val("insertPerusahaan");
+        $('#modal-tambah').modal('show');
+    });
+
+
+	$(document).on('submit', '#user_form', function(event){
+        event.preventDefault();
+        $.ajax({
+            url:"<?php echo base_url() . 'test_api/action' ?>",
+            method:"POST",
+            data:$(this).serialize(),
+            dataType:"json",
+            success:function(data)
+            {
+                if(data.success)
+                {
+                    $('#user_form')[0].reset();
+                    $('#modal-tambah').modal('hide');
+                    if($('#data_action').val() == "insertPerusahaan")
+                    {
+                        $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
+                    }
+                }
+
+                if(data.error)
+                {
+                    $('#nama').html(data.nama);
+                }
+            }
+        })
+    });
+
+});
+
+</script>
+
+
 
  
