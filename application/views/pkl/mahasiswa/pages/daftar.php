@@ -70,13 +70,13 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Perusahaan" value="">
+			<input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
 		<div class="form-group">
 			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
 		</div>
 		<div class="form-group">
-			<input type="number" id="no_telp" name="no_telp" class="form-control" placeholder="No Telp" value="">
+			<input type="number" id="tlpn_hotline" name="tlpn_hotline" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />

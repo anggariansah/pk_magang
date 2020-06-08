@@ -14,22 +14,7 @@ class Test_api extends CI_Controller {
 		{
 			$data_action = $this->input->post('data_action');
 
-			if($data_action == "deleteNilai")
-			{
-				$api_url = "http://localhost/pk_magang/pkl_api/deleteNilai";
-				$form_data = array(
-				'id'  => $this->input->post('id')
-				);
-
-				$client = curl_init($api_url);
-				curl_setopt($client, CURLOPT_POST, true);
-				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
-				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-				$response = curl_exec($client);
-				curl_close($client);
-				echo $response;
-
-			}
+			
 
 			if($data_action == "deleteSidang")
 			{
@@ -48,47 +33,11 @@ class Test_api extends CI_Controller {
 
 			}
 
-			if($data_action == "Edit")
-			{
-				$api_url = "http://localhost/tutorial/codeigniter/api/update";
-				$form_data = array(
-				'first_name'  => $this->input->post('first_name'),
-				'last_name'   => $this->input->post('last_name'),
-				'id'    => $this->input->post('user_id')
-				);
-
-				$client = curl_init($api_url);
-				curl_setopt($client, CURLOPT_POST, true);
-				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
-				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-				$response = curl_exec($client);
-				curl_close($client);
-
-				echo $response;
-			}
-
-			if($data_action == "tampilNilai")
-			{
-				$api_url = "http://localhost/pk_magang/pkl_api/tampilSingleNilai";
-				$form_data = array(
-					'id'  => $this->input->post('id')
-				);
-
-				$client = curl_init($api_url);
-				curl_setopt($client, CURLOPT_POST, true);
-				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
-				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-				$response = curl_exec($client);
-				curl_close($client);
-
-				echo $response;
-
-			}
-
 		
-
-
+		
 			//PEMBIMBING
+
+			//CRUD Dashboard
 
 			if($data_action == "jumlahMahasiswa")
 			{
@@ -129,6 +78,47 @@ class Test_api extends CI_Controller {
 			}
 
 
+			//CRUD Mahasiswa
+
+			if($data_action == "getMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getMahasiswa";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<tr>
+							<td>'.$row->nim.'</td>
+							<td>'.$row->nama_mhs.'</td>
+							<td>'.$row->kelas_kodeklas.'</td>
+							<td>'.$row->tlp_bpk.'</td>
+							<td>
+							<button type="button" name="detail" class="btn btn-sm btn-primary detail" id="'.$row->nim.'">Detail</button>
+							</td>
+							</tr>
+
+								';
+						}
+				}
+				else{
+						$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+					echo $output;
+			}
+
 			if($data_action == "getNim")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getMahasiswa";
@@ -162,9 +152,9 @@ class Test_api extends CI_Controller {
 					echo $output;
 			}
 
+
+			//CRUD Nilai
 			
-
-
 			if($data_action == "getNilai")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getNilai";
@@ -187,8 +177,8 @@ class Test_api extends CI_Controller {
 							<td>'.$row->nama_kelas.'</td>
 							<td>'.$row->nilai.'</td>
 							<td>
-								<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
-								<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button></td>
+							<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
+							<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>
 							</td>
 								</tr>
 
@@ -205,47 +195,82 @@ class Test_api extends CI_Controller {
 					echo $output;
 			}
 
-
-			if($data_action == "getMahasiswa")
+			if($data_action == "tampilNilai")
 			{
-				$api_url = "http://localhost/pk_magang/pkl_api/getMahasiswa";
+				$api_url = "http://localhost/pk_magang/pkl_api/tampilSingleNilai";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
 				$client = curl_init($api_url);
-				
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
 				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 				$response = curl_exec($client);
 				curl_close($client);
-				$result = json_decode($response);
-				$output = '';
 
-				if(count($result) > 0)
-				{
-					foreach($result as $row)
-					{
-							$output .= '
-							<tr>
-							<td>'.$row->nim.'</td>
-							<td>'.$row->nama_mhs.'</td>
-							<td>'.$row->kelas_kodeklas.'</td>
-							<td>'.$row->tlp_bpk.'</td>
-							<td>
-							<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-detail">Detail</a>
-							</td>
-							</tr>
+				echo $response;
 
-								';
-						}
-				}
-				else{
-						$output .= '
-						<tr>
-							<td colspan="4" align="center">No Data Found</td>
-						</tr>
-						';
-				}
-					echo $output;
 			}
 
 
+			if($data_action == "tampilDetailMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/tampilDetailMahasiswa";
+				$form_data = array(
+					'nim'  => $this->input->post('nim')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "updateNilai")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/updateNilai";
+				$form_data = array(
+					'nim'  => $this->input->post('nim'),
+					'nilai' => $this->input->post('nilai'),
+					'id'    => $this->input->post('user_id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+			}
+
+			if($data_action == "deleteNilai")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deleteNilai";
+				$form_data = array(
+				'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+
+			}
+
+
+
+			
 			if($data_action == "getRiwayatBimbingan")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getRiwayatBimbingan";
@@ -437,15 +462,14 @@ class Test_api extends CI_Controller {
 							$output .= '
 
 							
-							<tr>
-
+						
 								<td scope="col" width="5%">
 									<div class="card" style="width: 18rem;">
 									<div class="card-body">
 									<h5 class="card-title"><b>'.$row->nama_perusahaan.'</b></h5>
 									<p class="card-text">'.$row->alamat.'</p>
 									<p class="card-text">'.$row->tlpn_hotline.'</p>
-									<a href="#" class="btn btn-primary">Detail</a>
+									<a href="#" class="btn btn-primary">Daftar</a>
 									</div>
 									</div>        
 									</div>	
@@ -510,9 +534,9 @@ class Test_api extends CI_Controller {
 				$api_url = "http://localhost/pk_magang/pkl_api/insertPerusahaan";
 
 				$form_data = array(
-					'nama_perusahaan' => $this->input->post('nama'),
+					'nama_perusahaan' => $this->input->post('nama_perusahaan'),
 					'alamat'  => $this->input->post('alamat'),
-					'tlpn_hotline'  => $this->input->post('no_telp')
+					'tlpn_hotline'  => $this->input->post('tlpn_hotline')
 				);
 
 				$client = curl_init($api_url);
