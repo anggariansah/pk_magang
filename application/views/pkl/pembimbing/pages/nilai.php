@@ -40,7 +40,6 @@
 		<form method="post" id="user_form">
 		<div class="form-group">
 			<select id="nim" name="nim" class="custom-select">
-				
 			</select>
 		</div>
 		<div class="form-group">
