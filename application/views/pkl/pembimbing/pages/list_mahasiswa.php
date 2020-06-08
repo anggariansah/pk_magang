@@ -27,18 +27,18 @@
 </div>
 </div>
 
+
 <!-- MODAL TAMBAH DATA -->
-<div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
+<div class="modal fade" id="modal-detail">
+<div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Detail Mahasiswa</h5>
+		<h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
 	<div class="modal-body">
-		
 	<div class="card">
 	<div class="card-body mb-4">
 
@@ -47,8 +47,8 @@
 		<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
 	</div>
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item">Nama		: Ramona Matovani</li>
-		<li class="list-group-item">NIM 		: 4617010021</li>
+		<li class="list-group-item" id="nama" name="nama"> </li>
+		<li class="list-group-item" id="nim" name="nim"> </li>
 		<li class="list-group-item">kelas		: TI 6A</li>
 	</ul>
 	</div>
@@ -81,7 +81,6 @@
         </div>
       </div>
     </div>
-
 	</div>
 	</div>
 </div>
@@ -90,13 +89,10 @@
 <!-- TUTUP MODAL TAMBAH DATA -->
 
 
-
-
-
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 
-		function fetch_data()
+		function tampilDataMahasiswa()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
@@ -109,9 +105,28 @@
 			});
 		}
 
-		fetch_data();
+		tampilDataMahasiswa();
+
+
+		$(document).on('click', '.detail', function(){
+        var nim = $(this).attr('nim');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{nim:nim, data_action:'tampilDetailMahasiswa'},
+            dataType:"json",
+            success:function(data)
+            {
+							$('#modal-detail').modal('show');           
+							$('#nim').val(nim);
+							$('#nama').val(data.nama);
+							$('.modal-title').text('Detail Mahasiswa');
+						}
+        })
+    });
 
 	});
+
 
 
 

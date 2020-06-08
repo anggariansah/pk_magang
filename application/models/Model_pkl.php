@@ -9,7 +9,6 @@ class Model_pkl extends CI_Model
 	}
 	
 
-
 	//Mahasiswa
 	function get_perusahaan()
 	{
@@ -161,24 +160,26 @@ class Model_pkl extends CI_Model
 		return $query->result_array();
 	}
 
-	function tampil_data_dosen_mhs($id)
+	function tampil_detail_mahasiswa($nim)
 	{
-		$query = $this->db->query('SELECT r.id as id, r.nama as nama FROM dsn_indstri r JOIN pkl_mhs_dosen m ON m.staff_nip = m.nip, m.mahasiswa_nim');
+		$this->db->where("nim", $nim);
+		$query = $this->db->get('mahasiswa');
+		return $query->result_array();
 	}
 
+	function update_nilai($id, $data)
+	{
+		$this->db->where("id", $id);
+		$this->db->update("nilai_pkl", $data);
+	}
 
-	// function fetch_single_user($user_id)
-	// {
-	// 	$this->db->where("id", $user_id);
-	// 	$query = $this->db->get('tbl_sample');
-	// 	return $query->result_array();
-	// }
+	function tampil_data_dosen_mhs()
+	{
+		$query = $this->db->query('SELECT p.kode_pkl as id, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		return $query;
+	}
 
-	// function update_api($user_id, $data)
-	// {
-	// 	$this->db->where("id", $user_id);
-	// 	$this->db->update("tbl_sample", $data);
-	// }
+	
 	
 	// function delete_single_user($user_id)
 	// {

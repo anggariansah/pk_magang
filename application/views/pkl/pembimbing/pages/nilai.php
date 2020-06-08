@@ -40,7 +40,6 @@
 		<form method="post" id="user_form">
 		<div class="form-group">
 			<select id="nim" name="nim" class="custom-select">
-				
 			</select>
 		</div>
 		<div class="form-group">
@@ -73,23 +72,21 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form class="form" id="user_form" method="post">
+		<form method="post" id="user_form">
 		<div class="form-group">
 			<select id="nim" name="nim" class="custom-select">
-				<option selected>Nim</option>
-				<option>4617010014</option>
-				<option>4617010012</option>
-				<option>4617010022</option>
+				
 			</select>
 		</div>
 		<div class="form-group">
-			<input type="number" name="nilai" class="form-control" placeholder="Nilai" value="">
+			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
 		</div>
 		<div class="modal-footer">
-			<input type="hidden" name="id" id="id" />
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="hidden" name="data_action" id="data_action" value="Insert" />
+			<input type="hidden" name="user_id" id="user_id" />
+            <input type="hidden" name="data_action" id="data_action" value="Insert" />
             <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
 		</div>
 		</form>
 	</div>
@@ -135,6 +132,7 @@
 	$('#add-button').click(function(){
         $('#user_form')[0].reset();
         $('#action').val('Add');
+		$('.modal-title').text('Tambah Nilai');
         $('#data_action').val("insertNilai");
         $('#modal-tambah').modal('show');
     });
@@ -169,6 +167,27 @@
         })
     });
 
+	$(document).on('click', '.edit', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{id:id, data_action:'tampilNilai'},
+            dataType:"json",
+            success:function(data)
+            {
+				$('#modal-tambah').modal('show');           
+                $('#nim').val(data.nim);
+                $('#nilai').val(data.nilai);
+                $('.modal-title').text('Edit Nilai');
+                $('#user_id').val(id);
+                $('#action').val('Edit');
+				$('#data_action').val('updateNilai');
+
+			}
+        })
+    });
+
 	$(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
         if(confirm("Are you sure you want to delete this?"))
@@ -188,26 +207,6 @@
                 }
             })
         }
-    });
-
-	$(document).on('click', '.edit', function(){
-        var id = $(this).attr('id');
-        $.ajax({
-            url:"<?php echo base_url(); ?>test_api/action",
-            method:"POST",
-            data:{id:id, data_action:'tampilNilai'},
-            dataType:"json",
-            success:function(data)
-            {
-                $('#modal-edit').modal('show');
-                $('#nim').val(data.nim);
-                $('#nama').val(data.nama);
-                $('.modal-title').text('Edit User');
-                $('#id').val(id);
-                $('#action').val('Edit');
-                $('#data_action').val('Edit');
-            }
-        })
     });
 
 });

@@ -26,31 +26,31 @@ class PKL_Api extends CI_Controller {
 
 	function insertPerusahaan()
 	{
-		// $this->form_validation->set_rules("nama", "nama", "required");
-		// $this->form_validation->set_rules("alamat", "alamat", "required");
-		// $this->form_validation->set_rules("no_telp", "no_telp", "required");
+		$this->form_validation->set_rules("nama_perusahaan", "nama_perusahaan", "required");
+		$this->form_validation->set_rules("alamat", "alamat", "required");
+		$this->form_validation->set_rules("tlpn_hotline", "tlpn_hotline", "required");
 		$array = array();
-		// if($this->form_validation->run())
-		// {
+		if($this->form_validation->run())
+		{
 			$data = array(
-				'nama' => trim($this->input->post('nama')),
+				'nama_perusahaan' => trim($this->input->post('nama_perusahaan')),
 				'alamat'  => trim($this->input->post('alamat')),
-				'no_telp'  => trim($this->input->post('no_telp'))
+				'tlpn_hotline'  => trim($this->input->post('tlpn_hotline'))
 			);
-			$this->model_pkl->insert_nilai($data);
+			$this->model_pkl->insert_perusahaan($data);
 			$array = array(
 				'success'  => true
 			);
-		// }
-		// else
-		// {
-		// 	$array = array(
-		// 		'error'    => true,
-		// 		'nama' => form_error('nama'),
-		// 		'alamat' => form_error('alamat'),
-		// 		'no_telp' => form_error('no_telp')
-		// 	);
-		// }
+		}
+		else
+		{
+			$array = array(
+				'error'    => true,
+				'nama_perusahaan' => form_error('nama_perusahaan'),
+				'alamat' => form_error('alamat'),
+				'tlpn_hotline' => form_error('tlpn_hotline')
+			);
+		}
 		echo json_encode($array, true);
 	}
 
@@ -123,22 +123,36 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($array, true);
 	}
 
+
 	function insertSidang()
 	{
 		$this->form_validation->set_rules("tanggal_sidang", "Tanggal Sidang", "required");
 		$this->form_validation->set_rules("dosen", "Dosen", "required");
 		$this->form_validation->set_rules("ruangan", "Ruangan", "required");
 		$this->form_validation->set_rules("mahasiswa", "Mahasiswa", "required");
+
+	function updateNilai()
+	{
+		$this->form_validation->set_rules("nim", "nim", "required");
+		$this->form_validation->set_rules("nilai", "nilai", "required");
+
 		$array = array();
 		if($this->form_validation->run())
 		{
 			$data = array(
+
 				'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
 				'dosen'  => trim($this->input->post('dosen')),
 				'ruangan'  => trim($this->input->post('ruangan')),
 				'mahasiswa'  => trim($this->input->post('mahasiswa'))
 			);
 			$this->model_pkl->insert_sidang($data);
+
+				'nim' => trim($this->input->post('nim')),
+				'nilai'  => trim($this->input->post('nilai'))
+			);
+			$this->model_pkl->update_nilai($this->input->post('id'), $data);
+
 			$array = array(
 				'success'  => true
 			);
@@ -147,10 +161,15 @@ class PKL_Api extends CI_Controller {
 		{
 			$array = array(
 				'error'    => true,
+
 				'tanggal_sidang' => form_error('tanggal_sidang'),
 				'dosen' => form_error('dosen'),
 				'ruangan' => form_error('ruangan'),
 				'mahasiswa' => form_error('mahasiswa')
+
+				'nim' => form_error('nim'),
+				'nilai' => form_error('nilai')
+
 			);
 		}
 		echo json_encode($array, true);
@@ -185,25 +204,20 @@ class PKL_Api extends CI_Controller {
 		}
 	}
 
-	function deleteSidang()
+	function tampilSingleNilai()
 	{
 		if($this->input->post('id'))
 		{
-			if($this->model_pkl->delete_sidang($this->input->post('id')))
+			$data = $this->model_pkl->tampil_single_nilai($this->input->post('id'));
+			foreach($data as $row)
 			{
-				$array = array(
-				'success' => true
-				);
+				$output['nim'] = $row["nim"];
+				$output['nilai'] = $row["nilai"];
 			}
-			else
-			{
-				$array = array(
-				'error' => true
-				);
-			}
-			echo json_encode($array);
+			echo json_encode($output);
 		}
 	}
+
 
 	function deletePerusahaan()
 	{
@@ -226,14 +240,16 @@ class PKL_Api extends CI_Controller {
 	}
 
 	function tampilSingleNilai()
+
+	function tampilDetailMahasiswa()
+
 	{
-		if($this->input->post('id'))
+		if($this->input->post('nim'))
 		{
-			$data = $this->api_model->tampil_single_nilai($this->input->post('id'));
+			$data = $this->model_pkl->tampil_detail_mahasiswa($this->input->post('nim'));
 			foreach($data as $row)
 			{
-				$output['nim'] = $row["nim"];
-				$output['nilai'] = $row["nilai"];
+				$output['nama'] = $row["nama"];
 			}
 			echo json_encode($output);
 		}

@@ -38,8 +38,10 @@
       	<label for="perusahaan"></label>
       <div class="input-group">
       <div class="custom-file">
-      	<input type="perusahaan" class="form-control" id="perusahaan" placeholder="Nama Perusahaan">
-      <div class="input-group-append">
+				<select id="perusahaan" name="perusahaan" class="custom-select">
+				
+				</select>      
+			<div class="input-group-append">
 			<button id="add-button" type="button" class="btn btn-sm btn-primary">Tambah</button>
       </div>
       </div>
@@ -68,13 +70,13 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Perusahaan" value="">
+			<input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
 		<div class="form-group">
 			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
 		</div>
 		<div class="form-group">
-			<input type="number" id="no_telp" name="no_telp" class="form-control" placeholder="No Telp" value="">
+			<input type="number" id="tlpn_hotline" name="tlpn_hotline" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />
@@ -96,21 +98,21 @@
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 
-		function getNilaiMahasiswa()
+		function getListPerusahaan()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getNilai'},
+				data:{data_action:'getListPerusahaan'},
 				success:function(data)
 				{
-					$('tbody').html(data);
+					$('#perusahaan').html(data);
 				}
 			});
 		}
 
 
-		getNilaiMahasiswa();
+		getListPerusahaan();
 
 	$('#add-button').click(function(){
         $('#user_form')[0].reset();
@@ -120,7 +122,7 @@
     });
 
 
-	$(document).on('submit', '#user_form', function(event){
+		$(document).on('submit', '#user_form', function(event){
         event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
@@ -133,6 +135,7 @@
                 {
                     $('#user_form')[0].reset();
                     $('#modal-tambah').modal('hide');
+                    getListPerusahaan();
                     if($('#data_action').val() == "insertPerusahaan")
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
@@ -141,8 +144,50 @@
 
                 if(data.error)
                 {
-                    $('#nama').html(data.nama);
+                    $('#first_name_error').html(data.first_name_error);
+                    $('#last_name_error').html(data.last_name_error);
                 }
+            }
+        })
+    });
+
+	$(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Are you sure you want to delete this?"))
+        {
+            $.ajax({
+                url:"<?php echo base_url(); ?>test_api/action",
+                method:"POST",
+                data:{id:id, data_action:'deleteNilai'},
+                dataType:"JSON",
+                success:function(data)
+                {
+                    if(data.success)
+                    {
+                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+                        getNilaiMahasiswa();
+                    }
+                }
+            })
+        }
+    });
+
+	$(document).on('click', '.edit', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{id:id, data_action:'tampilNilai'},
+            dataType:"json",
+            success:function(data)
+            {
+                $('#modal-edit').modal('show');
+                $('#nim').val(data.nim);
+                $('#nama').val(data.nama);
+                $('.modal-title').text('Edit User');
+                $('#id').val(id);
+                $('#action').val('Edit');
+                $('#data_action').val('Edit');
             }
         })
     });
