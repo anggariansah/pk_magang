@@ -154,16 +154,7 @@ class PKL_Api extends CI_Controller {
 	}
 
 
-		$data = array(
-
-			'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
-			'dosen'  => trim($this->input->post('dosen')),
-			'ruangan'  => trim($this->input->post('ruangan')),
-			'mahasiswa'  => trim($this->input->post('mahasiswa'))
-		);
-		$this->model_pkl->insert_sidang($data);
-
-	}
+		
 
 	function updateNilai()
 	{
@@ -193,11 +184,13 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($array, true);
 	}
 
+
 	function mahasiswa_dosen()
 	{
 		$data = $this->model_pkl->tampil_data_dosen_mhs();
 		echo json_encode($data->result_array());
 	}
+
 
 
 	
