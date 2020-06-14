@@ -223,68 +223,68 @@ class PKL_Api extends CI_Controller {
 	}
 
 	// PANITIA
-	function insertMahasiswa()
-	{
-		$this->form_validation->set_rules("nama_mhs", "nim", "required");
-		$this->form_validation->set_rules("nilai", "nilai", "required");
-		$array = array();
-		if($this->form_validation->run())
-		{
-			$data = array(
-				'nim' => trim($this->input->post('nim')),
-				'nilai'  => trim($this->input->post('nilai'))
-			);
-			$this->model_pkl->insert_nilai($data);
-			$array = array(
-				'success'  => true
-			);
-		}
-		else
-		{ 
-			$array = array(
-				'error'    => true,
-				'nim' => form_error('nim'),
-				'nilai' => form_error('nilai')
-			);
-		}
-		echo json_encode($array, true);
-	}
+	// function insertMahasiswa()
+	// {
+	// 	$this->form_validation->set_rules("nama_mhs", "nim", "required");
+	// 	$this->form_validation->set_rules("nilai", "nilai", "required");
+	// 	$array = array();
+	// 	if($this->form_validation->run())
+	// 	{
+	// 		$data = array(
+	// 			'nim' => trim($this->input->post('nim')),
+	// 			'nilai'  => trim($this->input->post('nilai'))
+	// 		);
+	// 		$this->model_pkl->insert_nilai($data);
+	// 		$array = array(
+	// 			'success'  => true
+	// 		);
+	// 	}
+	// 	else
+	// 	{ 
+	// 		$array = array(
+	// 			'error'    => true,
+	// 			'nim' => form_error('nim'),
+	// 			'nilai' => form_error('nilai')
+	// 		);
+	// 	}
+	// 	echo json_encode($array, true);
+	// }
 
 
 	// MENGHAPUS MAHASISWA
-	function deleteMahasiswa()
-	{
-		if($this->input->post('id'))
-		{
-			if($this->model_pkl->delete_nilai($this->input->post('id')))
-			{
-				$array = array(
-				'success' => true
-				);
-			}
-			else
-			{
-				$array = array(
-				'error' => true
-				);
-			}
-			echo json_encode($array);
-		}
-	}
+	// function deleteMahasiswa()
+	// {
+	// 	if($this->input->post('id'))
+	// 	{
+	// 		if($this->model_pkl->delete_nilai($this->input->post('id')))
+	// 		{
+	// 			$array = array(
+	// 			'success' => true
+	// 			);
+	// 		}
+	// 		else
+	// 		{
+	// 			$array = array(
+	// 			'error' => true
+	// 			);
+	// 		}
+	// 		echo json_encode($array);
+	// 	}
+	// }
 
-	function tampilSingleNilai()
-	{
-		if($this->input->post('id'))
-		{
-			$data = $this->model_pkl->tampil_single_nilai($this->input->post('id'));
-			foreach($data as $row)
-			{
-				$output['nim'] = $row["nim"];
-				$output['nilai'] = $row["nilai"];
-			}
-			echo json_encode($output);
-		}
-	}
+	// function tampilSingleNilai()
+	// {
+	// 	if($this->input->post('id'))
+	// 	{
+	// 		$data = $this->model_pkl->tampil_single_nilai($this->input->post('id'));
+	// 		foreach($data as $row)
+	// 		{
+	// 			$output['nim'] = $row["nim"];
+	// 			$output['nilai'] = $row["nilai"];
+	// 		}
+	// 		echo json_encode($output);
+	// 	}
+	// }
 
 
 	function deletePerusahaan()
