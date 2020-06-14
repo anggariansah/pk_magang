@@ -22,6 +22,56 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
+	function get_riwayat_bimbingan()
+	{
+		$query = $this->db->query('SELECT r.id as id, r.judul as judul, r.tanggal as tanggal, m.nama_mhs as nama, r.deskripsi as deskripsi FROM riwayat_bimbingan_pkl r JOIN mahasiswa m ON r.nim = m.nim');
+		return $query;
+	}
+
+	function tampil_riwayat_bimbingan($id)
+	{
+		$this->db->where("id", $id);
+		$query = $this->db->get('riwayat_bimbingan_pkl');
+		return $query->result_array();
+	}
+
+	function insert_riwayat($data)
+	{
+		$this->db->insert('riwayat_bimbingan_pkl', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function update_riwayat($id, $data)
+	{
+		$this->db->where("id", $id);
+		$this->db->update("judul", $data);
+		$this->db->update("date", $data);
+		$this->db->update("nim", $data);
+		$this->db->update("nip", $data);
+		$this->db->update("deskripsi", $data);
+	}
+
+	function delete_riwayat($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("riwayat_bimbingan_pkl");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	//Pembimbing
 	function get_nilai()
 	{
@@ -100,14 +150,6 @@ class Model_pkl extends CI_Model
 	function get_mahasiswa()
 	{
 		$query = $this->db->get('mahasiswa');
-		return $query;
-	}
-
-	
-
-	function get_riwayat_bimbingan()
-	{
-		$query = $this->db->query('SELECT r.id as id, r.judul as judul, r.tanggal as tanggal, m.nama_mhs as nama, r.deskripsi as deskripsi FROM riwayat_bimbingan_pkl r JOIN mahasiswa m ON r.nim = m.nim');
 		return $query;
 	}
 
