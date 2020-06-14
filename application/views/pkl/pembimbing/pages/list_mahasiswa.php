@@ -105,17 +105,14 @@
         </div>
       </div>
 
-
     </form>
 
   </div>
-=======
     </div>
 	</div>
 	</div>
 </div>
 </div>
-
 
 <!-- TUTUP MODAL TAMBAH DATA -->
 
