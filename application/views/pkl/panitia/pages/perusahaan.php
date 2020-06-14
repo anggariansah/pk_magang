@@ -184,7 +184,7 @@
                     if(data.success)
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getPerusahaan();
+                        getPerusahaanTabel();
                     }
                 }
             })
