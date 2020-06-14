@@ -1,63 +1,32 @@
+<div class="container-fluid"> 
+ <!-- Small boxes (Stat box) -->
 
-<section class="content">
-<span id="success_message"></span>
-    <div class="container-fluid">
-      <div class="row">
-        <!-- left column -->
-      <div class="col-md-6">
-       <!-- general form elements -->
-      <div class="card card-primary">
-      <div class="card-header">
-      <h3 class="card-title">Daftar PKL</h3>
-      </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-      <form role="form">
-      <div class="card-body">
-      <div class="form-group">
-      <label for="nama"></label>
-      <input type="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
-      </div>
+ <div class="card-body">
+ 	<span id="success_message"></span>
+	<br>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Industri</button>
+	<br>
+	<br>
 
-      <div class="form-group">
-      <label for="nim"></label>
-      <input type="nim" class="form-control" id="nim" placeholder="Nomor Induk Mahasiswa">
-      </div>
+	<table class="table table-bordered table-striped" id="example1">
+	<thead>
+			<tr>
+				<th>Id Industri</th>
+				<th>Nama</th>
+				<th>Alamat</th>
+				<th>No Telp</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+</div>
 
-      <div class="form-group">
-      <label for="notlp"></label>
-      <input type="notlp" class="form-control" id="notlp" placeholder="Nomor Telepon">
-      </div>
 
-      <div class="form-group">
-      <label for="Email"></label>
-      <input type="email" class="form-control" id="email" placeholder="Email">
-      </div>
-
-      <div class="form-group">
-      	<label for="perusahaan"></label>
-      <div class="input-group">
-      <div class="custom-file">
-				<select id="perusahaan" name="perusahaan" class="custom-select">
-				
-				</select>      
-			<div class="input-group-append">
-			<button id="add-button" type="button" class="btn btn-sm btn-primary">Tambah</button>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-              <!-- /.card-body -->
-
-    <div class="card-footer">
-        <button type="daftar" class="btn btn-primary">Daftar</button>
-      </div>
-    </form>
-    </div>
-    <!-- /.card -->
-
-		<!-- MODAL TAMBAH DATA -->
+<!-- MODAL TAMBAH DATA -->
 <div class="modal fade" id="modal-tambah">
 <div class="modal-dialog">
 	<div class="modal-content">
@@ -70,13 +39,13 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="">
+			<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
 		<div class="form-group">
 			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
 		</div>
 		<div class="form-group">
-			<input type="number" id="tlpn_hotline" name="tlpn_hotline" class="form-control" placeholder="No Telp" value="">
+			<input type="number" id="no_telp" name="no_telp" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />
@@ -91,38 +60,88 @@
 </div>
 </div>
 
-
-
 <!-- TUTUP MODAL TAMBAH DATA -->
+
+
+<!-- MODAL EDIT DATA -->
+<div class="modal fade" id="modal-edit">
+<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form class="form" id="user_form" method="post">
+		<div class="form-group">
+			<select id="nim" name="nim" class="custom-select">
+				<option selected>Nim</option>
+				<option>4617010014</option>
+				<option>4617010012</option>
+				<option>4617010022</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="number" name="nilai" class="form-control" placeholder="Nilai" value="">
+		</div>
+		<div class="modal-footer">
+			<input type="hidden" name="id" id="id" />
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<input type="hidden" name="data_action" id="data_action" value="Insert" />
+            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+		</div>
+		</form>
+	</div>
+	</div>
+</div>
+</div>
+
+<!-- TUTUP MODAL EDIT DATA -->
 
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 
-		function getListPerusahaan()
+		function getPerusahaanTabel()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getListPerusahaan'},
+				data:{data_action:'getPerusahaanTabel'},
 				success:function(data)
 				{
-					$('#perusahaan').html(data);
+					$('tbody').html(data);
 				}
 			});
 		}
 
+		function getNim()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'getNim'},
+				success:function(data)
+				{
+					$('#nim').html(data);
+				}
+			});
+		}
 
-		getListPerusahaan();
+		getPerusahaanTabel();
+		getNim();
+
 
 	$('#add-button').click(function(){
         $('#user_form')[0].reset();
         $('#action').val('Add');
-        $('#data_action').val("insertPerusahaan");
+        $('#data_action').val("insertNilai");
         $('#modal-tambah').modal('show');
     });
 
 
-		$(document).on('submit', '#user_form', function(event){
+	$(document).on('submit', '#user_form', function(event){
         event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
@@ -135,8 +154,8 @@
                 {
                     $('#user_form')[0].reset();
                     $('#modal-tambah').modal('hide');
-                    getListPerusahaan();
-                    if($('#data_action').val() == "insertPerusahaan")
+                    getNilaiMahasiswa();
+                    if($('#data_action').val() == "insertNilai")
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
                     }
@@ -158,14 +177,14 @@
             $.ajax({
                 url:"<?php echo base_url(); ?>test_api/action",
                 method:"POST",
-                data:{id:id, data_action:'deleteNilai'},
+                data:{id:id, data_action:'deletePerusahaan'},
                 dataType:"JSON",
                 success:function(data)
                 {
                     if(data.success)
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getNilaiMahasiswa();
+                        getPerusahaan();
                     }
                 }
             })
@@ -198,4 +217,3 @@
 
 
 
- 

@@ -9,9 +9,14 @@ class Model_pkl extends CI_Model
 	}
 	
 
-
 	//Mahasiswa
 	function get_perusahaan()
+	{
+		$query = $this->db->get('industri');
+		return $query;
+	}
+
+	function jumlah_industri()
 	{
 		$query = $this->db->get('industri');
 		return $query;
@@ -50,6 +55,33 @@ class Model_pkl extends CI_Model
 	}
 
 
+	function insert_perusahaan($data)
+	{
+		$this->db->insert('industri', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function insert_sidang($data)
+	{
+		$this->db->insert('sidang_pkl', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
 	//Panitia
 	function get_sidang()
 	{
@@ -57,18 +89,9 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
-	// function insert_sidang($data)
-	// {
-	// 	$this->db->insert('sidang_pkl', $data);
-	// 	if($this->db->affected_rows() > 0)
-	// 	{
-	// 		return true;
-	// 	}
-	// 	else
-	// 	{
-	// 		return false;
-	// 	}
-	// }
+
+
+	
 
 	
 	
@@ -102,6 +125,34 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function delete_sidang($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("sidang_pkl");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function delete_perusahaan($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("industri");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function tampil_single_nilai($id)
 	{
 		$this->db->where("id", $id);
@@ -109,19 +160,26 @@ class Model_pkl extends CI_Model
 		return $query->result_array();
 	}
 
+	function tampil_detail_mahasiswa($nim)
+	{
+		$this->db->where("nim", $nim);
+		$query = $this->db->get('mahasiswa');
+		return $query->result_array();
+	}
 
-	// function fetch_single_user($user_id)
-	// {
-	// 	$this->db->where("id", $user_id);
-	// 	$query = $this->db->get('tbl_sample');
-	// 	return $query->result_array();
-	// }
+	function update_nilai($id, $data)
+	{
+		$this->db->where("id", $id);
+		$this->db->update("nilai_pkl", $data);
+	}
 
-	// function update_api($user_id, $data)
-	// {
-	// 	$this->db->where("id", $user_id);
-	// 	$this->db->update("tbl_sample", $data);
-	// }
+	function tampil_data_dosen_mhs()
+	{
+		$query = $this->db->query('SELECT p.kode_pkl as id, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		return $query;
+	}
+
+	
 	
 	// function delete_single_user($user_id)
 	// {

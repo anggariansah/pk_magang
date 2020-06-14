@@ -23,7 +23,7 @@
          
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_panitia/dashboard")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
               </p>
@@ -32,7 +32,7 @@
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_panitia/mahasiswa")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Mahasiswa
               </p>
@@ -41,7 +41,7 @@
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_panitia/sidang")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-gavel"></i>
               <p>
                 Sidang
               </p>
@@ -50,9 +50,18 @@
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_panitia/dosen")?>" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Dosen
+              </p>
+            </a>
+					</li>
+					
+					<li class="nav-item">
+            <a href="<?php echo site_url("pkl_panitia/perusahaan")?>" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Industri
               </p>
             </a>
           </li>

@@ -1,26 +1,25 @@
-<div class="container-fluid">
-
-<div class="card-body">
- 	<span id="success_message"></span>
+<div class="container-fluid"> 
+ <!-- Small boxes (Stat box) -->
+ <div class="card-body">
+ <span id="success_message"></span>
 	<br>
-	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Laporan Bimbingan</button>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Dosen</button>
 	<br>
 	<br>
-
-		<table class="table table-bordered table-striped" id="example1">
-  <thead>
-      <tr>
-        <th>Judul</th>
-        <th>Tanggal</th>
-        <th>NIM</th>
-        <th>NIP</th>
-        <th>Deskripsi</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>
-  </table>
+	<table class="table table-bordered table-striped" id="example1">
+	<thead>
+			<tr>
+				<th>Id PKL.</th>
+				<th>Nama Dosen</th>
+				<th>Mahasiswa yang Dibimbing</th>
+				<th>Dosen Industri</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+				
+		</tbody>
+	</table>
 </div>
 </div>
 
@@ -29,7 +28,7 @@
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Tambah Laporan Bimbingan</h5>
+		<h5 class="modal-title" id="exampleModalLabel">Tambah Dosen</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
@@ -37,14 +36,7 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="text" name="Judul" class="form-control" placeholder="Judul" value="">
-			</select>
-		</div>
-		<div class="form-group">
-                <input type="date" name="nilai" class="form-control" placeholder="Tanggal Bimbingan" value="">
-    	</div>
-		<div class="form-group">
-			<input type="text" name="nim" class="form-control" placeholder="NIM" value="">
+			<input type="text" name="namadosen" class="form-control" placeholder="Nama Dosen" value="">
 			</select>
 		</div>
 		<div class="form-group">
@@ -52,7 +44,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-                <input type="text" name="deskripsi" class="form-control" placeholder="Deskripsi" value="">
+                <input type="text" name="namamahasiswa" class="form-control" placeholder="Nama Mahasiswa yang Dibimbing" value="">
               </div>
 
               <div class="modal-footer">
@@ -72,22 +64,15 @@
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Edit Laporan Bimbingan</h5>
+		<h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
 	<div class="modal-body">
-		<form class="form" id="user_form" method="post">
+		<form method="post" id="user_form">
 		<div class="form-group">
-			<select id="judul" name="judul" class="custom-select">
-			</select>
-		</div>
-		<div class="form-group">
-                <input type="date" name="nilai" class="form-control" placeholder="Tanggal Bimbingan" value="">
-    	</div>
-		<div class="form-group">
-			<select id="nim" name="nim" class="custom-select">
+			<select id="nama" name="namadosen" class="custom-select">
 			</select>
 		</div>
 		<div class="form-group">
@@ -95,46 +80,47 @@
 			</select>
 		</div>
 		<div class="form-group">
-                <input type="text" name="deskripsi" class="form-control" placeholder="Deskripsi" value="">
+                <input type="text" name="namamahasiswa" class="form-control" placeholder="Nama Mahasiswa yang Dibimbing" value="">
               </div>
-		<div class="modal-footer">
-			<input type="hidden" name="id" id="id" />
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="hidden" name="data_action" id="data_action" value="Insert" />
+
+              <div class="modal-footer">
+			<input type="hidden" name="user_id" id="user_id" />
+            <input type="hidden" name="data_action" id="data_action" value="Insert" />
             <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
 		</div>
 		</form>
 	</div>
 </div>
 <!-- TUTUP MODAL EDIT DATA -->
 
-
 <script type="text/javascript" language="javascript">
-
 	$(document).ready(function(){
-		
-		function getRiwayatBimbingan()
+
+		function fetch_data()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getRiwayatBimbingan'},
+				data:{data_action:'listmhs_dosen'},
 				success:function(data)
 				{
-					$('#card_riwayat').html(data);
+					$('tbody').html(data);
 				}
 			});
 		}
 
-		getRiwayatBimbingan();
+		fetch_data();
 
 		$('#add-button').click(function(){
         $('#user_form')[0].reset();
         $('#action').val('Add');
-        $('#data_action').val("insertLaporan");
+        $('#data_action').val("insertDosen");
         $('#modal-tambah').modal('show');
     });
 	});
+
 
 
 </script>

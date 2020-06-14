@@ -4,7 +4,7 @@
  <div class="card-body">
  	<span id="success_message"></span>
 	<br>
-	<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-circle"></i> Tambah Nilai</a>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Nilai</button>
 	<br>
 	<br>
 
@@ -27,8 +27,8 @@
 
 
 <!-- MODAL TAMBAH DATA -->
-<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
+<div class="modal fade" id="modal-tambah">
+<div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
 		<h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
@@ -37,16 +37,20 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form method="post" id="user_add">
+		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="number" id="nim" name="nim" class="form-control" placeholder="Nim" value="">
+			<select id="nim" name="nim" class="custom-select">
+			</select>
 		</div>
 		<div class="form-group">
 			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="submit" id="action" name="action" class="btn btn-primary" values="Save changes">
+			<input type="hidden" name="user_id" id="user_id" />
+            <input type="hidden" name="data_action" id="data_action" value="Insert" />
+            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
 		</div>
 		</form>
 	</div>
@@ -58,8 +62,8 @@
 
 
 <!-- MODAL EDIT DATA -->
-<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
+<div class="modal fade" id="modal-edit">
+<div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
 		<h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
@@ -68,22 +72,21 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form class="form" id="user_form" method="post">
+		<form method="post" id="user_form">
 		<div class="form-group">
-			<select name="" class="custom-select">
-				<option selected>Nim</option>
-				<option>4617010014</option>
-				<option>4617010012</option>
-				<option>4617010022</option>
+			<select id="nim" name="nim" class="custom-select">
+				
 			</select>
 		</div>
 		<div class="form-group">
-			<input type="number" name="nilai" class="form-control" placeholder="Nilai" value="">
+			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
 		</div>
 		<div class="modal-footer">
-			<input type="hidden" name="id" id="id" />
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="submit" id="action" name="action" class="btn btn-primary" values="Save changes">
+			<input type="hidden" name="user_id" id="user_id" />
+            <input type="hidden" name="data_action" id="data_action" value="Insert" />
+            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
 		</div>
 		</form>
 	</div>
@@ -92,36 +95,6 @@
 </div>
 
 <!-- TUTUP MODAL EDIT DATA -->
-
-
-<div id="userModal" class="modal fade">
-    <div class="modal-dialog">
-        <form method="post" id="user_form">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add User</h4>
-                </div>
-                <div class="modal-body">
-                    <label>Enter First Name</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" />
-                    <span id="first_name_error" class="text-danger"></span>
-                    <br />
-                    <label>Enter Last Name</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control" />
-                    <span id="last_name_error" class="text-danger"></span>
-                    <br />
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="user_id" id="user_id" />
-                    <input type="hidden" name="data_action" id="data_action" value="Insert" />
-                    <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
@@ -139,11 +112,33 @@
 			});
 		}
 
+		function getNim()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'getNim'},
+				success:function(data)
+				{
+					$('#nim').html(data);
+				}
+			});
+		}
+
 		getNilaiMahasiswa();
-	});
+		getNim();
 
 
-	$(document).on('submit', '#user_add', function(event){
+	$('#add-button').click(function(){
+        $('#user_form')[0].reset();
+        $('#action').val('Add');
+		$('.modal-title').text('Tambah Nilai');
+        $('#data_action').val("insertNilai");
+        $('#modal-tambah').modal('show');
+    });
+
+
+	$(document).on('submit', '#user_form', function(event){
         event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
@@ -154,7 +149,7 @@
             {
                 if(data.success)
                 {
-                    $('#user_add')[0].reset();
+                    $('#user_form')[0].reset();
                     $('#modal-tambah').modal('hide');
                     getNilaiMahasiswa();
                     if($('#data_action').val() == "insertNilai")
@@ -165,10 +160,31 @@
 
                 if(data.error)
                 {
-                    $('#nim').html(data.nim);
-                    $('#nilai').html(data.nilai);
+                    $('#first_name_error').html(data.first_name_error);
+                    $('#last_name_error').html(data.last_name_error);
                 }
             }
+        })
+    });
+
+	$(document).on('click', '.edit', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{id:id, data_action:'tampilNilai'},
+            dataType:"json",
+            success:function(data)
+            {
+				$('#modal-tambah').modal('show');           
+                $('#nim').val(data.nim);
+                $('#nilai').val(data.nilai);
+                $('.modal-title').text('Edit Nilai');
+                $('#user_id').val(id);
+                $('#action').val('Edit');
+				$('#data_action').val('updateNilai');
+
+			}
         })
     });
 
@@ -193,24 +209,7 @@
         }
     });
 
-	$(document).on('click', '.edit', function(){
-        var id = $(this).attr('id');
-        $.ajax({
-            url:"<?php echo base_url(); ?>test_api/action",
-            method:"POST",
-            data:{id:id, data_action:'tampilNilai'},
-            dataType:"json",
-            success:function(data)
-            {
-                $('#userModal').modal('show');
-                $('#nim').val(data.nim);
-                $('#nilai').val(data.nilai);
-                $('#id').val(id);
-                $('#action').val('Edit');
-                $('#data_action').val('Edit');
-            }
-        })
-    });
+});
 
 </script>
 
