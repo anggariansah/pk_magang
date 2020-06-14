@@ -154,6 +154,17 @@ class PKL_Api extends CI_Controller {
 	}
 
 
+		$data = array(
+
+			'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
+			'dosen'  => trim($this->input->post('dosen')),
+			'ruangan'  => trim($this->input->post('ruangan')),
+			'mahasiswa'  => trim($this->input->post('mahasiswa'))
+		);
+		$this->model_pkl->insert_sidang($data);
+
+	}
+
 	function updateNilai()
 	{
 		$this->form_validation->set_rules("nim", "nim", "required");
@@ -162,20 +173,7 @@ class PKL_Api extends CI_Controller {
 		$array = array();
 		if($this->form_validation->run())
 		{
-			$data = array(
-
-				'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
-				'dosen'  => trim($this->input->post('dosen')),
-				'ruangan'  => trim($this->input->post('ruangan')),
-				'mahasiswa'  => trim($this->input->post('mahasiswa'))
-			);
-			$this->model_pkl->insert_sidang($data);
-
-				'nim' => trim($this->input->post('nim')),
-				'nilai'  => trim($this->input->post('nilai'))
-			);
-			$this->model_pkl->update_nilai($this->input->post('id'), $data);
-
+			
 			$array = array(
 				'success'  => true
 			);
@@ -189,9 +187,6 @@ class PKL_Api extends CI_Controller {
 				'dosen' => form_error('dosen'),
 				'ruangan' => form_error('ruangan'),
 				'mahasiswa' => form_error('mahasiswa')
-
-				'nim' => form_error('nim'),
-				'nilai' => form_error('nilai')
 
 			);
 		}
@@ -312,10 +307,8 @@ class PKL_Api extends CI_Controller {
 		}
 	}
 
-	function tampilSingleNilai()
 
 	function tampilDetailMahasiswa()
-
 	{
 		if($this->input->post('nim'))
 		{
