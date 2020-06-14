@@ -167,6 +167,20 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function delete_mahasiswa($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("mahasiswa");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function delete_sidang($id)
 	{
 		$this->db->where("id", $id);
