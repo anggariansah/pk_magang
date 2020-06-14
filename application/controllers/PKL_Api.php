@@ -113,7 +113,7 @@ class PKL_Api extends CI_Controller {
 			);
 		}
 		else
-		{
+		{ 
 			$array = array(
 				'error'    => true,
 				'nim' => form_error('nim'),
@@ -130,33 +130,31 @@ class PKL_Api extends CI_Controller {
 		$this->form_validation->set_rules("dosen", "Dosen", "required");
 		$this->form_validation->set_rules("ruangan", "Ruangan", "required");
 		$this->form_validation->set_rules("mahasiswa", "Mahasiswa", "required");
-
 		$array = array();
 		if($this->form_validation->run())
 		{
 			$data = array(
-				'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
-				'dosen'  => trim($this->input->post('dosen')),
-				'ruangan'  => trim($this->input->post('ruangan')),
-				'mahasiswa'  => trim($this->input->post('mahasiswa'))
+				'nim' => trim($this->input->post('nim')),
+				'nilai'  => trim($this->input->post('nilai'))
 			);
-			$this->model_pkl->insert_sidang($data);
+			$this->model_pkl->insert_nilai($data);
 			$array = array(
 				'success'  => true
 			);
 		}
 		else
-		{
+		{ 
 			$array = array(
 				'error'    => true,
-				'tanggal_sidang' => form_error('tanggal_sidang'),
-				'dosen' => form_error('dosen'),
-				'ruangan' => form_error('ruangan'),
-				'mahasiswa'  => form_error('mahasiswa')
+				'nim' => form_error('nim'),
+				'nilai' => form_error('nilai')
 			);
 		}
 		echo json_encode($array, true);
 	}
+
+
+		
 
 	function updateNilai()
 	{
@@ -193,7 +191,61 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($data->result_array());
 	}
 
+
+
+	
+	// MENGHAPUS NILAI
 	function deleteNilai()
+	{
+		if($this->input->post('id'))
+		{
+			if($this->model_pkl->delete_nilai($this->input->post('id')))
+			{
+				$array = array(
+				'success' => true
+				);
+			}
+			else
+			{
+				$array = array(
+				'error' => true
+				);
+			}
+			echo json_encode($array);
+		}
+	}
+
+	// PANITIA
+	function insertMahasiswa()
+	{
+		$this->form_validation->set_rules("nama_mhs", "nim", "required");
+		$this->form_validation->set_rules("nilai", "nilai", "required");
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'nim' => trim($this->input->post('nim')),
+				'nilai'  => trim($this->input->post('nilai'))
+			);
+			$this->model_pkl->insert_nilai($data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{ 
+			$array = array(
+				'error'    => true,
+				'nim' => form_error('nim'),
+				'nilai' => form_error('nilai')
+			);
+		}
+		echo json_encode($array, true);
+	}
+
+
+	// MENGHAPUS MAHASISWA
+	function deleteMahasiswa()
 	{
 		if($this->input->post('id'))
 		{
