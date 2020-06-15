@@ -380,7 +380,7 @@ class Test_api extends CI_Controller {
 
 
 
-			
+			#CRUD RIWAYAT
 			if($data_action == "getRiwayatBimbingan")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getRiwayatBimbingan";
@@ -392,37 +392,147 @@ class Test_api extends CI_Controller {
 				$result = json_decode($response);
 				$output = '';
 
-				if(count($result) > 0)
+			// 	if(count($result) > 0)
+			// 	{
+			// 		foreach($result as $row)
+			// 		{
+			// 				$output .= '
+
+			// 				<div class="card card-primary card-outline">
+			// 					<div class="card-header">
+			// 						<h5 class="card-title m-0">'.$row->judul.'</h5>
+			// 					</div>
+			// 					<div class="card-body">
+			// 						<h6 class="card-title"><b>'.$row->nama.'</b></h6>
+			// 						<br>
+			// 						<hr>
+			// 						<p class="card-text">'.$row->deskripsi.'</p>
+			// 						<a href="#" class="btn btn-primary">Komentari</a>
+			// 					</div>
+			// 				</div>
+
+			// 					';
+			// 			}
+			// 	}
+			// 	else{
+			// 			$output .= '
+			// 			<tr>
+			// 				<td colspan="4" align="center">No Data Found</td>
+			// 			</tr>
+			// 			';
+			// 	}
+			// 		echo $output;
+			// }
+			
+			if(count($result) > 0)
+			{
+				foreach($result as $row)
 				{
-					foreach($result as $row)
-					{
-							$output .= '
-
-							<div class="card card-primary card-outline">
-								<div class="card-header">
-									<h5 class="card-title m-0">'.$row->judul.'</h5>
-								</div>
-								<div class="card-body">
-									<h6 class="card-title"><b>'.$row->nama.'</b></h6>
-									<br>
-									<hr>
-									<p class="card-text">'.$row->deskripsi.'</p>
-									<a href="#" class="btn btn-primary">Komentari</a>
-								</div>
-							</div>
-
-								';
-						}
-				}
-				else{
 						$output .= '
 						<tr>
-							<td colspan="4" align="center">No Data Found</td>
-						</tr>
-						';
-				}
-					echo $output;
+						<td>'.$row->judul.'</td>
+						<td>'.$row->date.'</td>
+						<td>'.$row->nim.'</td>
+						<td>'.$row->nip.'</td>
+						<td>'.$row->deskripsi.'</td>
+						<td>
+						<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
+						<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>
+						</td>
+							</tr>
+
+							';
+					}
 			}
+			else{
+				$output .= '
+				<tr>
+					<td colspan="4" align="center">No Data Found</td>
+				</tr>
+				';
+		}
+			echo $output;
+	}
+
+			if($data_action == "tampilRiwayat")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/tampilRiwayatBimbingan";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+			}
+
+			if($data_action == "insertRiwayat")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertRiwayat";
+
+				$form_data = array(
+					'judul'  => $this->input->post('judul'),
+					'date'  => $this->input->post('date'),
+					'nim'  => $this->input->post('nim'),
+					'nip'  => $this->input->post('nip'),
+					'deskripsi'  => $this->input->post('deskripsi')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+			}
+
+			if($data_action == "updateRiwayat")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/updateRiwayat";
+				$form_data = array(
+					'judul'  => $this->input->post('judul'),
+					'date'  => $this->input->post('date'),
+					'nim'  => $this->input->post('nim'),
+					'nip'  => $this->input->post('nip'),
+					'deskripsi'  => $this->input->post('deskripsi'),
+					'id'    => $this->input->post('user_id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+			}
+
+			if($data_action == "deleteRiwayat")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deleteRiwayat";
+				$form_data = array(
+				'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+
+			}
+
+
+
+
 
 
 			if($data_action == "insertNilai")
@@ -715,9 +825,49 @@ class Test_api extends CI_Controller {
 				}
 					echo $output;
 			}
+		}
 
-
+		if($data_action == "getRiwayatBimbingan")
+		{
+			$api_url = "http://localhost/pk_magang/pkl_api/getRiwayatBimbingan";
+			$client = curl_init($api_url);
 			
+			curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+			$response = curl_exec($client);
+			curl_close($client);
+			$result = json_decode($response);
+			$output = '';
+
+			if(count($result) > 0)
+			{
+				foreach($result as $row)
+				{
+						$output .= '
+
+						<div class="card card-primary card-outline">
+							<div class="card-header">
+								<h5 class="card-title m-0">'.$row->judul.'</h5>
+							</div>
+							<div class="card-body">
+								<h6 class="card-title"><b>'.$row->nama.'</b></h6>
+								<br>
+								<hr>
+								<p class="card-text">'.$row->deskripsi.'</p>
+								<a href="#" class="btn btn-primary">Komentari</a>
+							</div>
+						</div>
+
+							';
+					}
+			}
+			else{
+					$output .= '
+					<tr>
+						<td colspan="4" align="center">No Data Found</td>
+					</tr>
+					';
+			}
+				echo $output;
 		}
 
 		
