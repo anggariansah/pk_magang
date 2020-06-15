@@ -281,6 +281,7 @@ class PKL_Api extends CI_Controller {
 		$this->form_validation->set_rules("nama", "nama", "required");
 		$this->form_validation->set_rules("kelas", "kelas", "required");
 		$this->form_validation->set_rules("perusahaan", "perusahaan", "required");
+	}
 
 	function updateSidang()
 	{
@@ -289,19 +290,10 @@ class PKL_Api extends CI_Controller {
 		$this->form_validation->set_rules("ruangan", "Ruangan", "required");
 		$this->form_validation->set_rules("mahasiswa", "Mahasiswa", "required");
 
-
 		$array = array();
 		if($this->form_validation->run())
 		{
 			$data = array(
-
-				'nama' => trim($this->input->post('nama')),
-				'kelas'  => trim($this->input->post('kelas')),
-				'perusahaan'  => trim($this->input->post('perusahaan'))
-
-			);
-			$this->model_pkl->insert_nilai($data);
-
 				'tanggal_sidang' => trim($this->input->post('tanggal_sidang')),
 				'dosen'  => trim($this->input->post('dosen')),
 				'ruangan'  => trim($this->input->post('ruangan')),
@@ -316,13 +308,6 @@ class PKL_Api extends CI_Controller {
 		else
 
 		{ 
-			$array = array(
-				'error'    => true,
-				'nama' => form_error('nama'),
-				'kelas' => form_error('kelas'),
-				'perusahaan' => form_error('perusahaan')
-
-		{
 			$array = array(
 				'error'    => true,
 				'tanggal_sidang' => form_error('tanggal_sidang'),
@@ -546,5 +531,6 @@ class PKL_Api extends CI_Controller {
 	// }
 
 	
-	
 }
+	
+
