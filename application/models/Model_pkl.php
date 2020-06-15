@@ -81,6 +81,19 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function insert_mahasiswa($data)
+	{
+		$this->db->insert('mahasiswa', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 	//Panitia
 	function get_sidang()

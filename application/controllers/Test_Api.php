@@ -472,6 +472,27 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "insertMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertMahasiswa";
+
+				$form_data = array(
+				'nama_mhs'  => $this->input->post('nama_mhs'),
+				'kelas_kodeklas'  => $this->input->post('kelas_kodeklas'),
+				'perusahaan'  => $this->input->post('perusahaan')				
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
 
 			if($data_action == "listmhs_dosen")
 			{

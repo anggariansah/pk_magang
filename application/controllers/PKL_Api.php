@@ -123,6 +123,7 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($array, true);
 	}
 
+	// PANITIA
 
 	function insertSidang()
 	{
@@ -154,7 +155,36 @@ class PKL_Api extends CI_Controller {
 	}
 
 
-		
+	function insertMahasiswa()
+	{
+		$this->form_validation->set_rules("nama", "nama", "required");
+		$this->form_validation->set_rules("kelas", "kelas", "required");
+		$this->form_validation->set_rules("perusahaan", "perusahaan", "required");
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'nama' => trim($this->input->post('nama')),
+				'kelas'  => trim($this->input->post('kelas')),
+				'perusahaan'  => trim($this->input->post('perusahaan'))
+
+			);
+			$this->model_pkl->insert_nilai($data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{ 
+			$array = array(
+				'error'    => true,
+				'nama' => form_error('nama'),
+				'kelas' => form_error('kelas'),
+				'perusahaan' => form_error('perusahaan')
+			);
+		}
+		echo json_encode($array, true);
+	}
 
 	function updateNilai()
 	{
@@ -216,32 +246,7 @@ class PKL_Api extends CI_Controller {
 	}
 
 	// PANITIA
-	// function insertMahasiswa()
-	// {
-	// 	$this->form_validation->set_rules("nama_mhs", "nim", "required");
-	// 	$this->form_validation->set_rules("nilai", "nilai", "required");
-	// 	$array = array();
-	// 	if($this->form_validation->run())
-	// 	{
-	// 		$data = array(
-	// 			'nim' => trim($this->input->post('nim')),
-	// 			'nilai'  => trim($this->input->post('nilai'))
-	// 		);
-	// 		$this->model_pkl->insert_nilai($data);
-	// 		$array = array(
-	// 			'success'  => true
-	// 		);
-	// 	}
-	// 	else
-	// 	{ 
-	// 		$array = array(
-	// 			'error'    => true,
-	// 			'nim' => form_error('nim'),
-	// 			'nilai' => form_error('nilai')
-	// 		);
-	// 	}
-	// 	echo json_encode($array, true);
-	// }
+	// 
 
 
 	// MENGHAPUS MAHASISWA
