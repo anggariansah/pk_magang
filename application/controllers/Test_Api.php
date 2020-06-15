@@ -285,6 +285,44 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "getSingleSidang")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getSingleSidang";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+
+			if($data_action == "updateSidang")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/updateSidang";
+				$form_data = array(
+					'tanggal_sidang'  => $this->input->post('tanggal_sidang'),
+					'dosen' => $this->input->post('dosen'),
+					'ruangan'   => $this->input->post('ruangan'),
+					'mahasiswa'   => $this->input->post('mahasiswa')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+			}
 
 			if($data_action == "tampilDetailMahasiswa")
 			{
@@ -431,8 +469,8 @@ class Test_api extends CI_Controller {
 								<td>'.$row->ruangan.'</td>
 								<td>'.$row->mahasiswa.'</td>
 								<td>
-									<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'" data-toggle="modal" data-target="#modal-edit">Edit</button>
-								<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>
+									<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
+									<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>
 								</td>
 							</tr>
 

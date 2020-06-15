@@ -174,6 +174,13 @@ class Model_pkl extends CI_Model
 		return $query->result_array();
 	}
 
+	function get_single_sidang($id)
+	{
+		$this->db->where("id", $id);
+		$query = $this->db->get('sidang_pkl');
+		return $query->result_array();
+	}
+
 	function tampil_detail_mahasiswa($nim)
 	{
 		$this->db->where("nim", $nim);
@@ -185,6 +192,12 @@ class Model_pkl extends CI_Model
 	{
 		$this->db->where("id", $id);
 		$this->db->update("nilai_pkl", $data);
+	}
+
+	function update_sidang($id, $data)
+	{
+		$this->db->where("id", $id);
+		$this->db->update("sidang_pkl", $data);
 	}
 
 	function tampil_data_dosen_mhs()
