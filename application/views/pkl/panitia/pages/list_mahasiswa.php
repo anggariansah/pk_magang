@@ -45,10 +45,10 @@
   <div class="modal-body">
     <form method="post" id="user_form">
     <div class="form-group">
-      <input type="text" name="nama" class="form-control" placeholder="Nama Mahasiswa" value="">
+      <input type="text" name="nama_mhs" class="form-control" placeholder="Nama" value="">
     </div>
     <div class="form-group">
-      <input type="text" name="kelas" class="form-control" placeholder="Kelas" value="">
+      <input type="text" name="kelas_kodeklas" class="form-control" placeholder="Kelas" value="">
     </div>
     <div class="form-group">
       <input type="text" name="perusahaan" class="form-control" placeholder="Perusahaan" value="">
@@ -154,6 +154,8 @@
 
 	});
 
+  getMahasiswa();
+
   $('#add-button').click(function(){
         $('#user_form')[0].reset();
         $('#action').val('Add');
@@ -192,6 +194,28 @@
         })
     });
 
+  $(document).on('click', '.edit', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{id:id, data_action:'tampilMahasiswa'},
+            dataType:"json",
+            success:function(data)
+            {
+        $('#modal-tambah').modal('show');           
+                $('#nim').val(data.nim);
+                $('#nilai').val(data.nilai);
+                $('.modal-title').text('Edit Data');
+                $('#user_id').val(id);
+                $('#action').val('Edit');
+        $('#data_action').val('updateMahasiswa');
+
+      }
+        })
+    });
+
+
 
 
   $(document).on('click', '.delete', function(){
@@ -208,7 +232,7 @@
                     if(data.success)
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getPerusahaanTabel();
+                        getMahasiswa();
                     }
                 }
             })

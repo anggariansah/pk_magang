@@ -2,9 +2,9 @@
 
 <!-- TABEL TAMBAH DATA SIDANG -->
  <div class="card-body">
-  <span id="success_message"></span>
+ 	<span id="success_message"></span>
   <br>
-  <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-circle"></i> Tambah Data</a>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Jadwal</button>
   <br>
   <br>
 
@@ -26,7 +26,7 @@
 </div>
 
          <!-- MODAL TAMBAH DATA -->
-          <div class="modal fade" id="modal-tambah">
+<div class="modal fade" id="modal-tambah">
 <div class="modal-dialog">
   <div class="modal-content">
   <div class="modal-header">
@@ -36,15 +36,15 @@
               </button>
             </div>
             <div class="modal-body">
-              <form class="form" action="" id="userform" method="POST">
+						<form method="post" id="user_form">
               <div class="form-group">
-                <input type="date" name="tanggal_sidang" class="form-control" placeholder="Tanggal Sidang" value="">
+                <input type="date" name="tanggal_sidang" id="tanggal_sidang" class="form-control" placeholder="Tanggal Sidang" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="dosen" class="form-control" placeholder="Dosen" value="">
+                <input type="text" name="dosen" id="dosen" class="form-control" placeholder="Dosen" value="">
               </div>
               <div class="form-group">
-              <select name="ruangan" class="custom-select">
+              <select name="ruangan" id="ruangan" class="custom-select">
                 <option selected>Ruangan</option>
                 <option>AA201</option>
                 <option>AA202</option>
@@ -58,16 +58,15 @@
               </select>
               </div>
               <div class="form-group">
-                <input type="text" name="mahasiswa" class="form-control" placeholder="Mahasiswa" value="">
+                <input type="text" name="mahasiswa" id="mahasiswa" class="form-control" placeholder="Mahasiswa" value="">
               </div>
 
-
               <div class="modal-footer">
-      <input type="hidden" name="id" id="id" />
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <input type="hidden" name="data_action" id="data_action" value="Insert" />
-            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
-    </div>
+							<input type="hidden" name="user_id" id="user_id" />
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<input type="hidden" name="data_action" id="data_action" value="Insert" />
+							<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+							</div>
               </form>
             </div>
             </div>
@@ -75,27 +74,24 @@
           </div>
         <!-- TUTUP MODAL TAMBAH DATA -->
 
-          <script type="text/javascript" language="javascript">
-            $(document).ready(function(){
+			<script type="text/javascript" language="javascript">
+				$(document).ready(function(){
 
-              function getSidang()
-              {
-                $.ajax({
-                  url:"<?php echo base_url(); ?>test_api/action",
-                  method:"POST",
-                  data:{data_action:'getSidang'},
-                  success:function(data)
-                  {
-                    $('tbody').html(data);
-                  }
-                });
-              }
+					function getSidang()
+					{
+						$.ajax({
+							url:"<?php echo base_url(); ?>test_api/action",
+							method:"POST",
+							data:{data_action:'getSidang'},
+							success:function(data)
+							{
+								$('tbody').html(data);
+							}
+						});
+					}
 
-              getSidang();
-            });
-
-
-
+          getSidang();
+        
 
           $('#add-button').click(function(){
             $('#user_form')[0].reset();
@@ -133,27 +129,54 @@
           })
       });
 
-            $(document).on('click', '.delete', function(){
-            var id = $(this).attr('id');
-            if(confirm("Are you sure you want to delete this?"))
+
+			$(document).on('click', '.edit', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{id:id, data_action:'getSingleSidang'},
+            dataType:"json",
+            success:function(data)
             {
-                $.ajax({
-                    url:"<?php echo base_url(); ?>test_api/action",
-                    method:"POST",
-                    data:{id:id, data_action:'deleteSidang'},
-                    dataType:"JSON",
-                    success:function(data)
-                    {
-                        if(data.success)
-                        {
-                            $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                            getSidang();
-                        }
-                    }
-                })
-            }
-              });
+								$('#modal-tambah').modal('show');           
+                $('#tanggal_sidang').val(data.tanggal_sidang);
+                $('#dosen').val(data.dosen);
+								$('#ruangan').val(data.ruangan);
+								$('#mahasiswa').val(data.mahasiswa);
+                $('.modal-title').text('Edit Sidang');
+                $('#user_id').val(id);
+                $('#action').val('Edit');
+								$('#data_action').val('updateSidang');
+
+							}
+						})
+    		});
+
+
+			$(document).on('click', '.delete', function(){
+				var id = $(this).attr('id');
+				if(confirm("Are you sure you want to delete this?"))
+				{
+						$.ajax({
+								url:"<?php echo base_url(); ?>test_api/action",
+								method:"POST",
+								data:{id:id, data_action:'deleteSidang'},
+								dataType:"JSON",
+								success:function(data)
+								{
+										if(data.success)
+										{
+												$('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+												getSidang();
+										}
+								}
+						})
+				}
+  	  });
+
+		});
           
           
 
-						</script>
+</script>

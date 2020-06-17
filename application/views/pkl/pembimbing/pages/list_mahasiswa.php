@@ -47,8 +47,8 @@
 		<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
 	</div>
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item" id="nama" name="nama"> </li>
-		<li class="list-group-item" id="nim" name="nim"> </li>
+		<p id="nim" name="nim"> </p>
+		<p id="nama" name="nama"> </p>
 		<li class="list-group-item">kelas		: TI 6A</li>
 	</ul>
 	</div>
@@ -137,7 +137,7 @@
 
 
 		$(document).on('click', '.detail', function(){
-        var nim = $(this).attr('nim');
+        var nim = $(this).attr('id');
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
             method:"POST",
@@ -145,9 +145,9 @@
             dataType:"json",
             success:function(data)
             {
-							$('#modal-detail').modal('show');           
-							$('#nim').val(nim);
-							$('#nama').val(data.nama);
+							$('#modal-detail').modal('show'); 
+							$('#nim').html('<li class="list-group-item" id="nim" name="nim">Nim : '+nim+'</li>');          
+							$('#nama').html('<li class="list-group-item" id="nama" name="nama">Nama : '+data.nama+'</li>');
 							$('.modal-title').text('Detail Mahasiswa');
 						}
         })
