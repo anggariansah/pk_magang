@@ -484,14 +484,11 @@ class PKL_Api extends CI_Controller {
 			$data = $this->model_pkl->tampil_detail_mahasiswa($this->input->post('nim'));
 			foreach($data as $row)
 			{
-				$output['nama'] = $row["nama"];
+				$output['nama'] = $row["nama_mhs"];
 			}
 			echo json_encode($output);
 		}
 	}
-
-
-
 	
 }
 	

@@ -153,16 +153,9 @@ class Model_pkl extends CI_Model
 	}
 
 
-
-	
-
-	
-	
-
-
 	function get_mahasiswa()
 	{
-		$query = $this->db->get('mahasiswa');
+		$query = $this->db->query('SELECT m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas JOIN industri i ON p.id_industri = i.industri_id');
 		return $query;
 	}
 
