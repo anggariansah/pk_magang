@@ -44,15 +44,24 @@
   </div>
   <div class="modal-body">
     <form method="post" id="user_form">
-    <div class="form-group">
-      <input type="text" name="nama_mhs" class="form-control" placeholder="Nama" value="">
+		<div class="form-group">
+			<div class="input-group">
+				<input type="number" class="form-control" id="mahasiswa_nim" name="mahasiswa_nim" placeholder="Nomor Induk Mahasiswa">
+				<div class="input-group-append">
+					<button id="show-button" type="button" class="btn btn-sm btn-primary">Tampilkan</button>
+				</div>
+			</div>
     </div>
     <div class="form-group">
-      <input type="text" name="kelas_kodeklas" class="form-control" placeholder="Kelas" value="">
+      <input type="text" name="nama" class="form-control" placeholder="Nama" value="" disabled>
     </div>
-    <div class="form-group">
-      <input type="text" name="perusahaan" class="form-control" placeholder="Perusahaan" value="">
+
+		<div class="form-group">
+			<select id="id_industri" name="id_industri" class="custom-select">
+				<option value="3">Bukalapak</option>
+			</select>      
     </div>
+
     <div class="modal-footer">
       <input type="hidden" name="user_id" id="user_id" />
             <input type="hidden" name="data_action" id="data_action" value="Insert" />
@@ -159,11 +168,28 @@
   $('#add-button').click(function(){
         $('#user_form')[0].reset();
         $('#action').val('Add');
-    $('.modal-title').text('Tambah Data');
+    		$('.modal-title').text('Tambah Data');
         $('#data_action').val("insertMahasiswa");
         $('#modal-tambah').modal('show');
+
+				getListPerusahaan();
     });
 
+
+		function getListPerusahaan()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'getListPerusahaan'},
+				success:function(data)
+				{
+					$('#id_industri').html(data);
+				}
+			});
+		}
+
+		getListPerusahaan();
 
   $(document).on('submit', '#user_form', function(event){
         event.preventDefault();
@@ -203,17 +229,45 @@
             dataType:"json",
             success:function(data)
             {
-        $('#modal-tambah').modal('show');           
+        				$('#modal-tambah').modal('show');           
                 $('#nim').val(data.nim);
                 $('#nilai').val(data.nilai);
                 $('.modal-title').text('Edit Data');
                 $('#user_id').val(id);
                 $('#action').val('Edit');
-        $('#data_action').val('updateMahasiswa');
+        				$('#data_action').val('updateMahasiswa');
 
-      }
+      			}
         })
     });
+
+
+		$(document).on('click', '#show-button', function(){
+        var nim = document.getElementById('mahasiswa_nim').value;
+				alert(nim);
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{nim:nim, data_action:'tampilDetailMahasiswa'},
+            dataType:"json",
+            success:function(data)
+            {
+
+							if(data.error == "true"){
+								
+								$('#nama').val("");
+
+								$('#data_action').val("insertPendaftaran");
+
+							}else{
+
+								$('#nama').val(data.nama);
+							}
+			
+						}
+        })
+    });
+		
 
 
 

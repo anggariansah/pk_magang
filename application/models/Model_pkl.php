@@ -118,6 +118,19 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function insert_pendaftaran($data)
+	{
+		$this->db->insert('pkl_mhs_dosen', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function insert_sidang($data)
 	{
 		$this->db->insert('sidang_pkl', $data);

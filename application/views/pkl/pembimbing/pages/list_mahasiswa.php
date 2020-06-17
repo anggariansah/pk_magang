@@ -40,22 +40,10 @@
 	</div>
 	<div class="modal-body">
 	<div class="card">
-	<div class="card-body mb-4">
-
-	<div class="card" style="width: 25rem;">
 	<div class="card-body">
-		<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
-	</div>
-	<ul class="list-group list-group-flush">
-		<p id="nim" name="nim"> </p>
-		<p id="nama" name="nama"> </p>
-		<li class="list-group-item">kelas		: TI 6A</li>
-	</ul>
-	</div>
 
 		<!-- Steps form -->
     <h2 class="text-center font-weight-bold pt-4 pb-5"><strong>Status Mahasiswa</strong></h2>
-    <hr class="my-5">
     <!-- Stepper -->
     <div class="steps-form">
       <div class="steps-row setup-panel">
@@ -81,6 +69,31 @@
         </div>
       </div>
     </div>
+
+		<br>
+
+		<div class="card" style="width: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
+			</div>
+			<ul class="list-group list-group-flush">
+				<p id="nim" name="nim"> </p>
+				<p id="nama" name="nama"> </p>
+				<li class="list-group-item">kelas		: TI 6A</li>
+			</ul>
+		</div>
+
+		<div class="card" style="width: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
+			</div>
+			<ul class="list-group list-group-flush">
+				<p id="nim" name="nim"> </p>
+				<p id="nama" name="nama"> </p>
+				<li class="list-group-item">kelas		: TI 6A</li>
+			</ul>
+		</div>
+
 	</div>
 	</div>
 </div>
