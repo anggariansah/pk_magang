@@ -25,6 +25,7 @@ class PKL_Panitia extends CI_Controller {
 		$data['title'] = "Mahasiswa";
 		$this->load->view('pkl/panitia/template/header');
 		$this->load->view('pkl/panitia/template/sidebar', $data);
+        $this->load->view('pkl/panitia/pages/mahasiswa');
         $this->load->view('pkl/panitia/pages/list_mahasiswa');
         $this->load->view('pkl/panitia/template/footer');
 	}

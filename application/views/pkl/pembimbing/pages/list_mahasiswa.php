@@ -43,31 +43,65 @@
 	<div class="card-body">
 
 		<!-- Steps form -->
+<<<<<<< HEAD
     <h2 class="text-center font-weight-bold pt-4 pb-5"><strong>Status Mahasiswa</strong></h2>
     <!-- Stepper -->
+=======
+     <!-- Stepper -->
+>>>>>>> 354614fe4e3fa540a4104d860ae8a0bbcfd3ce51
     <div class="steps-form">
       <div class="steps-row setup-panel">
         <div class="steps-step">
-          <a href="#step-9" type="button" class="btn btn-success btn-circle">1</a>
-          <p>Magang</p>
+          <a href="#step-9" type="button" class="btn btn-indigo btn-circle">1</a>
+          <p>Step 1</p>
         </div>
         <div class="steps-step">
-          <a href="#step-10" type="button" class="btn btn-success btn-circle" disabled="disabled">2</a>
-          <p>Bimbingan 1</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 2</p>
+          <a href="#step-10" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+          <p>Step 2</p>
         </div>
         <div class="steps-step">
           <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 3</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Sidang</p>
+          <p>Step 3</p>
         </div>
       </div>
+    </div>
+
+    <form role="form" action="" method="post">
+
+      <!-- First Step -->
+      <div class="row setup-content" id="step-9">
+        <div class="col-md-12">
+          <h3 class="font-weight-bold pl-0 my-4"><strong>Step 1</strong></h3>
+        
+      <!-- Second Step -->
+      <div class="row setup-content" id="step-10">
+        <div class="col-md-12">
+          <h3 class="font-weight-bold pl-0 my-4"><strong>Step 2</strong></h3>
+          <div class="form-group md-form">
+            <label for="companyName" data-error="wrong" data-success="right">Company Name</label>
+            <input id="companyName" type="text" required="required" class="form-control validate">
+          </div>
+          <div class="form-group md-form mt-3">
+            <label for="companyAddress" data-error="wrong" data-success="right">Company Address</label>
+            <input id="companyAddress" type="text" required="required" class="form-control validate">
+          </div>
+          <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
+          <button class="btn btn-indigo btn-rounded nextBtn float-right" type="button">Next</button>
+        </div>
+      </div>
+
+      <!-- Third Step -->
+      <div class="row setup-content" id="step-11">
+        <div class="col-md-12">
+          <h3 class="font-weight-bold pl-0 my-4"><strong>Step 3</strong></h3>
+          <button class="btn btn-indigo btn-rounded prevBtn float-left" type="button">Previous</button>
+          <button class="btn btn-default btn-rounded float-right" type="submit">Submit</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
     </div>
 
 		<br>
