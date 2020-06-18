@@ -40,21 +40,15 @@
 	</div>
 	<div class="modal-body">
 	<div class="card">
-	<div class="card-body mb-4">
-
-	<div class="card" style="width: 25rem;">
 	<div class="card-body">
-		<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
-	</div>
-	<ul class="list-group list-group-flush">
-		<p id="nim" name="nim"> </p>
-		<p id="nama" name="nama"> </p>
-		<li class="list-group-item">kelas		: TI 6A</li>
-	</ul>
-	</div>
 
 		<!-- Steps form -->
+<<<<<<< HEAD
+    <h2 class="text-center font-weight-bold pt-4 pb-5"><strong>Status Mahasiswa</strong></h2>
+    <!-- Stepper -->
+=======
      <!-- Stepper -->
+>>>>>>> 354614fe4e3fa540a4104d860ae8a0bbcfd3ce51
     <div class="steps-form">
       <div class="steps-row setup-panel">
         <div class="steps-step">
@@ -109,6 +103,31 @@
 
   </div>
     </div>
+
+		<br>
+
+		<div class="card" style="width: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
+			</div>
+			<ul class="list-group list-group-flush">
+				<p id="nim" name="nim"> </p>
+				<p id="nama" name="nama"> </p>
+				<li class="list-group-item">kelas		: TI 6A</li>
+			</ul>
+		</div>
+
+		<div class="card" style="width: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
+			</div>
+			<ul class="list-group list-group-flush">
+				<p id="nim" name="nim"> </p>
+				<p id="nama" name="nama"> </p>
+				<li class="list-group-item">kelas		: TI 6A</li>
+			</ul>
+		</div>
+
 	</div>
 	</div>
 </div>

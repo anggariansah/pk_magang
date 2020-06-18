@@ -1,27 +1,26 @@
+<section class="content">
 <div class="container-fluid">
+    		<div class="row">
+        <!-- left column -->
+				<div class="col-md-12">
+				<!-- general form elements -->
+				<div class="card card-primary">
+				<div class="card-header">
+				<h3 class="card-title">Riwayat Bimbingan</h3>
+				</div>
+				<br>
 
-<div class="card-body">
- 	<span id="success_message"></span>
-	<br>
-	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Laporan Bimbingan</button>
-	<br>
-	<br>
+					<!-- Main content -->
+					<div class="content">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-12" id="card_riwayat">
 
-		<table class="table table-bordered table-striped" id="example1">
-  <thead>
-      <tr>
-        <th>Judul</th>
-        <th>Tanggal</th>
-        <th>NIM</th>
-        <th>NIP</th>
-        <th>Deskripsi</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>
-  </table>
-</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+
 </div>
 
 <!-- MODAL TAMBAH LAPORAN BIMBINGAN -->

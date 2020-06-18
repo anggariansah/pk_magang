@@ -12,46 +12,51 @@
       </div>
             <!-- /.card-header -->
             <!-- form start -->
-      <form role="form">
+      <form method="post" id="daftar_form">
       <div class="card-body">
-      <div class="form-group">
-      <label for="nama"></label>
-      <input type="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
-      </div>
 
       <div class="form-group">
-      <label for="nim"></label>
-      <input type="nim" class="form-control" id="nim" placeholder="Nomor Induk Mahasiswa">
-      </div>
-
-      <div class="form-group">
-      <label for="notlp"></label>
-      <input type="notlp" class="form-control" id="notlp" placeholder="Nomor Telepon">
-      </div>
-
-      <div class="form-group">
-      <label for="Email"></label>
-      <input type="email" class="form-control" id="email" placeholder="Email">
-      </div>
-
-      <div class="form-group">
-      	<label for="perusahaan"></label>
-      <div class="input-group">
-      <div class="custom-file">
-				<select id="perusahaan" name="perusahaan" class="custom-select">
-				
-				</select>      
+		<label for="mahasiswa_nim">NIM</label>
+		<div class="input-group">
+			<input type="number" class="form-control" id="mahasiswa_nim" name="mahasiswa_nim" placeholder="Nomor Induk Mahasiswa">
 			<div class="input-group-append">
-			<button id="add-button" type="button" class="btn btn-sm btn-primary">Tambah</button>
+				<button id="show-button" type="button" class="btn btn-sm btn-primary">Tampilkan</button>
+			</div>
+		</div>
       </div>
+
+		<div class="form-group">
+			<label for="nama">Nama Lengkap</label>
+			<input type="nama" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" disabled>
+		</div>
+
+		<div class="form-group">
+			<label for="notlp">No Telepon</label>
+			<input type="notlp" class="form-control" id="notlp" placeholder="Nomor Telepon" disabled>
+		</div>
+
+		<div class="form-group">
+			<label for="Email">Email</label>
+			<input type="email" class="form-control" id="email" placeholder="Email" disabled>
+		</div>
+
+      <div class="form-group">
+    	<label for="id_industri">Perusahaan</label>
+      	<div class="input-group">
+			<select id="id_industri" name="id_industri" class="custom-select">
+			
+			</select>      
+			<div class="input-group-append">
+				<button id="add-button" type="button" class="btn btn-sm btn-primary">Tambah</button>
+			</div>
+      	</div>
       </div>
-      </div>
-      </div>
+	  
       </div>
               <!-- /.card-body -->
 
-    <div class="card-footer">
-        <button type="daftar" class="btn btn-primary">Daftar</button>
+    	<div class="card-footer">
+        <input type="submit" class="btn btn-primary" name="action" id="action" value="Daftar">
       </div>
     </form>
     </div>
@@ -98,6 +103,7 @@
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 
+
 		function getListPerusahaan()
 		{
 			$.ajax({
@@ -106,7 +112,7 @@
 				data:{data_action:'getListPerusahaan'},
 				success:function(data)
 				{
-					$('#perusahaan').html(data);
+					$('#id_industri').html(data);
 				}
 			});
 		}
@@ -122,8 +128,8 @@
     });
 
 
-		$(document).on('submit', '#user_form', function(event){
-        event.preventDefault();
+	$(document).on('submit', '#user_form', function(event){
+    	event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
             method:"POST",
@@ -151,44 +157,67 @@
         })
     });
 
-	$(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-        if(confirm("Are you sure you want to delete this?"))
-        {
-            $.ajax({
-                url:"<?php echo base_url(); ?>test_api/action",
-                method:"POST",
-                data:{id:id, data_action:'deleteNilai'},
-                dataType:"JSON",
-                success:function(data)
-                {
-                    if(data.success)
-                    {
-                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getNilaiMahasiswa();
-                    }
-                }
-            })
-        }
-    });
 
-	$(document).on('click', '.edit', function(){
-        var id = $(this).attr('id');
+	$(document).on('submit', '#daftar_form', function(event){
+    	event.preventDefault();
         $.ajax({
-            url:"<?php echo base_url(); ?>test_api/action",
+            url:"<?php echo base_url() . 'test_api/action' ?>",
             method:"POST",
-            data:{id:id, data_action:'tampilNilai'},
+            data:$(this).serialize(),
             dataType:"json",
             success:function(data)
             {
-                $('#modal-edit').modal('show');
-                $('#nim').val(data.nim);
-                $('#nama').val(data.nama);
-                $('.modal-title').text('Edit User');
-                $('#id').val(id);
-                $('#action').val('Edit');
-                $('#data_action').val('Edit');
+				alert("pp");
+                if(data.success)
+                {
+					
+                    $('#daftar_form')[0].reset();
+
+					if($('#data_action').val() == "insertPerusahaan")
+                    {
+                        $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
+                    }                    
+                }
+
+                if(data.error)
+                {
+                    $('#mahasiswa_nim').val("Error");
+                    $('#id_industri').val("Error");
+                }
             }
+        })
+    });
+
+	$(document).on('click', '#show-button', function(){
+        var nim = document.getElementById('mahasiswa_nim').value;
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{nim:nim, data_action:'tampilDetailMahasiswa'},
+            dataType:"json",
+            success:function(data)
+            {
+
+				if(data.error == "true"){
+					$('#success_message').html('<div class="alert alert-danger">Nim Tidak Ditemukan</div>');
+					
+					$('#nama').val("");
+					$('#notlp').val("");
+					$('#email').val("");
+
+				
+
+				}else{
+					$('#success_message').html('<div class="alert alert-success">Data Ditemukan</div>');
+
+					$('#nama').val(data.nama);
+					$('#notlp').val(data.telp);
+					$('#email').val(data.email);
+
+					$('#data_action').val("insertPendaftaran");
+				}
+			
+			}
         })
     });
 
