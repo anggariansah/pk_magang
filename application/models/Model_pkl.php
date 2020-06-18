@@ -1,6 +1,6 @@
 <?php
 class Model_pkl extends CI_Model
-{
+{ 
 
 	
 	public function __construct()

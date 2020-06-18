@@ -60,7 +60,7 @@
                       Login
                     </a>
                   <div class="text-center">
-                    <a class="small" href="register.html">Daftar</a>
+                    <a class="small" href="<?php echo site_url("pkl_mahasiswa/daftar")?>">Daftar</a>
                   </div>
                 </div>
               </div>

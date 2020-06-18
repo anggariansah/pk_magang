@@ -21,6 +21,5 @@ class Login extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('pkl/mahasiswa/pages/login.php');
-		$this->load->view('pilihan_login');
 	}
 }

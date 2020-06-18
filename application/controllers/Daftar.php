@@ -21,6 +21,6 @@ class Daftar extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('mahasiswa/pages/daftar');
+		$this->load->view('pkl/mahasiswa/pages/daftar');
 	}
 }
