@@ -49,6 +49,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="<?php echo site_url("pkl_mahasiswa/dosen_industri")?>" class="nav-link">
+              <i class="nav-icon fa fa-fw fa-user"></i>
+              <p>
+                Dosen Industri
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="<?php echo site_url("pkl_mahasiswa/riwayat_bimbingan")?>" class="nav-link">
               <i class="nav-icon fas fa-history"></i>
               <p>
@@ -56,6 +65,8 @@
               </p>
             </a>
           </li>
+
+          
           
           
         </ul>

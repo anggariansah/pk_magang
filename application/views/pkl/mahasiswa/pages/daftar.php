@@ -1,12 +1,12 @@
 
-<section class="content">
+<section style="margin-left: 100px;" class="content">
 <span id="success_message"></span>
     <div class="container-fluid">
       <div class="row">
         <!-- left column -->
       <div class="col-md-6">
        <!-- general form elements -->
-      <div class="card card-primary">
+      <div class="card card-primary" style="width: 55rem;">
       <div class="card-header">
       <h3 class="card-title">Daftar PKL</h3>
       </div>
