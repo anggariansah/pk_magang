@@ -37,7 +37,7 @@
       </div>
             <!-- /.card-header -->
             <!-- form start -->
-      <form method="post" id="daftar_form" actions="<?php echo site_url("pkl_mahasiswa")?>">
+      <form method="post" id="daftar_form">
       <div class="card-body">
 
       <div class="form-group">
@@ -81,7 +81,8 @@
               <!-- /.card-body -->
 
     	<div class="card-footer">
-        <a  class="btn btn-primary" href="<?php echo site_url("pkl_mahasiswa")?>" name="action" id="action">Daftar</a>
+		<input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
+		<input type="submit" name="btn-daftar" id="btn-daftar" class="btn btn-primary" value="Add" />
       </div>
     </form>
     </div>
@@ -98,7 +99,7 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form method="post" id="user_form">
+		<form method="post" id="perusahaan_form">
 		<div class="form-group">
 			<input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
@@ -110,7 +111,7 @@
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />
-      <input type="hidden" name="data_action" id="data_action" value="Insert" />
+      		<input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
 			<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
@@ -148,14 +149,14 @@
 		getListPerusahaan();
 
 	$('#add-button').click(function(){
-        $('#user_form')[0].reset();
+        $('#perusahaan_form')[0].reset();
         $('#action').val('Add');
         $('#data_action').val("insertPerusahaan");
         $('#modal-tambah').modal('show');
     });
 
 
-	$(document).on('submit', '#user_form', function(event){
+	$(document).on('submit', '#perusahaan_form', function(event){
     	event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
@@ -166,7 +167,7 @@
             {
                 if(data.success)
                 {
-                    $('#user_form')[0].reset();
+                    $('#perusahaan_form')[0].reset();
                     $('#modal-tambah').modal('hide');
                     getListPerusahaan();
                     if($('#data_action').val() == "insertPerusahaan")
@@ -186,7 +187,7 @@
 
 
 	$(document).on('submit', '#daftar_form', function(event){
-    	event.preventDefault();
+        event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
             method:"POST",
@@ -194,22 +195,22 @@
             dataType:"json",
             success:function(data)
             {
-				alert("pp");
+							
                 if(data.success)
                 {
-					
+									
                     $('#daftar_form')[0].reset();
-
-					if($('#data_action').val() == "insertPerusahaan")
+					window.location.href="http://[::1]/pk_magang/pkl_mahasiswa";
+                    fetch_data();
+                    if($('#data_action').val() == "insertPendaftaran")
                     {
-                        $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
-                    }                    
+                    }
                 }
 
                 if(data.error)
                 {
-                    $('#mahasiswa_nim').val("Error");
-                    $('#id_industri').val("Error");
+                    $('#first_name_error').html(data.first_name_error);
+                    $('#last_name_error').html(data.last_name_error);
                 }
             }
         })
