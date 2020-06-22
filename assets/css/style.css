@@ -41,9 +41,9 @@ img {
         background: #fbfbfb;
         border-radius: 8px;
         box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-        height: 600px;
+        height: 40px;
         margin: 12rem auto 8.1rem auto;
-        width: 1000px;
+        width: 70px;
 }
 #cardpilihan1 {
         background: #fbfbfb;
@@ -55,6 +55,7 @@ img {
         width: 200px;
         background-image: url('.../image/panitia.jpeg');
 }
+
 
 #gambar {
     cursor: pointer;
@@ -84,8 +85,18 @@ img {
       width: 89px;
 }
 
+
+
 body {
        background: -webkit-linear-gradient(bottom, #263578, #FFF8DC);
        background-repeat: no-repeat;
 }
 
+
+/*end pilihan login*/
+
+/*LOGIN*/
+
+
+
+/*END LOGIN*/

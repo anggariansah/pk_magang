@@ -45,6 +45,22 @@ class PKL_Mahasiswa extends CI_Controller {
 		$this->load->view('pkl/mahasiswa/template/footer');
 	}
 
+	public function jadwalsidang(){
+		$data['title'] = "Jadwal Sidang";
+		$this->load->view('pkl/mahasiswa/template/header');
+		$this->load->view('pkl/mahasiswa/template/sidebar',$data);
+        $this->load->view('pkl/mahasiswa/pages/jadwalsidang');
+        $this->load->view('pkl/mahasiswa/template/footer');
+	}
+
+	public function dosen_industri(){
+		$data['title'] = "Dosen Industri";
+		$this->load->view('pkl/mahasiswa/template/header');
+		$this->load->view('pkl/mahasiswa/template/sidebar',$data);
+        $this->load->view('pkl/mahasiswa/pages/dosen_industri');
+        $this->load->view('pkl/mahasiswa/template/footer');
+	}
+
 }
 
 /* End of file Controllername.php */

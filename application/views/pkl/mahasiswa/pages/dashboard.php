@@ -25,7 +25,8 @@
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">Nama		: Ramona Matovani</li>
 							<li class="list-group-item">NIM 		: 4617010021</li>
-							<li class="list-group-item">kelas		: TI 6A</li>
+							<li class="list-group-item">Kelas		: TI 6A</li>
+							<li class="list-group-item">Perusahaan	: Bukalapak.com</li>
 						</ul>
 						</div>
           </div>
@@ -47,15 +48,7 @@
           <p>Bimbingan 1</p>
         </div>
         <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 2</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 3</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+          <a href="<?php echo site_url("pkl_mahasiswa/jadwalsidang")?>" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
           <p>Sidang</p>
         </div>
       </div>
