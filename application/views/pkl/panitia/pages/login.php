@@ -42,7 +42,7 @@
                   </div>
                   <form class="user">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="NIM">
+                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="NIP">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
@@ -56,12 +56,9 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <a href="<?php echo site_url("pkl_mahasiswa")?>" class="btn btn-primary btn-user btn-block">
+                    <a href="<?php echo site_url("pkl_panitia")?>" class="btn btn-primary btn-user btn-block">
                       Login
                     </a>
-                  <div class="text-center">
-                    <a class="small" href="<?php echo site_url("daftar")?>">Daftar</a>
-                  </div>
                 </div>
               </div>
             </div>

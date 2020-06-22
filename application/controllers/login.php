@@ -22,4 +22,19 @@ class Login extends CI_Controller {
 	{
 		$this->load->view('pkl/mahasiswa/pages/login.php');
 	}
+
+	public function login_pembimbing()
+	{
+		$this->load->view('pkl/pembimbing/pages/login.php');
+	}
+
+	public function login_mahasiswa()
+	{
+		$this->load->view('pkl/mahasiswa/pages/login.php');
+	}
+
+	public function login_panitia()
+	{
+		$this->load->view('pkl/panitia/pages/login.php');
+	}
 }
