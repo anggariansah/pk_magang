@@ -30,7 +30,7 @@
             </a>
    		    </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?php echo site_url("pkl_mahasiswa/list_perusahaan")?>" class="nav-link">
               <i class="nav-icon fas fa-building"></i>
               <p>
@@ -46,7 +46,7 @@
                 Daftar PKL
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_mahasiswa/dosen_industri")?>" class="nav-link">

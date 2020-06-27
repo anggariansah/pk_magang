@@ -1,10 +1,35 @@
+<!-- Font Awesome -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+
+
+	<!-- jQuery -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/demo.js"></script>
+<div class="container" >
+<br>
+<br>
+<section class="content">
 
 <section style="margin-left: 100px;" class="content">
 <span id="success_message"></span>
     <div class="container-fluid">
+	<span id="success_message"></span>
       <div class="row">
         <!-- left column -->
-      <div class="col-md-6">
+      <div class="col-md-8">
        <!-- general form elements -->
       <div class="card card-primary" style="width: 55rem;">
       <div class="card-header">
@@ -56,7 +81,8 @@
               <!-- /.card-body -->
 
     	<div class="card-footer">
-        <input type="submit" class="btn btn-primary" name="action" id="action" value="Daftar">
+		<input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
+		<input type="submit" name="btn-daftar" id="btn-daftar" class="btn btn-primary" value="Add" />
       </div>
     </form>
     </div>
@@ -73,7 +99,7 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form method="post" id="user_form">
+		<form method="post" id="perusahaan_form">
 		<div class="form-group">
 			<input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
@@ -85,7 +111,7 @@
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />
-      <input type="hidden" name="data_action" id="data_action" value="Insert" />
+      		<input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
 			<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
@@ -94,6 +120,8 @@
 	</div>
 	</div>
 </div>
+</div>
+
 </div>
 
 
@@ -121,14 +149,14 @@
 		getListPerusahaan();
 
 	$('#add-button').click(function(){
-        $('#user_form')[0].reset();
+        $('#perusahaan_form')[0].reset();
         $('#action').val('Add');
         $('#data_action').val("insertPerusahaan");
         $('#modal-tambah').modal('show');
     });
 
 
-	$(document).on('submit', '#user_form', function(event){
+	$(document).on('submit', '#perusahaan_form', function(event){
     	event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
@@ -139,7 +167,7 @@
             {
                 if(data.success)
                 {
-                    $('#user_form')[0].reset();
+                    $('#perusahaan_form')[0].reset();
                     $('#modal-tambah').modal('hide');
                     getListPerusahaan();
                     if($('#data_action').val() == "insertPerusahaan")
@@ -159,7 +187,7 @@
 
 
 	$(document).on('submit', '#daftar_form', function(event){
-    	event.preventDefault();
+        event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
             method:"POST",
@@ -167,22 +195,22 @@
             dataType:"json",
             success:function(data)
             {
-				alert("pp");
+							
                 if(data.success)
                 {
-					
+									
                     $('#daftar_form')[0].reset();
-
-					if($('#data_action').val() == "insertPerusahaan")
+					window.location.href="http://[::1]/pk_magang/pkl_mahasiswa";
+                    fetch_data();
+                    if($('#data_action').val() == "insertPendaftaran")
                     {
-                        $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
-                    }                    
+                    }
                 }
 
                 if(data.error)
                 {
-                    $('#mahasiswa_nim').val("Error");
-                    $('#id_industri').val("Error");
+                    $('#first_name_error').html(data.first_name_error);
+                    $('#last_name_error').html(data.last_name_error);
                 }
             }
         })

@@ -71,20 +71,19 @@ body {
   <table>
   <td>
   <div id="cardpilihan1">
-  <a class="gambar" href="<?php echo site_url("login")?>""><img src="<?php echo base_url(); ?>assets/image/panitia.jpeg" style="width: 160px; height: 160px;"></a>
-
-      
+  <a class="gambar" href="<?php echo site_url("login/login_panitia")?>""><img src="<?php echo base_url(); ?>assets/image/panitia.jpeg" style="width: 200px; height: 200px;"></a>
   </div>
   </td>
   <td>
   <div id="cardpilihan1">
-  <a class="gambar" href="<?php echo site_url("login")?>""><img src="<?php echo base_url(); ?>assets/image/mahasiswa.jpeg" style="width: 160px; height: 160px;"></a>
+
+  <a class="gambar" href="<?php echo site_url("login/login_mahasiswa")?>""><img src="<?php echo base_url(); ?>assets/image/mahasiswa.jpeg" style="width: 200px; height: 200px;"></a>
 
   </div>
   </td>
   <td>
   <div id="cardpilihan1">
-  <a class="gambar" href="<?php echo site_url("login")?>""><img src="<?php echo base_url(); ?>assets/image/dosen.jpeg" style="width: 160px; height: 160px;"></a>
+  <a class="gambar" href="<?php echo site_url("login/login_pembimbing")?>""><img src="<?php echo base_url(); ?>assets/image/dosen.jpeg" style="width: 200px; height: 200px;"></a>
 
   </div>
   </td>

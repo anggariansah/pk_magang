@@ -110,7 +110,7 @@ label {
     <div class="underline-title"></div>
   </div><br>
 
-  <label for="user-email">&nbsp;NIP</label><br>
+  <label for="user-email">&nbsp;NIM</label><br>
   <input
    id="user-email"
    class="form-content"

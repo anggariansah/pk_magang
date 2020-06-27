@@ -29,6 +29,8 @@
 				
 		</tbody>
 	</table>
+
+	
 </div>
 </div>
 
@@ -53,7 +55,7 @@
 			</div>
     </div>
     <div class="form-group">
-      <input type="text" name="nama" class="form-control" placeholder="Nama" value="" disabled>
+      <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama" value="" disabled>
     </div>
 
 		<div class="form-group">
@@ -63,8 +65,8 @@
     </div>
 
     <div class="modal-footer">
-      <input type="hidden" name="user_id" id="user_id" />
-            <input type="hidden" name="data_action" id="data_action" value="Insert" />
+      			<input type="hidden" name="user_id" id="user_id" />
+            <input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
             <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
@@ -146,6 +148,20 @@
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 
+		function getListPerusahaan()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{data_action:'getListPerusahaan'},
+				success:function(data)
+				{
+					$('#id_industri').html(data);
+				}
+			});
+		}
+
+
 		function fetch_data()
 		{
 			$.ajax({
@@ -161,37 +177,19 @@
 
 		fetch_data();
 
-	});
-
-  getMahasiswa();
-
-  $('#add-button').click(function(){
-        $('#user_form')[0].reset();
-        $('#action').val('Add');
-    		$('.modal-title').text('Tambah Data');
-        $('#data_action').val("insertMahasiswa");
-        $('#modal-tambah').modal('show');
-
-				getListPerusahaan();
-    });
-
-
-		function getListPerusahaan()
-		{
-			$.ajax({
-				url:"<?php echo base_url(); ?>test_api/action",
-				method:"POST",
-				data:{data_action:'getListPerusahaan'},
-				success:function(data)
-				{
-					$('#id_industri').html(data);
-				}
-			});
-		}
-
 		getListPerusahaan();
 
-  $(document).on('submit', '#user_form', function(event){
+		$('#add-button').click(function(){
+					$('#user_form')[0].reset();
+					$('#action').val('Add');
+					$('.modal-title').text('Tambah Data');
+					$('#data_action').val("insertPendaftaran");
+					$('#modal-tambah').modal('show');
+			});
+
+	
+
+			$(document).on('submit', '#user_form', function(event){
         event.preventDefault();
         $.ajax({
             url:"<?php echo base_url() . 'test_api/action' ?>",
@@ -200,12 +198,14 @@
             dataType:"json",
             success:function(data)
             {
+							
                 if(data.success)
                 {
+									
                     $('#user_form')[0].reset();
                     $('#modal-tambah').modal('hide');
-                    getMahasiswa();
-                    if($('#data_action').val() == "insertMahasiswa")
+                    fetch_data();
+                    if($('#data_action').val() == "insertPendaftaran")
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
                     }
@@ -244,7 +244,6 @@
 
 		$(document).on('click', '#show-button', function(){
         var nim = document.getElementById('mahasiswa_nim').value;
-				alert(nim);
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
             method:"POST",
@@ -254,10 +253,8 @@
             {
 
 							if(data.error == "true"){
-								
-								$('#nama').val("");
 
-								$('#data_action').val("insertPendaftaran");
+								$('#nama').val("");
 
 							}else{
 
@@ -269,29 +266,28 @@
     });
 		
 
+		$(document).on('click', '.delete', function(){
+					var id = $(this).attr('id');
+					if(confirm("Are you sure you want to delete this?"))
+					{
+							$.ajax({
+									url:"<?php echo base_url(); ?>test_api/action",
+									method:"POST",
+									data:{id:id, data_action:'deleteMahasiswa'},
+									dataType:"JSON",
+									success:function(data)
+									{
+											if(data.success)
+											{
+													$('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+													getMahasiswa();
+											}
+									}
+							})
+					}
+			});
 
-
-
-  $(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-        if(confirm("Are you sure you want to delete this?"))
-        {
-            $.ajax({
-                url:"<?php echo base_url(); ?>test_api/action",
-                method:"POST",
-                data:{id:id, data_action:'deleteMahasiswa'},
-                dataType:"JSON",
-                success:function(data)
-                {
-                    if(data.success)
-                    {
-                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getMahasiswa();
-                    }
-                }
-            })
-        }
-    });
+	});
 
 
 	//TEP

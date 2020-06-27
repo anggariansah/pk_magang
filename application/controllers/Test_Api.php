@@ -768,7 +768,7 @@ class Test_api extends CI_Controller {
 
 				$form_data = array(
 					'mahasiswa_nim' => $this->input->post('mahasiswa_nim'),
-					'id_industri'  => $this->input->post('id_industri'),
+					'id_industri'  => $this->input->post('id_industri')
 				);
 
 				$client = curl_init($api_url);
@@ -817,7 +817,7 @@ class Test_api extends CI_Controller {
 					foreach($result as $row)
 					{
 							$output .= '
-							<select id="id_industri" name="id_industri" class="custom-select" class="custom-select">
+							<select id="id_industri" name="id_industri" class="custom-select">
 								<option value="'.$row->industri_id.'">'.$row->nama_perusahaan.'</option>
 							</select>
 
