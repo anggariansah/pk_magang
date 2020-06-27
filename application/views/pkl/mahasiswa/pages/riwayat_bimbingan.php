@@ -1,17 +1,56 @@
+
+ <!-- Content Wrapper. Contains page content -->
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+
+ <div class="card-body">
+ 	<span id="success_message"></span>
+  <br>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambahkan Diskusi</button>
+  <br>
+  <br>
+
+  <table class="table table-bordered table-striped" id="example1" >
+  <thead>
+      <tr>
+        <th colspan="2">Diskusi</th>
+        <th>Bimbingan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td><a class="text" href="<?php echo site_url("diskusi_bimbingan")?>"">Diskusi Bimbingan 1</a></td>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- 
 <section class="content">
 <div class="container-fluid">
     		<div class="row">
-        <!-- left column -->
-				<div class="col-md-12">
-				<!-- general form elements -->
-				<div class="card card-primary">
+ -->        <!-- left column -->
+<!-- 				<div class="col-md-12">
+ -->				<!-- general form elements -->
+<!-- 				<div class="card card-primary">
 				<div class="card-header">
 				<h3 class="card-title">Riwayat Bimbingan</h3>
 				</div>
 				<br>
 
-					<!-- Main content -->
-					<div class="content">
+ -->					<!-- Main content -->
+<!-- 					<div class="content">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-12" id="card_riwayat">
@@ -22,9 +61,9 @@
 					</div>
 
 </div>
-
+ -->
 <!-- MODAL TAMBAH LAPORAN BIMBINGAN -->
-<div class="modal fade" id="modal-tambah">
+<!-- <div class="modal fade" id="modal-tambah">
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
@@ -61,10 +100,10 @@
 		</form>
 	</div>
 </div>
-<!-- TUTUP MODAL TAMBAH DATA -->
+ --><!-- TUTUP MODAL TAMBAH DATA -->
 
 <!-- MODAL EDIT DATA -->
-<div class="modal fade" id="modal-edit">
+<!-- <div class="modal fade" id="modal-edit">
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
@@ -100,10 +139,10 @@
 		</form>
 	</div>
 </div>
-<!-- TUTUP MODAL EDIT DATA -->
+ --><!-- TUTUP MODAL EDIT DATA -->
 
 
-<script type="text/javascript" language="javascript">
+<!-- <script type="text/javascript" language="javascript">
 
 	$(document).ready(function(){
 		
@@ -203,3 +242,4 @@
 
 
 </script>
+ -->

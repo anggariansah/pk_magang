@@ -61,6 +61,8 @@ class PKL_Mahasiswa extends CI_Controller {
         $this->load->view('pkl/mahasiswa/template/footer');
 	}
 
+	
+
 }
 
 /* End of file Controllername.php */
