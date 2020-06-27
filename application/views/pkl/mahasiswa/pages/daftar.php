@@ -204,6 +204,7 @@
                     fetch_data();
                     if($('#data_action').val() == "insertPendaftaran")
                     {
+						
                     }
                 }
 

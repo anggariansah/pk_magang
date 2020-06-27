@@ -12,9 +12,8 @@
   <thead>
       <tr>
         <th>Tanggal Sidang</th>
-        <th>Dosen</th>
+        <th>Jam</th>
         <th>Ruangan</th>
-        <th>Mahasiswa</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -41,7 +40,9 @@
                 <input type="date" name="tanggal_sidang" id="tanggal_sidang" class="form-control" placeholder="Tanggal Sidang" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="dosen" id="dosen" class="form-control" placeholder="Dosen" value="">
+								<select name="dosen" id="dosen" class="custom-select">
+									<option selected>Dosen</option>
+								</select>
               </div>
               <div class="form-group">
               <select name="ruangan" id="ruangan" class="custom-select">
@@ -90,7 +91,32 @@
 						});
 					}
 
+					function getDosen()
+					{
+						$.ajax({
+							url:"<?php echo base_url(); ?>test_api/action",
+							method:"POST",
+							data:{data_action:'getDosen'},
+							success:function(data)
+							{
+								$('#dosen').html(data);
+							}
+						});
+					}
+
           getSidang();
+					getDosen();
+
+
+					$(document).on('click', '.detail', function(){
+						var id = $(this).attr('id');
+						window.location.href="http://[::1]/pk_magang/pkl_panitia/detail_sidang?id="+id;
+    			});
+
+
+					// $('#detail').click(function(){
+					// 	window.location.href="http://[::1]/pk_magang/pkl_panitia/detail_sidang";
+        	// });
         
 
           $('#add-button').click(function(){

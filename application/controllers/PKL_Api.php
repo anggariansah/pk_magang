@@ -382,6 +382,12 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($data->result_array());
 	}
 
+	function getDosen()
+	{
+		$data = $this->model_pkl->get_dosen();
+		echo json_encode($data->result_array());
+	}
+
 
 
 	
@@ -474,11 +480,19 @@ class PKL_Api extends CI_Controller {
 			foreach($data as $row)
 			{
 				$output['tanggal_sidang'] = $row["tanggal_sidang"];
-				$output['dosen'] = $row["dosen"];
+				$output['jam'] = $row["jam"];
 				$output['ruangan'] = $row["ruangan"];
-				$output['mahasiswa'] = $row["mahasiswa"];
 			}
 			echo json_encode($output);
+		}
+	}
+
+	function getSidangMahasiswa()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->get_sidang_mahasiswa($this->input->post('id'));
+			echo json_encode($data->result_array());
 		}
 	}
 

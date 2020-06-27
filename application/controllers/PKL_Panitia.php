@@ -54,6 +54,14 @@ class PKL_Panitia extends CI_Controller {
         $this->load->view('pkl/panitia/template/footer');
 	}
 
+	public function detail_sidang(){
+		$data['title'] = "Detail Sidang";
+		$this->load->view('pkl/panitia/template/header');
+		$this->load->view('pkl/panitia/template/sidebar', $data);
+        $this->load->view('pkl/panitia/pages/detail_sidang');
+        $this->load->view('pkl/panitia/template/footer');
+	}
+
 }
 
 /* End of file Controllername.php */

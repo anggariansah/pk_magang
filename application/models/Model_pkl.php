@@ -172,6 +172,12 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
+	function get_dosen()
+	{
+		$query = $this->db->get('staff');
+		return $query;
+	}
+
 	function delete_nilai($id)
 	{
 		$this->db->where("id", $id);
@@ -240,6 +246,13 @@ class Model_pkl extends CI_Model
 		$this->db->where("id", $id);
 		$query = $this->db->get('sidang_pkl');
 		return $query->result_array();
+	}
+
+	function get_sidang_mahasiswa($id)
+	{
+		$this->db->where("id_jadwal", $id);
+		$query = $this->db->query('SELECT m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri FROM sidang_pkl_mahasiswa s JOIN pkl_mhs_dosen p ON s.nim = p.mahasiswa_nim JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas JOIN industri i ON p.id_industri = i.industri_id');
+		return $query;
 	}
 
 	function tampil_detail_mahasiswa($nim)

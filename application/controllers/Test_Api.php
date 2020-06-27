@@ -224,6 +224,41 @@ class Test_api extends CI_Controller {
 			}
 
 
+
+			if($data_action == "getDosen")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getDosen";
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+							$output .= '
+							<select id="dosen" name="dosen" class="custom-select" class="custom-select">
+								<option value="'.$row->nip.'">'.$row->nama.'</option>
+							</select>
+
+								';
+					}
+				}
+				else{
+						$output .= '
+						<select name="dosen" id="dosen" class="custom-select">
+							<option>No Data</option>
+						</select>
+						';
+				}
+					echo $output;
+			}
+
+
 			//CRUD Nilai
 			
 			if($data_action == "getNilai")
@@ -292,13 +327,81 @@ class Test_api extends CI_Controller {
 				);
 
 				$client = curl_init($api_url);
+				
 				curl_setopt($client, CURLOPT_POST, true);
 				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+
 				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 				$response = curl_exec($client);
 				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
 
-				echo $response;
+				$output .= '
+				<div class="col-lg-3 col-6" id="data-jadwal">
+					<div class="card" style="width: 40rem;">
+					<div class="card-body">
+						<h3 class="card-title"> <strong> Jadwal Sidang </strong></h3>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Tanggal		: '.$result->tanggal_sidang.'</li>
+						<li class="list-group-item">Jam 		: '.$result->jam.'</li>
+						<li class="list-group-item">Ruangan		: '.$result->ruangan.'</li>
+					</ul>
+					</div>
+				</div>
+					';
+					
+				echo $output;
+
+			}
+
+			if($data_action == "getSidangMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getSidangMahasiswa";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+						$output .= '
+							<tr>
+								<td>'.$row->nim.'</td>
+								<td>'.$row->nama.'</td>
+								<td>'.$row->kelas.'</td>
+								<td>'.$row->industri.'</td>
+								<td>
+								<button type="button" name="detail" class="btn btn-sm btn-primary detail" id="'.$row->nim.'">Detail</button>
+								</td>
+							</tr>
+						';
+
+								
+					}
+				}
+				else{
+					$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+
+				echo $output;
 
 			}
 
@@ -542,11 +645,10 @@ class Test_api extends CI_Controller {
 							$output .= '
 							<tr>
 								<td>'.$row->tanggal_sidang.'</td>
-								<td>'.$row->dosen.'</td>
+								<td>'.$row->jam.'</td>
 								<td>'.$row->ruangan.'</td>
-								<td>'.$row->mahasiswa.'</td>
 								<td>
-									<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
+									<button type="button" name="detail" class="btn btn-sm btn-primary detail" id="'.$row->id.'">Detail</button>
 									<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>
 								</td>
 							</tr>
