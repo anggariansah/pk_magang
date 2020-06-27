@@ -44,7 +44,7 @@
           <p>Magang</p>
         </div>
         <div class="steps-step">
-          <a href="#step-10" type="button" class="btn btn-success btn-circle" disabled="disabled">2</a>
+          <a href="<?php echo site_url("pkl_mahasiswa/riwayat_bimbingan")?>" type="button" class="btn btn-success btn-circle" disabled="disabled">2</a>
           <p>Bimbingan 1</p>
         </div>
         <div class="steps-step">
