@@ -10,7 +10,9 @@
 	<thead>
 			<tr>
 				<th>Id PKL.</th>
-				<th>Nama Dosen</th>
+				<th>Nama Dosen 1</th>
+				<th>Nama Dosen 2</th>
+				<th>Nama Dosen 3</th>
 				<th>Mahasiswa yang Dibimbing</th>
 				<th>Dosen Industri</th>
 				<th>Action</th>
@@ -36,7 +38,27 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="text" name="namadosen" class="form-control" placeholder="Nama Dosen" value="">
+			<input type="text" name="namadosen1" class="form-control" placeholder="Nama Dosen 1" value="">
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="text" name="nip" class="form-control" placeholder="NIP" value="">
+			</select>
+		</div>
+	<div class="modal-body">
+		<form method="post" id="user_form">
+		<div class="form-group">
+			<input type="text" name="namadosen2" class="form-control" placeholder="Nama Dosen 2" value="">
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="text" name="nip" class="form-control" placeholder="NIP" value="">
+			</select>
+		</div>
+	<div class="modal-body">
+		<form method="post" id="user_form">
+		<div class="form-group">
+			<input type="text" name="namadosen3" class="form-control" placeholder="Nama Dosen 3" value="">
 			</select>
 		</div>
 		<div class="form-group">
@@ -58,7 +80,27 @@
 	</div>
 </div>
 <!-- TUTUP MODAL EDIT DATA -->
-
+<div class="modal-body">
+		<form method="post" id="user_form">
+		<div class="form-group">
+			<input type="text" name="namadosen" class="form-control" placeholder="Nama Dosen" value="">
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="text" name="nip" class="form-control" placeholder="NIP" value="">
+			</select>
+		</div>
+	<div class="modal-body">
+		<form method="post" id="user_form">
+		<div class="form-group">
+			<input type="text" name="namadosen" class="form-control" placeholder="Nama Dosen" value="">
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="text" name="nip" class="form-control" placeholder="NIP" value="">
+			</select>
+		</div>
+	
 <!-- MODAL EDIT DATA -->
 <div class="modal fade" id="modal-edit">
 <div class="modal-dialog">
@@ -72,7 +114,27 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<select id="nama" name="namadosen" class="custom-select">
+			<select id="nama" name="namadosen1" class="custom-select">
+			</select>
+		</div>
+		<div class="form-group">
+			<select id="nip" name="nip" class="custom-select">
+			</select>
+		</div>
+	<div class="modal-body">
+		<form method="post" id="user_form">
+		<div class="form-group">
+			<select id="nama" name="namadosen2" class="custom-select">
+			</select>
+		</div>
+		<div class="form-group">
+			<select id="nip" name="nip" class="custom-select">
+			</select>
+		</div>
+	<div class="modal-body">
+		<form method="post" id="user_form">
+		<div class="form-group">
+			<select id="nama" name="namadosen3" class="custom-select">
 			</select>
 		</div>
 		<div class="form-group">
