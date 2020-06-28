@@ -12,6 +12,7 @@
   <thead>
       <tr>
         <th>Tanggal Sidang</th>
+        <th>Jam</th>
         <th>Dosen</th>
         <th>Ruangan</th>
         <th>Mahasiswa</th>
@@ -141,6 +142,7 @@
             {
 								$('#modal-tambah').modal('show');           
                 $('#tanggal_sidang').val(data.tanggal_sidang);
+                $('#jam').val(data.jam);
                 $('#dosen').val(data.dosen);
 								$('#ruangan').val(data.ruangan);
 								$('#mahasiswa').val(data.mahasiswa);
