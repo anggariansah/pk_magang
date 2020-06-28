@@ -40,9 +40,7 @@
                 <input type="date" name="tanggal_sidang" id="tanggal_sidang" class="form-control" placeholder="Tanggal Sidang" value="">
               </div>
               <div class="form-group">
-								<select name="dosen" id="dosen" class="custom-select">
-									<option selected>Dosen</option>
-								</select>
+								<input type="time" name="waktu_sidang" id="waktu_sidang" class="form-control" placeholder="Waktu Sidang" value="">
               </div>
               <div class="form-group">
               <select name="ruangan" id="ruangan" class="custom-select">
@@ -58,10 +56,7 @@
                 <option>AA304</option>
               </select>
               </div>
-              <div class="form-group">
-                <input type="text" name="mahasiswa" id="mahasiswa" class="form-control" placeholder="Mahasiswa" value="">
-              </div>
-
+              
               <div class="modal-footer">
 							<input type="hidden" name="user_id" id="user_id" />
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -91,18 +86,7 @@
 						});
 					}
 
-					function getDosen()
-					{
-						$.ajax({
-							url:"<?php echo base_url(); ?>test_api/action",
-							method:"POST",
-							data:{data_action:'getDosen'},
-							success:function(data)
-							{
-								$('#dosen').html(data);
-							}
-						});
-					}
+				
 
           getSidang();
 					getDosen();

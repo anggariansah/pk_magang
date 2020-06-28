@@ -48,6 +48,12 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function update_nilai($id, $data)
+	{
+		$this->db->where("id", $id);
+		$this->db->update("nilai_pkl", $data);
+	}
+
 	function update_riwayat($id, $data)
 	{
 		$this->db->where("id", $id);
@@ -158,6 +164,20 @@ class Model_pkl extends CI_Model
 	}
 
 
+	function insert_dosen_pembimbing($id, $data)
+	{
+		$this->db->where("mahasiswa_nim", $id);
+		$this->db->update("pkl_mhs_dosen", $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	//Panitia
 	function get_sidang()
 	{
@@ -262,11 +282,6 @@ class Model_pkl extends CI_Model
 		return $query->result_array();
 	}
 
-	function update_nilai($id, $data)
-	{
-		$this->db->where("id", $id);
-		$this->db->update("nilai_pkl", $data);
-	}
 
 	function update_sidang($id, $data)
 	{
@@ -276,7 +291,7 @@ class Model_pkl extends CI_Model
 
 	function tampil_data_dosen_mhs()
 	{
-		$query = $this->db->query('SELECT p.kode_pkl as id, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		$query = $this->db->query('SELECT p.kode_pkl as id, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim LEFT JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
 		return $query;
 	}
 
