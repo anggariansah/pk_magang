@@ -5,6 +5,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
+              
             <div class="small-box bg-success">
               <div class="inner">
                 <h3 id="jmh_bimbingan"></h3>
@@ -15,9 +16,8 @@
               </div>
               <a href="<?php echo site_url("pkl_mahasiswa/riwayat_bimbingan")?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-					</div>
-					
-					<div class="col-lg-3 col-6">
+
+            <div class="col-lg-3 col-6">
 						<div class="card" style="width: 40rem;">
 						<div class="card-body">
 							<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
@@ -31,6 +31,29 @@
 							<li class="list-group-item">Kelas		: </li>
 							<li class="list-group-item">Perusahaan	: </li>
 						</ul>
+
+						
+						</div>
+					</div>
+					
+					
+					
+
+						<div class="col-lg-3 col-6">
+
+						<div class="card" style="width: 40rem;">
+						<div class="card-body">
+							<h3 class="card-title"> <strong> Detail Perusahaan </strong></h3>
+						</div>
+	
+						<tbody>
+						</tbody>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Nama Perusahaan	: </li>
+							<li class="list-group-item">Alamat		: </li>
+							<li class="list-group-item">No.Telf	: </li>
+							
+						</ul>
 						
 						</div>
 						
@@ -38,6 +61,10 @@
           </div>
 
 		</div>
+		
+						
+						
+          </div>
 
 			<!-- Steps form -->
 			<h2 class="text-center font-weight-bold pt-4 pb-5"><strong>Status Mahasiswa</strong></h2>
