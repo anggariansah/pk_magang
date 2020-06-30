@@ -39,17 +39,17 @@
 	<div class="modal-body">
 		<form method="post" id="user_form">
 		<div class="form-group">
-			<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Perusahaan" value="">
+			<input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-control" placeholder="Nama Perusahaan" value="">
 		</div>
 		<div class="form-group">
 			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
 		</div>
 		<div class="form-group">
-			<input type="number" id="no_telp" name="no_telp" class="form-control" placeholder="No Telp" value="">
+			<input type="number" id="tlpn_hotline" name="tlpn_hotline" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
-			<input type="hidden" name="user_id" id="user_id" />
-      <input type="hidden" name="data_action" id="data_action" value="Insert" />
+			<input type="hidden" name="industri_id" id="industri_id" />
+      		<input type="hidden" name="data_action" id="data_action" value="Insert" />
 			<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
@@ -62,43 +62,6 @@
 
 <!-- TUTUP MODAL TAMBAH DATA -->
 
-
-<!-- MODAL EDIT DATA -->
-<div class="modal fade" id="modal-edit">
-<div class="modal-dialog">
-	<div class="modal-content">
-	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form class="form" id="user_form" method="post">
-		<div class="form-group">
-			<select id="nim" name="nim" class="custom-select">
-				<option selected>Nim</option>
-				<option>4617010014</option>
-				<option>4617010012</option>
-				<option>4617010022</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<input type="number" name="nilai" class="form-control" placeholder="Nilai" value="">
-		</div>
-		<div class="modal-footer">
-			<input type="hidden" name="id" id="id" />
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="hidden" name="data_action" id="data_action" value="Insert" />
-            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
-		</div>
-		</form>
-	</div>
-	</div>
-</div>
-</div>
-
-<!-- TUTUP MODAL EDIT DATA -->
 
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
@@ -116,27 +79,14 @@
 			});
 		}
 
-		function getNim()
-		{
-			$.ajax({
-				url:"<?php echo base_url(); ?>test_api/action",
-				method:"POST",
-				data:{data_action:'getNim'},
-				success:function(data)
-				{
-					$('#nim').html(data);
-				}
-			});
-		}
-
+	
 		getPerusahaanTabel();
-		getNim();
 
 
 	$('#add-button').click(function(){
         $('#user_form')[0].reset();
         $('#action').val('Add');
-        $('#data_action').val("insertNilai");
+        $('#data_action').val("insertPerusahaan");
         $('#modal-tambah').modal('show');
     });
 
@@ -154,8 +104,8 @@
                 {
                     $('#user_form')[0].reset();
                     $('#modal-tambah').modal('hide');
-                    getNilaiMahasiswa();
-                    if($('#data_action').val() == "insertNilai")
+                    getPerusahaanTabel();
+                    if($('#data_action').val() == "insertPerusahaan")
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
                     }
@@ -196,17 +146,18 @@
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
             method:"POST",
-            data:{id:id, data_action:'tampilNilai'},
+            data:{id:id, data_action:'tampilSinglePerusahaan'},
             dataType:"json",
             success:function(data)
             {
-                $('#modal-edit').modal('show');
-                $('#nim').val(data.nim);
-                $('#nama').val(data.nama);
-                $('.modal-title').text('Edit User');
-                $('#id').val(id);
+                $('#modal-tambah').modal('show');
+                $('#nama_perusahaan').val(data.nama_perusahaan);
+				$('#alamat').val(data.alamat);
+				$('#tlpn_hotline').val(data.tlpn_hotline);
+                $('.modal-title').text('Edit Perusahaan');
+                $('#industri_id').val(id);
                 $('#action').val('Edit');
-                $('#data_action').val('Edit');
+                $('#data_action').val('updatePerusahaan');
             }
         })
     });

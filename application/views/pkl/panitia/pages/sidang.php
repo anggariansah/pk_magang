@@ -2,9 +2,9 @@
 
 <!-- TABEL TAMBAH DATA SIDANG -->
  <div class="card-body">
- 	<span id="success_message"></span>
+   <span id="success_message"></span>
   <br>
-	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Jadwal</button>
+  <button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Jadwal</button>
   <br>
   <br>
 
@@ -35,12 +35,12 @@
               </button>
             </div>
             <div class="modal-body">
-						<form method="post" id="user_form">
+            <form method="post" id="user_form">
               <div class="form-group">
                 <input type="date" name="tanggal_sidang" id="tanggal_sidang" class="form-control" placeholder="Tanggal Sidang" value="">
               </div>
               <div class="form-group">
-								<input type="time" name="waktu_sidang" id="waktu_sidang" class="form-control" placeholder="Waktu Sidang" value="">
+                <input type="time" name="waktu_sidang" id="waktu_sidang" class="form-control" placeholder="Waktu Sidang" value="">
               </div>
               <div class="form-group">
               <select name="ruangan" id="ruangan" class="custom-select">
@@ -58,11 +58,11 @@
               </div>
               
               <div class="modal-footer">
-							<input type="hidden" name="user_id" id="user_id" />
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<input type="hidden" name="data_action" id="data_action" value="Insert" />
-							<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
-							</div>
+              <input type="hidden" name="user_id" id="user_id" />
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="hidden" name="data_action" id="data_action" value="Insert" />
+              <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+              </div>
               </form>
             </div>
             </div>
@@ -70,37 +70,32 @@
           </div>
         <!-- TUTUP MODAL TAMBAH DATA -->
 
-			<script type="text/javascript" language="javascript">
-				$(document).ready(function(){
+      <script type="text/javascript" language="javascript">
+        $(document).ready(function(){
 
-					function getSidang()
-					{
-						$.ajax({
-							url:"<?php echo base_url(); ?>test_api/action",
-							method:"POST",
-							data:{data_action:'getSidang'},
-							success:function(data)
-							{
-								$('tbody').html(data);
-							}
-						});
-					}
+          function getSidang()
+          {
+            $.ajax({
+              url:"<?php echo base_url(); ?>test_api/action",
+              method:"POST",
+              data:{data_action:'getSidang'},
+              success:function(data)
+              {
+                $('tbody').html(data);
+              }
+            });
+          }
 
-				
+        
 
           getSidang();
-					getDosen();
 
 
-					$(document).on('click', '.detail', function(){
-						var id = $(this).attr('id');
-						window.location.href="http://[::1]/pk_magang/pkl_panitia/detail_sidang?id="+id;
-    			});
+          $(document).on('click', '.detail', function(){
+            var id = $(this).attr('id');
+            window.location.href="http://[::1]/pk_magang/pkl_panitia/detail_sidang?id="+id;
+          });
 
-
-					// $('#detail').click(function(){
-					// 	window.location.href="http://[::1]/pk_magang/pkl_panitia/detail_sidang";
-        	// });
         
 
           $('#add-button').click(function(){
@@ -140,7 +135,7 @@
       });
 
 
-			$(document).on('click', '.edit', function(){
+      $(document).on('click', '.edit', function(){
         var id = $(this).attr('id');
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
@@ -149,43 +144,44 @@
             dataType:"json",
             success:function(data)
             {
-								$('#modal-tambah').modal('show');           
+                $('#modal-tambah').modal('show');           
                 $('#tanggal_sidang').val(data.tanggal_sidang);
+                $('#jam').val(data.jam);
                 $('#dosen').val(data.dosen);
-								$('#ruangan').val(data.ruangan);
-								$('#mahasiswa').val(data.mahasiswa);
+                $('#ruangan').val(data.ruangan);
+                $('#mahasiswa').val(data.mahasiswa);
                 $('.modal-title').text('Edit Sidang');
                 $('#user_id').val(id);
                 $('#action').val('Edit');
-								$('#data_action').val('updateSidang');
+                $('#data_action').val('updateSidang');
 
-							}
-						})
-    		});
+              }
+            })
+        });
 
 
-			$(document).on('click', '.delete', function(){
-				var id = $(this).attr('id');
-				if(confirm("Are you sure you want to delete this?"))
-				{
-						$.ajax({
-								url:"<?php echo base_url(); ?>test_api/action",
-								method:"POST",
-								data:{id:id, data_action:'deleteSidang'},
-								dataType:"JSON",
-								success:function(data)
-								{
-										if(data.success)
-										{
-												$('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-												getSidang();
-										}
-								}
-						})
-				}
-  	  });
+      $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Are you sure you want to delete this?"))
+        {
+            $.ajax({
+                url:"<?php echo base_url(); ?>test_api/action",
+                method:"POST",
+                data:{id:id, data_action:'deleteSidang'},
+                dataType:"JSON",
+                success:function(data)
+                {
+                    if(data.success)
+                    {
+                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+                        getSidang();
+                    }
+                }
+            })
+        }
+      });
 
-		});
+    });
           
           
 

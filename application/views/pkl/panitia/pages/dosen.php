@@ -9,7 +9,7 @@
 	<table class="table table-bordered table-striped" id="example1">
 	<thead>
 			<tr>
-				<th>Id PKL.</th>
+				<th>Id PKLs</th>
 				<th>Nama Dosen</th>
 				<th>Mahasiswa yang Dibimbing</th>
 				<th>Dosen Industri</th>
@@ -65,9 +65,6 @@
           </div>
           </div>
         <!-- TUTUP MODAL TAMBAH DATA -->
-
-
-
 
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
@@ -131,6 +128,28 @@
         })
     });
 
+	$(document).on('click', '.edit', function(){
+        var id = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{id:id, data_action:'getSingleDosenMahasiswa'},
+            dataType:"json",
+            success:function(data)
+            {
+				$('#modal-tambah').modal('show');           
+                $('#mahasiswa_nim').val(data.nim);
+                $('#nama').val(data.nama);
+				$('#dosen').html('<option value="'+data.dosen+'">'+data.dosen+'</option>');
+                $('.modal-title').text('Edit Dosen');
+                $('#user_id').val(id);
+                $('#action').val('Edit');
+				$('#data_action').val('updateNilai');
+
+			}
+        })
+    });
+
 	$(document).on('submit', '#user_form', function(event){
           event.preventDefault();
           $.ajax({
@@ -144,7 +163,7 @@
                   {
                       $('#user_form')[0].reset();
                       $('#modal-tambah').modal('hide');
-					  getDosen();
+					  fetch_data();
                       if($('#data_action').val() == "insertDosenPembimbing")
                       {
                           $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
@@ -158,7 +177,29 @@
                   }
               }
           })
-      });
+	  });
+	  
+
+	  $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Are you sure you want to delete this?"))
+        {
+            $.ajax({
+                url:"<?php echo base_url(); ?>test_api/action",
+                method:"POST",
+                data:{id:id, data_action:'deleteDosenPembimbing'},
+                dataType:"JSON",
+                success:function(data)
+                {
+                    if(data.success)
+                    {
+                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+						fetch_data();
+                    }
+                }
+            })
+        }
+    });
 
 });
 

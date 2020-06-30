@@ -54,15 +54,7 @@ class Model_pkl extends CI_Model
 		$this->db->update("nilai_pkl", $data);
 	}
 
-	function update_riwayat($id, $data)
-	{
-		$this->db->where("id", $id);
-		$this->db->update("judul", $data);
-		$this->db->update("date", $data);
-		$this->db->update("nim", $data);
-		$this->db->update("nip", $data);
-		$this->db->update("deskripsi", $data);
-	}
+	
 
 	function delete_riwayat($id)
 	{
@@ -163,6 +155,32 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function insert_penguji($data)
+	{
+		$this->db->insert('sidang_pkl_penguji', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function insert_mahasiswa_sidang($data)
+	{
+		$this->db->insert('sidang_pkl_mahasiswa', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 	function insert_dosen_pembimbing($id, $data)
 	{
@@ -240,9 +258,40 @@ class Model_pkl extends CI_Model
 		}
 	}
 
-	function delete_perusahaan($id)
+
+	function delete_sidang_mahasiswa($id)
 	{
 		$this->db->where("id", $id);
+		$this->db->delete("sidang_pkl_mahasiswa");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	function delete_sidang_penguji($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("sidang_pkl_penguji");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	function delete_perusahaan($id)
+	{
+		$this->db->where("industri_id", $id);
 		$this->db->delete("industri");
 		if($this->db->affected_rows() > 0)
 		{
@@ -254,10 +303,20 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+
+	
+
 	function tampil_single_nilai($id)
 	{
 		$this->db->where("id", $id);
 		$query = $this->db->get('nilai_pkl');
+		return $query->result_array();
+	}
+
+	function tampil_single_perusahaan($id)
+	{
+		$this->db->where("industri_id", $id);
+		$query = $this->db->get('industri');
 		return $query->result_array();
 	}
 
@@ -271,7 +330,14 @@ class Model_pkl extends CI_Model
 	function get_sidang_mahasiswa($id)
 	{
 		$this->db->where("id_jadwal", $id);
-		$query = $this->db->query('SELECT m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri FROM sidang_pkl_mahasiswa s JOIN pkl_mhs_dosen p ON s.nim = p.mahasiswa_nim JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas JOIN industri i ON p.id_industri = i.industri_id');
+		$query = $this->db->query('SELECT s.id as id, m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri FROM sidang_pkl_mahasiswa s JOIN pkl_mhs_dosen p ON s.nim = p.mahasiswa_nim JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas JOIN industri i ON p.id_industri = i.industri_id where s.id_jadwal');
+		return $query;
+	}
+
+	function get_sidang_penguji($id)
+	{
+		$this->db->where("id_jadwal", $id);
+		$query = $this->db->query('SELECT p.id as id, s.nip as nip , s.nama as nama FROM sidang_pkl_penguji p JOIN staff s ON p.nip = s.nip');
 		return $query;
 	}
 
@@ -289,10 +355,29 @@ class Model_pkl extends CI_Model
 		$this->db->update("sidang_pkl", $data);
 	}
 
+	function update_perusahaan($id, $data)
+	{
+		$this->db->where("industri_id", $id);
+		$this->db->update("industri", $data);
+	}
+
+	function delete_dosen_pembimbing($id, $data)
+	{
+		$this->db->where("kode_pkl", $id);
+		$this->db->update("pkl_mhs_dosen", $data);
+	}
+
 	function tampil_data_dosen_mhs()
 	{
-		$query = $this->db->query('SELECT p.kode_pkl as id, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim LEFT JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		$query = $this->db->query('SELECT p.kode_pkl as id, p.mahasiswa_nim as nim, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim LEFT JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
 		return $query;
+	}
+
+	function tampil_single_dosen_mhs($id)
+	{
+		$this->db->where("kode_pkl", $id);
+		$query = $this->db->query('SELECT p.kode_pkl as id, p.mahasiswa_nim as nim, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim LEFT JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		return $query->result_array();
 	}
 
 	

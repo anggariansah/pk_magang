@@ -33,6 +33,41 @@ class Test_api extends CI_Controller {
 
 			}
 
+			
+			if($data_action == "deleteSidangMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deleteSidangMahasiswa";
+				$form_data = array(
+				'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+
+			}
+
+			if($data_action == "deleteSidangPenguji")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deleteSidangPenguji";
+				$form_data = array(
+				'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				echo $response;
+
+			}
+
 			if($data_action == "deleteMahasiswa")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/deleteMahasiswa";
@@ -55,7 +90,7 @@ class Test_api extends CI_Controller {
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/deletePerusahaan";
 				$form_data = array(
-				'id'  => $this->input->post('id')
+					'id'  => $this->input->post('id')
 				);
 
 				$client = curl_init($api_url);
@@ -90,6 +125,24 @@ class Test_api extends CI_Controller {
 			if($data_action == "tampilNilai")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/tampilSingleNilai";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+			}
+
+
+			if($data_action == "tampilSinglePerusahaan")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/tampilSinglePerusahaan";
 				$form_data = array(
 					'id'  => $this->input->post('id')
 				);
@@ -319,6 +372,24 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "getSingleDosenMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/tampilSingleDosenMahasiswa";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
 			if($data_action == "getSingleSidang")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getSingleSidang";
@@ -340,6 +411,7 @@ class Test_api extends CI_Controller {
 				$output .= '
 				<div class="col-lg-3 col-6" id="data-jadwal">
 					<div class="card" style="width: 40rem;">
+					<input type="hidden" name="id" id="id" value="'.$this->input->post('id').'" />
 					<div class="card-body">
 						<h3 class="card-title"> <strong> Jadwal Sidang </strong></h3>
 					</div>
@@ -385,7 +457,55 @@ class Test_api extends CI_Controller {
 								<td>'.$row->kelas.'</td>
 								<td>'.$row->industri.'</td>
 								<td>
-								<button type="button" name="detail" class="btn btn-sm btn-primary detail" id="'.$row->nim.'">Detail</button>
+								<button type="button" name="delete" class="btn btn-sm btn-danger delete-mhs" id="'.$row->id.'">Delete</button>
+								</td>
+							</tr>
+						';
+
+								
+					}
+				}
+				else{
+					$output .= '
+						<tr>
+							<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+				}
+
+				echo $output;
+
+			}
+
+
+			if($data_action == "getSidangPenguji")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getSidangPenguji";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+				$result = json_decode($response);
+				$output = '';
+
+				if(count($result) > 0)
+				{
+					foreach($result as $row)
+					{
+						$output .= '
+							<tr>
+								<td>'.$row->nip.'</td>
+								<td>'.$row->nama.'</td>
+								<td>
+								<button type="button" name="delete" class="btn btn-sm btn-danger delete-penguji" id="'.$row->id.'">Delete</button>
 								</td>
 							</tr>
 						';
@@ -414,6 +534,44 @@ class Test_api extends CI_Controller {
 					'dosen' => $this->input->post('dosen'),
 					'ruangan'   => $this->input->post('ruangan'),
 					'mahasiswa'   => $this->input->post('mahasiswa')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+			}
+
+			if($data_action == "updatePerusahaan")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/updatePerusahaan";
+				$form_data = array(
+					'industri_id' => $this->input->post('industri_id'),
+					'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+					'alamat'  => $this->input->post('alamat'),
+					'tlpn_hotline'  => $this->input->post('tlpn_hotline')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+			}
+
+			if($data_action == "deleteDosenPembimbing")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/deleteDosenPembimbing";
+				$form_data = array(
+					'nip' => $this->input->post('nip'),
+					'id' =>  $this->input->post('id')
 				);
 
 				$client = curl_init($api_url);
@@ -625,6 +783,49 @@ class Test_api extends CI_Controller {
 
 			}
 
+
+			
+			if($data_action == "insertPenguji")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertPenguji";
+
+				$form_data = array(
+					'dosen'  => $this->input->post('dosen'),
+					'id_jadwal_dosen'  => $this->input->post('id_jadwal_dosen')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "insertMahasiswaSidang")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertMahasiswaSidang";
+
+				$form_data = array(
+					'mahasiswa_nim'  => $this->input->post('mahasiswa_nim'),
+					'id_jadwal_mhs'  => $this->input->post('id_jadwal_mhs')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+
 			// PANITIA
 
 			if($data_action == "getSidang")
@@ -752,7 +953,8 @@ class Test_api extends CI_Controller {
 							<td>'.$row->nama_mhs.'</td>
 							<td>'.$row->dosen_industri.'</td>
 							<td>
-							<a href="#" class="btn btn-sm btn-primary">Lihat</a>		
+								<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->id.'">Edit</button>
+								<button type="button" name="delete" class="btn btn-sm  btn-danger delete" id="'.$row->id.'">Delete</button>		
 							</td>
 							</tr>
 
@@ -844,8 +1046,8 @@ class Test_api extends CI_Controller {
 								<td>'.$row->alamat.'</td>
 								<td>'.$row->tlpn_hotline.'</td>
 								<td>
-									<a href="#" class="btn btn-sm btn-primary">Edit</a>
-									<a href="#" class="btn btn-sm btn-danger">Delete</a>
+									<button type="button" name="edit" class="btn btn-sm btn-primary edit" id="'.$row->industri_id.'">Edit</button>
+									<button type="button" name="delete" class="btn btn-sm btn-danger delete" id="'.$row->industri_id.'">Delete</button>
 								</td>
 							</tr>
 
