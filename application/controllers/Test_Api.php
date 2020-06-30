@@ -216,8 +216,10 @@ class Test_api extends CI_Controller {
 				$output = '';
 
 				if(count($result) > 0)
+				// if((array)$result>0)
 				{
 					foreach($result as $row)
+					// foreach($result['output'] as $row)
 					{
 							$output .= '
 							<tr>
