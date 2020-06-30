@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Diskusi_bimbingan extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,21 +20,6 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('pkl/mahasiswa/pages/login.php');
-	}
-
-	public function login_pembimbing()
-	{
-		$this->load->view('pkl/pembimbing/pages/login.php');
-	}
-
-	public function login_mahasiswa()
-	{
-		$this->load->view('pkl/mahasiswa/pages/login.php');
-	}
-
-	public function login_panitia()
-	{
-		$this->load->view('pkl/panitia/pages/login.php');
+		$this->load->view('pkl/mahasiswa/pages/diskusi_bimbingan.php');
 	}
 }

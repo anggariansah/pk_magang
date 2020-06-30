@@ -130,7 +130,7 @@ label {
 
 <a href="#"><legend id="forgot-pass">Lupa password?</legend></a>
 <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-<a href="<?php echo site_url("daftar")?>" id="signup"><br>Belum punya akun?</a>
+<a href="<?php echo site_url("pkl_mahasiswa/daftar")?>" id="signup"><br>Belum punya akun?</a>
 </div>
 
 	

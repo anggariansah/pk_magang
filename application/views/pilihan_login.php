@@ -1,88 +1,94 @@
 <!DOCTYPE html>
-<html style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head>
-    <meta charset="utf-8"><style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1em}.svg-inline--fa.fa-stack-2x{height:2em;width:2em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}</style><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+  <title>Pilihan Login</title>
+  <style>
+    #card {
+        background: #fbfbfb;
+        border-radius: 8px;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        height: 450px;
+        margin: 5rem auto 8.1rem auto;
+        width: 875px;
+}
+#cardpilihan1 {
+        background: #fbfbfb;
+        border-radius: 8px;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        margin-left: 70px;
+        margin: 3rem;
+        height: 160px;
+        width: 160px;
+        background-image: url('.../image/panitia.jpeg');
+}
 
-    <link rel="shortcut icon" href="https://musiq.id/assets/frontend/img/logo/icon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://musiq.id/assets/frontend/plugins/slick/slick.css"><link rel="stylesheet" type="text/css" href="https://musiq.id/assets/frontend/plugins/slick/slick-theme.css"><link rel="stylesheet" type="text/css" href="https://musiq.id/assets/frontend/plugins/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="https://musiq.id/assets/frontend/css/custom.css">
-    
+#gambar {
+    cursor: pointer;
+    cursor: hand;
+}
 
-    <script src="https://www.googletagservices.com/activeview/js/current/osd.js?cb=%2Fr20100101"></script><script src="https://pagead2.googlesyndication.com/pagead/js/r20200609/r20190131/show_ads_impl_fy2019.js" id="google_shimpl"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script defer="" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script><script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons/ionicons.dkb1z4hj.js" type="module" crossorigin="true" data-resources-url="https://unpkg.com/ionicons@4.5.5/dist/ionicons/" data-namespace="ionicons"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-143562280-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+#bg-img {
+    background-image: url('.../image/panitia.jpeg');
+    height: 200px;
+    width: 200px;
+}
 
-      gtag('config', 'UA-143562280-1');
-    </script>
-    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8663748978015318",
-        enable_page_level_ads: true
-      });
-    </script>
+#card-content {
+      padding: 12px 44px;
+}
+#card-title {
+      font-family: "Raleway Thin", sans-serif;
+      letter-spacing: 4px;
+      padding-bottom: 23px;
+      padding-top: 13px;
+      text-align: center;
+}
+.underline-title {
+      background: -webkit-linear-gradient(right, #263578, #FFF8DC);
+      height: 2px;
+      margin: -1.1rem auto 0 auto;
+      width: 89px;
+}
 
-    <script type="text/javascript" src="https://musiq.id/assets/frontend/plugins/bootstrap/js/bootstrap.min.js"></script><script type="text/javascript" src="https://musiq.id/assets/frontend/plugins/slick/slick.min.js"></script><script type="text/javascript" src="https://musiq.id/assets/frontend/js/global.js"></script>    
 
-    <style type="text/css">
-        @media (max-width: 1366px ){
-            .container{
-                /*width: 1170px !important;*/
-            }
-        }
 
-        .slick-slide > .mentors > .col-sm-12{
-            background: #6c757d;
-            opacity: 0.9;
-        }
-        .slick-active > .mentors > .col-sm-12{
-            background: #6c757d !important;
-            opacity: 0.9;
-        }
-        .slick-center > .mentors > .col-sm-12{
-            background: #fff !important;
-            opacity: 1;
-        }
-        .slick-prev:before,
-        .slick-next:before {
-          color: #FFF;
-      }
-      .slick-prev, .slick-next{
-        margin-top:15px;height: 310px;width: 120px;z-index: 99;background: black;
-    }
-    .slick-prev, .slick-prev:hover, .slick-prev:active{
-        background: transparent;
-        background: -webkit-linear-gradient(to left, transparent, #1ac1c1);
-        background: linear-gradient(to left, transparent, #1ac1c1);
+body {
+       background: -webkit-linear-gradient(bottom, #263578, #FFF8DC);
+       background-repeat: no-repeat;
+}
 
-    }
-    .slick-next,.slick-next:hover, .slick-next:active{
-        background: transparent;
-        background: -webkit-linear-gradient(to right, transparent, #1ac1c1);
-        background: linear-gradient(to right, transparent, #1ac1c1);
+  </style>
+</head> 
+<body>
+<div id="card">
+<div id="card-content">
+  <div id="card-title">
+    <h2>PILIHAN LOGIN</h2>
+    <div class="underline-title"></div>
+  </div>
+  <table>
+  <td>
+  <div id="cardpilihan1">
+  <a class="gambar" href="<?php echo site_url("login/login_panitia")?>""><img src="<?php echo base_url(); ?>assets/image/panitia.jpeg" style="width: 200px; height: 200px;"></a>
+  </div>
+  </td>
+  <td>
+  <div id="cardpilihan1">
 
-    }
-</style>
+  <a class="gambar" href="<?php echo site_url("login/login_mahasiswa")?>""><img src="<?php echo base_url(); ?>assets/image/mahasiswa.jpeg" style="width: 200px; height: 200px;"></a>
 
-<script type="text/javascript">
-    var APIURL = 'https://apimusiq.id/';
-    var ASSETURL = 'https://musiq.id/assets/frontend/';
-    var BASEURL = 'https://musiq.id/';
-    var MEMBERSHIP = 'https://musiq.id/membership/'
-</script>
+  </div>
+  </td>
+  <td>
+  <div id="cardpilihan1">
+  <a class="gambar" href="<?php echo site_url("login/login_pembimbing")?>""><img src="<?php echo base_url(); ?>assets/image/dosen.jpeg" style="width: 200px; height: 200px;"></a>
 
-<link rel="preload" href="https://adservice.google.co.id/adsid/integrator.js?domain=musiq.id" as="script"><script type="text/javascript" src="https://adservice.google.co.id/adsid/integrator.js?domain=musiq.id"></script><link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=musiq.id" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=musiq.id"></script><template><style>:host{display:inline-block;width:1em;height:1em;contain:strict;-webkit-box-sizing:content-box!important;box-sizing:content-box!important}.icon-inner,svg{display:block;fill:currentColor;stroke:currentColor;height:100%;width:100%}:host(.flip-rtl) .icon-inner{-webkit-transform:scaleX(-1);transform:scaleX(-1)}:host(.icon-small){font-size:18px!important}:host(.icon-large){font-size:32px!important}:host(.ion-color){color:var(--ion-color-base)!important}:host(.ion-color-primary){--ion-color-base:var(--ion-color-primary,#3880ff)}:host(.ion-color-secondary){--ion-color-base:var(--ion-color-secondary,#0cd1e8)}:host(.ion-color-tertiary){--ion-color-base:var(--ion-color-tertiary,#f4a942)}:host(.ion-color-success){--ion-color-base:var(--ion-color-success,#10dc60)}:host(.ion-color-warning){--ion-color-base:var(--ion-color-warning,#ffce00)}:host(.ion-color-danger){--ion-color-base:var(--ion-color-danger,#f14141)}:host(.ion-color-light){--ion-color-base:var(--ion-color-light,#f4f5f8)}:host(.ion-color-medium){--ion-color-base:var(--ion-color-medium,#989aa2)}:host(.ion-color-dark){--ion-color-base:var(--ion-color-dark,#222428)}</style></template></head>
-<body cz-shortcut-listen="true">
+  </div>
+  </td>
+  </table>
+
 
 
 
@@ -149,3 +155,11 @@
              					<a href="#" data-toggle="modal" data-target="#registModal" class="btn btn-warning btn-sm " style="min-width: 130px;"> 
                                     Pembimbing&nbsp;<ion-icon name="paper-plane" role="img" class="hydrated" aria-label="paper plane"></ion-icon></a></div></div></div></div></div></div>
 </html>
+
+</div>
+  
+</div>
+
+</body>
+</html>
+

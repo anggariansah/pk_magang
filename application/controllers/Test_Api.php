@@ -6,7 +6,7 @@ class Test_api extends CI_Controller {
  function index()
  {
   $this->load->view('api_view');
- }
+ } 
 
  function action(){
  
@@ -163,8 +163,10 @@ class Test_api extends CI_Controller {
 				$output = '';
 
 				if(count($result) > 0)
+				// if((array)$result>0)
 				{
 					foreach($result as $row)
+					// foreach($result['output'] as $row)
 					{
 							$output .= '
 							<tr>
@@ -762,6 +764,26 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "insertPendaftaran")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertPendaftaran";
+
+				$form_data = array(
+					'mahasiswa_nim' => $this->input->post('mahasiswa_nim'),
+					'id_industri'  => $this->input->post('id_industri')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
 			if($data_action == "jumlahIndustri")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/jumlahIndustri";
@@ -797,7 +819,7 @@ class Test_api extends CI_Controller {
 					foreach($result as $row)
 					{
 							$output .= '
-							<select id="perusahaan" name="perusahaan" class="custom-select" class="custom-select">
+							<select id="id_industri" name="id_industri" class="custom-select">
 								<option value="'.$row->industri_id.'">'.$row->nama_perusahaan.'</option>
 							</select>
 
@@ -806,7 +828,7 @@ class Test_api extends CI_Controller {
 				}
 				else{
 						$output .= '
-						<select name="perusahaan" id="perusahaan" class="custom-select">
+						<select name="id_industri" id="id_industri" class="custom-select">
 							<option>No Data</option>
 						</select>
 						';

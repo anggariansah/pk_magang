@@ -22,12 +22,19 @@
 						<div class="card-body">
 							<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
 						</div>
+	
+						<tbody>
+						</tbody>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Nama		: Ramona Matovani</li>
-							<li class="list-group-item">NIM 		: 4617010021</li>
-							<li class="list-group-item">kelas		: TI 6A</li>
+							<li class="list-group-item">Nama		: </li>
+							<li class="list-group-item">NIM 		: </li>
+							<li class="list-group-item">Kelas		: </li>
+							<li class="list-group-item">Perusahaan	: </li>
 						</ul>
+						
 						</div>
+						
+						
           </div>
 
 		</div>
@@ -43,19 +50,11 @@
           <p>Magang</p>
         </div>
         <div class="steps-step">
-          <a href="#step-10" type="button" class="btn btn-success btn-circle" disabled="disabled">2</a>
+          <a href="<?php echo site_url("pkl_mahasiswa/riwayat_bimbingan")?>" type="button" class="btn btn-success btn-circle" disabled="disabled">2</a>
           <p>Bimbingan 1</p>
         </div>
         <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 2</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 3</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+          <a href="<?php echo site_url("pkl_mahasiswa/jadwalsidang")?>" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
           <p>Sidang</p>
         </div>
       </div>
@@ -100,4 +99,38 @@
 	});
 
 
+	$(document).ready(function(){
+function tampilDataMahasiswa()
+{
+	$.ajax({
+		url:"<?php echo base_url(); ?>test_api/action",
+		method:"POST",
+		data:{data_action:'getMahasiswa'},
+		success:function(data)
+		{
+			$('tbody').html(data);
+		}
+	});
+}
+tampilDataMahasiswa();
+
+$(document).ready(function(){
+        var nim = $(this).attr('id');
+        $.ajax({
+            url:"<?php echo base_url(); ?>test_api/action",
+            method:"POST",
+            data:{nim:nim, data_action:'tampilDetailMahasiswa'},
+            dataType:"json",
+            success:function(data)
+            {
+				$('#modal-detail').modal('show'); 
+				$('#nim').html('<li class="list-group-item" id="nim" name="nim">Nim : '+nim+'</li>');          
+				$('#nama').html('<li class="list-group-item" id="nama" name="nama">Nama : '+data.nama+'</li>');
+				$('.modal-title').text('Detail Mahasiswa');
+			}
+        })
+    });
+
+
+});
 </script>

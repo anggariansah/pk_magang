@@ -1,4 +1,4 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PKL_Api extends CI_Controller {
@@ -239,6 +239,33 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($array, true);
 	}
 
+	function insertPendaftaran()
+	{
+		$this->form_validation->set_rules("mahasiswa_nim", "mahasiswa_nim", "required");
+		$this->form_validation->set_rules("id_industri", "id_industri", "required");
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'mahasiswa_nim' => trim($this->input->post('mahasiswa_nim')),
+				'id_industri'  => trim($this->input->post('id_industri'))
+			);
+			$this->model_pkl->insert_pendaftaran($data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{ 
+			$array = array(
+				'error'    => true,
+				'mahasiswa_nim' => form_error('mahasiswa_nim'),
+				'id_industri' => form_error('id_industri')
+			);
+		}
+		echo json_encode($array, true);
+	}
+
 	// PANITIA
 
 	function insertSidang()
@@ -425,19 +452,19 @@ class PKL_Api extends CI_Controller {
 	// 	}
 	// }
 
-	// function tampilSingleNilai()
-	// {
-	// 	if($this->input->post('id'))
-	// 	{
-	// 		$data = $this->model_pkl->tampil_single_nilai($this->input->post('id'));
-	// 		foreach($data as $row)
-	// 		{
-	// 			$output['nim'] = $row["nim"];
-	// 			$output['nilai'] = $row["nilai"];
-	// 		}
-	// 		echo json_encode($output);
-	// 	}
-	// }
+	function tampilSingleNilai()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->tampil_single_nilai($this->input->post('id'));
+			foreach($data as $row)
+			{
+				$output['nim'] = $row["nim"];
+				$output['nilai'] = $row["nilai"];
+			}
+			echo json_encode($output);
+		}
+	}
 
 	function getSingleSidang()
 	{
@@ -482,10 +509,20 @@ class PKL_Api extends CI_Controller {
 		if($this->input->post('nim'))
 		{
 			$data = $this->model_pkl->tampil_detail_mahasiswa($this->input->post('nim'));
-			foreach($data as $row)
-			{
-				$output['nama'] = $row["nama_mhs"];
+
+			if(count($data) > 0){
+				foreach($data as $row)
+				{
+					$output['error'] = "false";
+
+					$output['nama'] = $row["nama_mhs"];
+					$output['telp'] = $row["tlp_mhs"];
+					$output['email'] = $row["email_mhs"];
+				}
+			}else {
+					$output['error'] = "true";
 			}
+			
 			echo json_encode($output);
 		}
 	}

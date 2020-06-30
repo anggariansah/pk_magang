@@ -1,6 +1,6 @@
 <?php
 class Model_pkl extends CI_Model
-{
+{ 
 
 	
 	public function __construct()
@@ -108,6 +108,19 @@ class Model_pkl extends CI_Model
 	function insert_perusahaan($data)
 	{
 		$this->db->insert('industri', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function insert_pendaftaran($data)
+	{
+		$this->db->insert('pkl_mhs_dosen', $data);
 		if($this->db->affected_rows() > 0)
 		{
 			return true;

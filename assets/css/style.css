@@ -36,4 +36,67 @@ img {
     margin-top: 0;
     }
 
+/*Pilihan Login*/
+#card {
+        background: #fbfbfb;
+        border-radius: 8px;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        height: 40px;
+        margin: 12rem auto 8.1rem auto;
+        width: 70px;
+}
+#cardpilihan1 {
+        background: #fbfbfb;
+        border-radius: 8px;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        margin-left: 70px;
+        margin: 3rem;
+        height: 200px;
+        width: 200px;
+        background-image: url('.../image/panitia.jpeg');
+}
 
+
+#gambar {
+    cursor: pointer;
+    cursor: hand;
+}
+
+#bg-img {
+    background-image: url('.../image/panitia.jpeg');
+    height: 200px;
+    width: 200px;
+}
+
+#card-content {
+      padding: 12px 44px;
+}
+#card-title {
+      font-family: "Raleway Thin", sans-serif;
+      letter-spacing: 4px;
+      padding-bottom: 23px;
+      padding-top: 13px;
+      text-align: center;
+}
+.underline-title {
+      background: -webkit-linear-gradient(right, #a6f77b, #2ec06f);
+      height: 2px;
+      margin: -1.1rem auto 0 auto;
+      width: 89px;
+}
+
+
+
+body {
+       background: -webkit-linear-gradient(bottom, #263578, #FFF8DC);
+       background-repeat: no-repeat;
+}
+
+
+/*end pilihan login*/
+
+/*LOGIN*/
+
+
+
+/*END LOGIN*/
