@@ -90,7 +90,11 @@
 <div class="text-center font-13 m-t-10 pad-30">
 	<h4>Masuk <span class="is-colored text-bold">Sebagai?</span>
 	</h4>
+          <div class="card-body p-0">
 </div>
+<div class="row">
+              <div class="media">
+              <img src="assets/image/himatik.jpeg>
 <div class="row m-t-30">
 	<div class="col-sm-3 m-t-10">
 		<div class="col-sm-12 bg-white is-bordered-radius removal-overflow ">
@@ -99,7 +103,7 @@
 					
 				<div class="col-md-3 no-pad d-none d-md-block d-lg-block d-xl-block">
 					<img src="https://musiq.id//assets/frontend/img/package/subs-beginner.png"></div>
-					
+					<div class="card o-hidden border-0 shadow-lg my-5">
 					<div> 
 						<img src=""></div>
 						 <div class="text-center m-t-30 pad-20"><a href="#" data-toggle="modal" data-target="#registModal" class="btn btn-primary btn-sm " style="min-width: 130px;">
