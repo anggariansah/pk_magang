@@ -20,7 +20,6 @@
 <!--   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
  -->
 
-
 </head>
 <body>
    <!-- Content Wrapper. Contains page content -->
@@ -28,7 +27,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card">
+      <di4v class="card">
         <div class="card-header">
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -38,7 +37,9 @@
           </div>
         </div>
         <div class="card-body">
-        <!-- TABEL TAMBAH DATA DOSEN -->
+<div class="container-fluid"> 
+
+<!-- Tambah diskusi -->
  <div class="card-body">
   <span id="success_message"></span>
   <br>
@@ -55,8 +56,9 @@
   </div>
 </div>
 
-         <!-- MODAL TAMBAH DATA -->
-<div class="modal fade" id="modal-tambah">
+
+<!-- MODAL TAMBAH DATA -->
+<<div class="modal fade" id="modal-tambah">
 <div class="modal-dialog">
   <div class="modal-content">
   <div class="modal-header">
@@ -68,10 +70,13 @@
             <div class="modal-body">
             <form method="post" id="user_form">
               <div class="form-group">
-                <input type="text" name="tanggal_sidang" id="tanggal_sidang" class="form-control" placeholder="judul" value="">
+                <input type="text" name="judul" id="judul" class="form-control" placeholder="Judul" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="dosen" id="dosen" class="form-control" placeholder="Isi" value="">
+                <input type="text" name="isi" id="isi" class="form-control" placeholder="Isi" value="">
+              </div>
+              <div class="form-group">
+                <input type="file" name="file" id="file" class="form-control" placeholder="File" value="">
               </div>
               <div class="form-group">
              
@@ -84,10 +89,20 @@
               </div>
               </form>
             </div>
-            </div>
-          </div>
-          </div>
+  </div>
+</div>
+</div>
+        
         <!-- TUTUP MODAL TAMBAH DATA -->
+
+        <script type="text/javascript" language="javascript">
+        $('#add-button').click(function(){
+            $('#user_form')[0].reset();
+            $('#action').val('Add');
+            $('#data_action').val("insertSidang");
+            $('#modal-tambah').modal('show');
+        });
+        </script>
 
 </div>
 </div>

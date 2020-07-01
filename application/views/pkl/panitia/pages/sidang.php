@@ -1,3 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+<script src="<?php echo base_url();?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script>
+  $(function () {
+    $("#example").dataTable();
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('table.display').DataTable();
+  });
+</script>
+
+</head>
+<body>
+
+
 <div class="container-fluid"> 
 
 <!-- TABEL TAMBAH DATA SIDANG -->
@@ -8,7 +32,8 @@
   <br>
   <br>
 
-  <table class="table table-bordered table-striped" id="example1">
+<div class="table table-striped">
+  <table id="example" class="display" style="width: 100%">
   <thead>
       <tr>
         <th>Tanggal Sidang</th>
@@ -22,6 +47,7 @@
       
     </tbody>
   </table>
+  </div>
 </div>
 </div>
 
@@ -180,3 +206,5 @@
           
 
 </script>
+</body>
+</html>

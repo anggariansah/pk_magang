@@ -52,7 +52,7 @@
             <a href="<?php echo site_url("pkl_mahasiswa/dosen_industri")?>" class="nav-link">
               <i class="nav-icon fa fa-fw fa-user"></i>
               <p>
-                Dosen Industri
+                Pembimbing
               </p>
             </a>
           </li>
