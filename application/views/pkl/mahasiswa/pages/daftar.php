@@ -111,7 +111,7 @@
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="user_id" id="user_id" />
-      		<input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
+      		<input type="hidden" name="data_action" id="data_action" value="insertPerusahaan" />
 			<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
@@ -204,6 +204,7 @@
                     fetch_data();
                     if($('#data_action').val() == "insertPendaftaran")
                     {
+						
                     }
                 }
 
