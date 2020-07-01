@@ -20,7 +20,6 @@
 <!--   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
  -->
 
-
 </head>
 <html>
 <head>
@@ -52,5 +51,91 @@
     </form>   
   </div>
  
+
+   <!-- Content Wrapper. Contains page content -->
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <di4v class="card">
+        <div class="card-header">
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+<div class="container-fluid"> 
+
+<!-- Tambah diskusi -->
+ <div class="card-body">
+  <span id="success_message"></span>
+  <br>
+  <button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
+  <br>
+  <br>
+
+  <div class="card" style="width: 40rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Balas</a>
+    <a href="#" class="card-link">Edit</a>
+  </div>
+</div>
+
+
+<!-- MODAL TAMBAH DATA -->
+<<div class="modal fade" id="modal-tambah">
+<div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <form method="post" id="user_form">
+              <div class="form-group">
+                <input type="text" name="judul" id="judul" class="form-control" placeholder="Judul" value="">
+              </div>
+              <div class="form-group">
+                <input type="text" name="isi" id="isi" class="form-control" placeholder="Isi" value="">
+              </div>
+              <div class="form-group">
+                <input type="file" name="file" id="file" class="form-control" placeholder="File" value="">
+              </div>
+              <div class="form-group">
+             
+
+              <div class="modal-footer">
+              <input type="hidden" name="user_id" id="user_id" />
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="hidden" name="data_action" id="data_action" value="Insert" />
+              <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+              </div>
+              </form>
+            </div>
+  </div>
+</div>
+</div>
+        
+        <!-- TUTUP MODAL TAMBAH DATA -->
+
+        <script type="text/javascript" language="javascript">
+        $('#add-button').click(function(){
+            $('#user_form')[0].reset();
+            $('#action').val('Add');
+            $('#data_action').val("insertSidang");
+            $('#modal-tambah').modal('show');
+        });
+        </script>
+
+</div>
+</div>
+
 </body>
 </html>

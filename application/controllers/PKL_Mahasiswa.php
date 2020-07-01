@@ -54,7 +54,7 @@ class PKL_Mahasiswa extends CI_Controller {
 	}
 
 	public function dosen_industri(){
-		$data['title'] = "Dosen Industri";
+		$data['title'] = "Pembimbing";
 		$this->load->view('pkl/mahasiswa/template/header');
 		$this->load->view('pkl/mahasiswa/template/sidebar',$data);
         $this->load->view('pkl/mahasiswa/pages/dosen_industri');

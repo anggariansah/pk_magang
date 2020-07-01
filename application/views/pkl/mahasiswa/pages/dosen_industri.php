@@ -1,3 +1,21 @@
+
+ <!-- Content Wrapper. Contains page content -->
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+
+
 <div class="container-fluid"> 
 
 <!-- TABEL TAMBAH DATA DOSEN -->
@@ -12,10 +30,12 @@
   <thead>
       <tr>
         <th>Kode</th>
-        <th>Nama</th>
+        <th>Dosen Pembimbing</th>
         <th>Email</th>
         <th>Telepon</th>
+        <th>Dosen Industri</th>
         <th>Kode Industri</th>
+        <th>File</th>
       </tr>
     </thead>
     <tbody>
@@ -41,7 +61,7 @@
                 <input type="number" name="kode" id="kode" class="form-control" placeholder="Kode" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama" value="">
+                <input type="text" name="dospem" id="dospem" class="form-control" placeholder="Dosen Pembimbing" value="">
               </div>
               <div class="form-group">
                 <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="">
@@ -49,6 +69,16 @@
               <div class="form-group">
                 <input type="number" name="telepon" id="telepon" class="form-control" placeholder="Telepon" value="">
               </div>
+              <div class="form-group">
+                <input type="text" name="dosin" id="dosin" class="form-control" placeholder="Dosen Industri" value="">
+              </div>
+              <div class="form-group">
+                <input type="number" name="kode" id="kodin" class="form-control" placeholder="Kode Industri" value="">
+              </div>
+              <div class="form-group">
+                <input type="file" name="kode" id="kodin" class="form-control" placeholder="Kode Industri" value="">
+              </div>
+
 
               <div class="modal-footer">
 							<input type="hidden" name="user_id" id="user_id" />
@@ -64,23 +94,31 @@
         <!-- TUTUP MODAL TAMBAH DATA -->
 
       <script type="text/javascript" language="javascript">
-        $(document).ready(function(){
 
-          function getDosenindustri()
-          {
-            $.ajax({
-              url:"<?php echo base_url(); ?>test_api/action",
-              method:"POST",
-              data:{data_action:'getDosenindustri'},
-              success:function(data)
-              {
-                $('tbody').html(data);
-              }
-            });
-          }
+        $('#add-button').click(function(){
+            $('#user_form')[0].reset();
+            $('#action').val('Add');
+            $('#data_action').val("insertSidang");
+            $('#modal-tambah').modal('show');
+        });
 
-          getDosenindustri();
+        // $(document).ready(function(){
 
-          });
+        //   function getDosenindustri()
+        //   {
+        //     $.ajax({
+        //       url:"<?php echo base_url(); ?>test_api/action",
+        //       method:"POST",
+        //       data:{data_action:'getDosenindustri'},
+        //       success:function(data)
+        //       {
+        //         $('tbody').html(data);
+        //       }
+        //     });
+        //   }
+
+        //   getDosenindustri();
+
 
       </script>
+ 

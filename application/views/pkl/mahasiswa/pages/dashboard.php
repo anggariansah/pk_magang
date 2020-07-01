@@ -1,4 +1,60 @@
 <div class="container-fluid"> 
+ <!-- Small boxes (Stat box) -->
+ 	<div class="row">
+
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3 id="jmh_bimbingan"></h3>
+                <p>Riwayat Bimbingan</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="<?php echo site_url("pkl_mahasiswa/riwayat_bimbingan")?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+		</div>				
+		</div>
+
+<table>
+<tr>
+<td>
+
+	<div class="col-lg-3 col-6">
+	<div class="card" style="width: 30rem;">
+		<div class="card-body">
+		<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
+		</div>
+			<ul class="list-group list-group-flush">
+			<li class="list-group-item">Nama&nbsp;: Ramona Matovani</li>
+			<li class="list-group-item">NIM 		: 4617010021</li>
+			<li class="list-group-item">Kelas		: TI 6A</li>
+			<li class="list-group-item">Perusahaan	: Bukalapak.com</li>
+			</ul>
+	</div>
+	</div>
+</div>
+</td>
+<td>
+	<div class="col-lg-3 col-6">
+	<div class="card" style="width: 30rem;">
+		<div class="card-body">
+		<h3 class="card-title"> <strong> Detail Perusahaan </strong></h3>
+		</div>
+			<ul class="list-group list-group-flush">
+			<li class="list-group-item">Kode 				: 2331</li>
+			<li class="list-group-item">Dosen Pembimbing	: Risna Sari, M.Kom</li>
+			<li class="list-group-item">Dosen Industri		: Hatta maulana, M.TI</li>
+			<li class="list-group-item">Kode Industri		: Bukalapak.com</li>
+			</ul>
+	</div>
+	</div>
+</td>
+</tr>
+</table>
+
 	<!-- Small boxes (Stat box) -->
 	<div class="row">
 

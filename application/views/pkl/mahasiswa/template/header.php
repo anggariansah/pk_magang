@@ -28,6 +28,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/demo.js"></script>
 
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
