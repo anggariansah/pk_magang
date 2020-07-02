@@ -206,3 +206,12 @@
 
 
 </script>
+<!-- <script src="adminLTE/plugins/datatables/jquery.dataTables.js"></script> -->
+<script type="text/javascript" src="<? echo base_url() ?>assets/AdminLTE/plugins/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<? echo base_url() ?>assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- <script src="adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+  });
+  </script>
