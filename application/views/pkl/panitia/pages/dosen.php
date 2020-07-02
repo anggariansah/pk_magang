@@ -67,6 +67,8 @@
         <!-- TUTUP MODAL TAMBAH DATA -->
 
 <script type="text/javascript" language="javascript">
+    // });
+
 	$(document).ready(function(){
 
 		function fetch_data()
@@ -212,6 +214,6 @@
 <!-- <script src="adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
 <script>
   $(function () {
-    $("#example1").DataTable();
+    $('#example1').DataTable();
   });
   </script>
