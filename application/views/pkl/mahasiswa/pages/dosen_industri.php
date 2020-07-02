@@ -22,26 +22,45 @@
  <div class="card-body">
  	<span id="success_message"></span>
   <br>
-	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
+	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i>  Update Dosen Industri</button>
   <br>
   <br>
 
-  <table class="table table-bordered table-striped" id="example1">
-  <thead>
-      <tr>
-        <th>Kode</th>
-        <th>Dosen Pembimbing</th>
-        <th>Email</th>
-        <th>Telepon</th>
-        <th>Dosen Industri</th>
-        <th>Kode Industri</th>
-        <th>File</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>
-  </table>
+	<table>
+	<tr>
+	<td>
+		<div class="col-lg-3 col-6">
+		<div class="card" style="width: 30rem;">
+			<div class="card-body">
+			<h3 class="card-title"> <strong> Detail Dosen Industri </strong></h3>
+			</div>
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item">Nama    : </li>
+				<li class="list-group-item">Email   : </li>
+				<li class="list-group-item">No Hp		:</li>
+				<li class="list-group-item">Perusahaan :</li>
+				</ul>
+		</div>
+		</div>
+	</div>
+	</td>
+	<td>
+		<div class="col-lg-3 col-6">
+		<div class="card" style="width: 30rem;">
+			<div class="card-body">
+			<h3 class="card-title"> <strong> Dosen Pembimbing </strong></h3>
+			</div>
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item">NIP 				: -</li>
+				<li class="list-group-item">Nama	: - </li>
+				<li class="list-group-item">Email		:  -</li>
+				<li class="list-group-item">No Telp		: -</li>
+				</ul>
+		</div>
+		</div>
+	</td>
+	</tr>
+	</table>
 </div>
 </div>
 
@@ -102,22 +121,6 @@
             $('#modal-tambah').modal('show');
         });
 
-        // $(document).ready(function(){
-
-        //   function getDosenindustri()
-        //   {
-        //     $.ajax({
-        //       url:"<?php echo base_url(); ?>test_api/action",
-        //       method:"POST",
-        //       data:{data_action:'getDosenindustri'},
-        //       success:function(data)
-        //       {
-        //         $('tbody').html(data);
-        //       }
-        //     });
-        //   }
-
-        //   getDosenindustri();
 
 
       </script>
