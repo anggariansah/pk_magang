@@ -9,11 +9,8 @@
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo base_url(); ?>assets/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block" id="nama"></a>
         </div>
       </div>
 
@@ -29,24 +26,6 @@
               </p>
             </a>
    		    </li>
-
-          <!-- <li class="nav-item">
-            <a href="<?php echo site_url("pkl_mahasiswa/list_perusahaan")?>" class="nav-link">
-              <i class="nav-icon fas fa-building"></i>
-              <p>
-                List Perusahaan
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?php echo site_url("pkl_mahasiswa/daftar")?>" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Daftar PKL
-              </p>
-            </a>
-          </li> -->
 
           <li class="nav-item">
             <a href="<?php echo site_url("pkl_mahasiswa/dosen_industri")?>" class="nav-link">
@@ -97,3 +76,30 @@
 
   </body>
 </html>
+
+<script type="text/javascript" language="javascript">
+
+var id = "1";
+
+
+$(document).ready(function(){
+
+		function getDetailMahasiswa()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{id:id, data_action:'tampilDetailMahasiswa'},
+				dataType:"json",
+				success:function(data)
+				{
+					$('#nama').html('<a href="#" class="d-block" id="nama">'+data.nama+'</a>');
+				}
+			});
+		}
+
+		getDetailMahasiswa();
+
+});
+
+</script>

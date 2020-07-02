@@ -9,11 +9,8 @@
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo base_url(); ?>assets/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+					<a href="#" class="d-block" id="nama"></a>
         </div>
       </div>
 
@@ -95,3 +92,30 @@
 
   </body>
 </html>
+
+<script type="text/javascript" language="javascript">
+
+var nip = "12345";
+
+
+$(document).ready(function(){
+
+		function getProfileDosen()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{nip:nip, data_action:'getProfileDosen'},
+				dataType:"json",
+				success:function(data)
+				{
+					$('#nama').html('<a href="#" class="d-block" id="nama">'+data.nama+'</a>');
+				}
+			});
+		}
+
+		getProfileDosen();
+
+});
+
+</script>

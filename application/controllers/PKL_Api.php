@@ -216,6 +216,20 @@ class PKL_Api extends CI_Controller {
 	}
 
 
+	function getProfileDosen()
+	{
+		if($this->input->post('nip'))
+		{
+			$data = $this->model_pkl->get_profile_dosen($this->input->post('nip'));
+			foreach($data as $row)
+			{
+				$output['nama'] = $row["nama"];
+			}
+			echo json_encode($output);
+		}
+	}
+
+
 	function getNilaiPembimbing()
 	{
 		if($this->input->post('nip'))
@@ -338,8 +352,12 @@ class PKL_Api extends CI_Controller {
 
 	function jumlahBimbingan()
 	{
-		$data = $this->model_pkl->jumlah_bimbingan();
-		echo json_encode($data->result_array());
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->jumlah_bimbingan($this->input->post('id'));
+			echo json_encode($data->result_array());
+		}
+		
 	}
 
 	function getMahasiswa()
@@ -442,6 +460,72 @@ class PKL_Api extends CI_Controller {
 		}
 		echo json_encode($array, true);
 	}
+
+
+	function insertDosenIndustri()
+	{
+		$this->form_validation->set_rules("nama", "Nama", "required");
+		$this->form_validation->set_rules("email", "Email", "required");
+		$this->form_validation->set_rules("telepon", "Telepon", "required");
+		$this->form_validation->set_rules("id_industri", "id_industri", "required");
+
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'nama'  => trim($this->input->post('nama')),
+				'email'  => trim($this->input->post('email')),
+				'no_hp'  => trim($this->input->post('telepon')),
+				'industri_industri_id'  => trim($this->input->post('id_industri'))
+			);
+			$this->model_pkl->insert_dosen_industri($this->input->post('id'), $data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{ 
+			$array = array(
+				'error'    => true,
+				'nama' => form_error('nama'),
+				'email' => form_error('email')
+			);
+		}
+		echo json_encode($array, true);
+	}
+
+	function updateDosenIndustri()
+	{
+		$this->form_validation->set_rules("nama", "Nama", "required");
+		$this->form_validation->set_rules("email", "Email", "required");
+		$this->form_validation->set_rules("telepon", "Telepon", "required");
+		$this->form_validation->set_rules("id_industri", "id_industri", "required");
+
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'nama'  => trim($this->input->post('nama')),
+				'email'  => trim($this->input->post('email')),
+				'no_hp'  => trim($this->input->post('telepon')),
+				'industri_industri_id'  => trim($this->input->post('id_industri'))
+			);
+			$this->model_pkl->update_dosen_industri($this->input->post('id'), $data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{ 
+			$array = array(
+				'error'    => true,
+				'nama' => form_error('nama'),
+				'email' => form_error('email')
+			);
+		}
+		echo json_encode($array, true);
+	}
+
 
 	function insertPenguji()
 	{
@@ -838,6 +922,92 @@ class PKL_Api extends CI_Controller {
 				}
 			}else {
 					$output['error'] = "true";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
+	function getDetailPerusahaanMahasiswa()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->tampil_detail_perusahaan_mahasiswa($this->input->post('id'));
+
+			if(count($data) > 0){
+				foreach($data as $row)
+				{
+					$output['error'] = "false";
+
+					$output['nama'] = $row["nama"];
+					$output['alamat'] = $row["alamat"];
+					$output['telp'] = $row["telp"];
+				}
+			}else {
+					$output['error'] = "true";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
+
+	function getDetailDosenIndustri()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->get_detail_dosen_industri($this->input->post('id'));
+
+			if(count($data) > 0){
+				foreach($data as $row)
+				{
+					$output['error'] = "false";
+
+					$output['id'] = $row["id_industri"];
+					$output['iddosen'] = $row["id_dosen"];
+					$output['nama'] = $row["nama"];
+					$output['email'] = $row["email"];
+					$output['nohp'] = $row["nohp"];
+					$output['perusahaan'] = $row["perusahaan"];
+				}
+			}else {
+					$output['error'] = "true";
+
+					$output['id'] = "-";
+					$output['iddosen'] = "-";
+					$output['nama'] = "-";
+					$output['email'] = "-";
+					$output['nohp'] = "-";
+					$output['perusahaan'] = "-";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
+	function getDetailDosenPembimbing()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->get_detail_dosen_pembimbing($this->input->post('id'));
+
+			if(count($data) > 0){
+				foreach($data as $row)
+				{
+					$output['error'] = "false";
+
+					$output['nip'] = $row["nip"];
+					$output['nama'] = $row["nama"];
+					$output['email'] = $row["email"];
+					$output['notelp'] = $row["notelp"];
+				}
+			}else {
+					$output['error'] = "true";
+					
+					$output['nip'] = "-";
+					$output['nama'] = "-";
+					$output['email'] = "-";
+					$output['notelp'] = "-";
 			}
 			
 			echo json_encode($output);

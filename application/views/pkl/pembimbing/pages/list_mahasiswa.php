@@ -79,7 +79,20 @@
 			</ul>
 		</div>
 
+		<div class="card" style="width: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title"> <strong> Detail Perusahaan </strong></h3>
+			</div>
+			<ul class="list-group list-group-flush">
+				<p id="nama-industri" name="nama-industri"> </p>
+				<p id="alamat-industri" name="alamat-industri"> </p>
+				<p id="telp-industri" name="telp-industri"> </p>
+			</ul>
+		</div>
+
 		<input type="hidden" name="status-id" id="status-id" />
+		<input type="hidden" name="id" id="id" />
+
 
 	</div>
 	</div>
@@ -121,6 +134,7 @@
             {
 							$('#modal-detail').modal('show'); 
 							$('#status-id').val(data.status); 
+							$('#id').val(id); 
 							$('#nim-detail').html('<li class="list-group-item" id="nim" name="nim">Nim : '+data.nim+'</li>');          
 							$('#nama-detail').html('<li class="list-group-item" id="nama" name="nama">Nama : '+data.nama+'</li>');
 							$('#kelas-detail').html('<li class="list-group-item" id="kelas" name="kelas">Kelas : '+data.kelas+'</li>');
@@ -128,6 +142,8 @@
 
 
 							var status = document.getElementById('status-id').value;
+
+							getDetailPerusahaanMahasiswa();
 
 							if(status == '1'){
 								$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
@@ -154,7 +170,29 @@
         })
     });
 
+
+		function getDetailPerusahaanMahasiswa()
+		{
+			var id = document.getElementById('id').value;
+
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{id:id, data_action:'getDetailPerusahaanMahasiswa'},
+				dataType:"json",
+				success:function(data)
+				{
+					$('#nama-industri').html('<li class="list-group-item" id="nama-industri" name="nama-industri">Nama : '+data.nama+'</li>');          
+					$('#alamat-industri').html('<li class="list-group-item" id="alamat-industri" name="alamat-industri">Nama : '+data.alamat+'</li>');
+					$('#telp-industri').html('<li class="list-group-item" id="telp-industri" name="telp-industri">No Telp : '+data.telp+'</li>');
+				}
+			});
+		}
+
+
+
 	});
+	
 
 
 

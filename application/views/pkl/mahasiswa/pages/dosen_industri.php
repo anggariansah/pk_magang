@@ -35,10 +35,10 @@
 			<h3 class="card-title"> <strong> Detail Dosen Industri </strong></h3>
 			</div>
 				<ul class="list-group list-group-flush">
-				<li class="list-group-item">Nama    : </li>
-				<li class="list-group-item">Email   : </li>
-				<li class="list-group-item">No Hp		:</li>
-				<li class="list-group-item">Perusahaan :</li>
+					<p id="nama-dosen" name="nama-dosen"> </p>
+					<p id="email-dosen" name="email-dosen"> </p>
+					<p id="nohp-dosen" name="nohp-dosen"> </p>
+					<p id="perusahaan-dosen" name="perusahaan-dosen"> </p>
 				</ul>
 		</div>
 		</div>
@@ -51,10 +51,10 @@
 			<h3 class="card-title"> <strong> Dosen Pembimbing </strong></h3>
 			</div>
 				<ul class="list-group list-group-flush">
-				<li class="list-group-item">NIP 				: -</li>
-				<li class="list-group-item">Nama	: - </li>
-				<li class="list-group-item">Email		:  -</li>
-				<li class="list-group-item">No Telp		: -</li>
+					<p id="nip-pembimbing" name="nip-pembimbing"> </p>
+					<p id="nama-pembimbing" name="nama-pembimbing"> </p>
+					<p id="email-pembimbing" name="email-pembimbing"> </p>
+					<p id="notelp-pembimbing" name="notelp-pembimbing"> </p>
 				</ul>
 		</div>
 		</div>
@@ -77,10 +77,7 @@
             <div class="modal-body">
 						<form method="post" id="user_form">
               <div class="form-group">
-                <input type="number" name="kode" id="kode" class="form-control" placeholder="Kode" value="">
-              </div>
-              <div class="form-group">
-                <input type="text" name="dospem" id="dospem" class="form-control" placeholder="Dosen Pembimbing" value="">
+                <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama Dosen" value="">
               </div>
               <div class="form-group">
                 <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="">
@@ -89,18 +86,14 @@
                 <input type="number" name="telepon" id="telepon" class="form-control" placeholder="Telepon" value="">
               </div>
               <div class="form-group">
-                <input type="text" name="dosin" id="dosin" class="form-control" placeholder="Dosen Industri" value="">
+								<select id="id_industri" name="id_industri" class="custom-select">
+			
+								</select>   
               </div>
-              <div class="form-group">
-                <input type="number" name="kode" id="kodin" class="form-control" placeholder="Kode Industri" value="">
-              </div>
-              <div class="form-group">
-                <input type="file" name="kode" id="kodin" class="form-control" placeholder="Kode Industri" value="">
-              </div>
+							<input type="hidden" name="id" id="id" />
 
 
               <div class="modal-footer">
-							<input type="hidden" name="user_id" id="user_id" />
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<input type="hidden" name="data_action" id="data_action" value="Insert" />
 							<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
@@ -114,12 +107,124 @@
 
       <script type="text/javascript" language="javascript">
 
-        $('#add-button').click(function(){
-            $('#user_form')[0].reset();
-            $('#action').val('Add');
-            $('#data_action').val("insertSidang");
-            $('#modal-tambah').modal('show');
-        });
+				var id = "17";
+
+      
+				function getListPerusahaan()
+				{
+					$.ajax({
+						url:"<?php echo base_url(); ?>test_api/action",
+						method:"POST",
+						data:{data_action:'getListPerusahaan'},
+						success:function(data)
+						{
+							$('#id_industri').html(data);
+						}
+					});
+				}
+
+				function getDetailDosenIndustri()
+				{
+					$.ajax({
+						url:"<?php echo base_url(); ?>test_api/action",
+						method:"POST",
+						data:{id:id, data_action:'getDetailDosenIndustri'},
+						dataType:"json",
+						success:function(data)
+						{
+							$('#nama-dosen').html('<li class="list-group-item" id="nama-dosen" name="nama-dosen">Nama : '+data.nama+'</li>');          
+							$('#email-dosen').html('<li class="list-group-item" id="email-dosen" name="email-dosen">Email : '+data.email+'</li>');
+							$('#nohp-dosen').html('<li class="list-group-item" id="nohp-dosen" name="nohp-dosen">Nohp : '+data.nohp+'</li>');
+							$('#perusahaan-dosen').html('<li class="list-group-item" id="perusahaan-dosen" name="perusahaan-dosen">Perusahaan : '+data.perusahaan+'</li>');
+
+							if(data.nama == "-"){
+							
+
+								$('#add-button').click(function(){
+										$('#user_form')[0].reset();
+										$('#action').val('Add');
+										$('#data_action').val("insertDosenIndustri");
+										$('#modal-tambah').modal('show');
+
+										$('#nama').val("");
+										$('#email').val("");
+										$('#telepon').val("");
+										$('#id').val(id);
+								});
+
+							}else{
+
+								$('#add-button').click(function(){
+										$('#user_form')[0].reset();
+										$('#action').val('Edit');
+										$('#data_action').val("updateDosenIndustri");
+										$('#modal-tambah').modal('show');
+
+										$('#nama').val(data.nama);
+										$('#email').val(data.email);
+										$('#telepon').val(data.nohp);
+										$('#id').val(data.iddosen);
+										$('#id_industri').html('<option id="id_industri" name="id_industri" value="'+data.id+'">'+data.perusahaan+'</option>');
+
+								});
+								
+							}
+
+						}
+					});
+				}
+
+				function getDetailDosenPembimbing()
+				{
+					$.ajax({
+						url:"<?php echo base_url(); ?>test_api/action",
+						method:"POST",
+						data:{id:id, data_action:'getDetailDosenPembimbing'},
+						dataType:"json",
+						success:function(data)
+						{
+							$('#nip-pembimbing').html('<li class="list-group-item" id="nip-pembimbing" name="nip-pembimbing">NIP : '+data.nip+'</li>');          
+							$('#nama-pembimbing').html('<li class="list-group-item" id="nama-pembimbing" name="nama-pembimbing">Nama : '+data.nama+'</li>');
+							$('#email-pembimbing').html('<li class="list-group-item" id="email-pembimbing" name="email-pembimbing">Email : '+data.email+'</li>');
+							$('#notelp-pembimbing').html('<li class="list-group-item" id="notelp-pembimbing" name="notelp-pembimbing">No Telp : '+data.notelp+'</li>');
+						}
+					});
+				}
+
+
+				getListPerusahaan();
+				getDetailDosenIndustri();
+				getDetailDosenPembimbing();
+
+				$(document).on('submit', '#user_form', function(event){
+    				event.preventDefault();
+						$.ajax({
+								url:"<?php echo base_url() . 'test_api/action' ?>",
+								method:"POST",
+								data:$(this).serialize(),
+								dataType:"json",
+								success:function(data)
+								{
+										if(data.success)
+										{
+												$('#user_form')[0].reset();
+												$('#modal-tambah').modal('hide');
+												getDetailDosenIndustri();
+												
+												$('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
+												
+										}
+
+										if(data.error)
+										{
+												$('#first_name_error').html(data.first_name_error);
+												$('#last_name_error').html(data.last_name_error);
+										}
+								}
+						})
+				});
+
+			
 
 
 

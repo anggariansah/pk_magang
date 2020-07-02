@@ -454,8 +454,14 @@ class Test_api extends CI_Controller {
 			if($data_action == "jumlahBimbingan")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/jumlahBimbingan";
+
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
 				$client = curl_init($api_url);
-				
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
 				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 				$response = curl_exec($client);
 				curl_close($client);
@@ -899,6 +905,80 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "getDetailPerusahaanMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getDetailPerusahaanMahasiswa";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "getDetailDosenIndustri")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getDetailDosenIndustri";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+
+			if($data_action == "getDetailDosenPembimbing")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getDetailDosenPembimbing";
+				$form_data = array(
+					'id'  => $this->input->post('id')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+
+			if($data_action == "getProfileDosen")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getProfileDosen";
+				$form_data = array(
+					'nip'  => $this->input->post('nip')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
 
 			if($data_action == "tampilNamaMahasiswa")
 			{
@@ -1174,6 +1254,52 @@ class Test_api extends CI_Controller {
 				$form_data = array(
 					'mahasiswa_nim'  => $this->input->post('mahasiswa_nim'),
 					'dosen'  => $this->input->post('dosen')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "insertDosenIndustri")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/insertDosenIndustri";
+				
+				$form_data = array(
+					'id'  => $this->input->post('id'),
+					'nama'  => $this->input->post('nama'),
+					'email'  => $this->input->post('email'),
+					'telepon'  => $this->input->post('telepon'),
+					'id_industri'  => $this->input->post('id_industri')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "updateDosenIndustri")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/updateDosenIndustri";
+				
+				$form_data = array(
+					'id'  => $this->input->post('id'),
+					'nama'  => $this->input->post('nama'),
+					'email'  => $this->input->post('email'),
+					'telepon'  => $this->input->post('telepon'),
+					'id_industri'  => $this->input->post('id_industri')
 				);
 
 				$client = curl_init($api_url);

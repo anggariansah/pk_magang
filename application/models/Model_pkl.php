@@ -193,8 +193,9 @@ class Model_pkl extends CI_Model
 	}
 
 
-	function jumlah_bimbingan()
+	function jumlah_bimbingan($nim)
 	{
+		$this->db->where('nim', $nim);
 		$query = $this->db->get('riwayat_bimbingan_pkl');
 		return $query;
 	}
@@ -283,6 +284,44 @@ class Model_pkl extends CI_Model
 	{
 		$this->db->where("mahasiswa_nim", $id);
 		$this->db->update("pkl_mhs_dosen", $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function insert_dosen_industri($id, $data)
+	{
+		$this->db->insert('dsn_indstri', $data);
+
+		
+		$data = array(
+			'dsn_indstri_kd_dsn'  => $this->db->insert_id()
+		);
+
+		$this->db->where("kode_pkl", $id);
+		$this->db->update("pkl_mhs_dosen", $data);
+		
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function update_dosen_industri($id, $data)
+	{
+
+		$this->db->where("kd_dsn", $id);
+		$this->db->update("dsn_indstri", $data);
+		
 		if($this->db->affected_rows() > 0)
 		{
 			return true;
@@ -439,6 +478,47 @@ class Model_pkl extends CI_Model
 		$this->db->join('mahasiswa as m','m.nim = p.mahasiswa_nim');
 		$this->db->join('kelas as k','m.kelas_kodeklas = k.kodeklas');
 		$this->db->join('industri as i','p.id_industri = i.industri_id');
+		$this->db->where("p.kode_pkl", $id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	function tampil_detail_perusahaan_mahasiswa($id)
+	{
+		$this->db->select('i.nama_perusahaan as nama, i.alamat as alamat, i.tlpn_hotline as telp');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('industri as i','p.id_industri = i.industri_id');
+		$this->db->where("p.kode_pkl", $id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+
+	function get_detail_dosen_industri($id)
+	{
+		$this->db->select('i.industri_id as id_industri, d.kd_dsn as id_dosen, d.nama as nama, d.email as email, d.no_hp as nohp, i.nama_perusahaan as perusahaan');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('industri as i','p.id_industri = i.industri_id');
+		$this->db->join('dsn_indstri as d','p.dsn_indstri_kd_dsn = d.kd_dsn');
+		$this->db->where("p.kode_pkl", $id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	
+	function get_profile_dosen($nip)
+	{
+		$this->db->where("nip", $nip);
+		$query = $this->db->get("staff");
+		return $query->result_array();
+	}
+
+	
+	function get_detail_dosen_pembimbing($id)
+	{
+		$this->db->select('s.nip as nip , s.nama as nama, s.email_staff as email, s.tlp_staff as notelp');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('staff as s','s.nip = p.staff_nip');
 		$this->db->where("p.kode_pkl", $id);
 		$query = $this->db->get();
 		return $query->result_array();
