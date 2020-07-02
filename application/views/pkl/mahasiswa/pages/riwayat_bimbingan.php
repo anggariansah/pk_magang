@@ -25,12 +25,12 @@
   <table class="table table-bordered table-striped" id="example1" >
   <thead>
       <tr>
-        <th colspan="2">Diskusi</th>
+        <th>Diskusi</th>
         <th>Bimbingan</th>
+        <th>Tanggal</th>
       </tr>
     </thead>
     <tbody>
-      <td><a class="text" href="<?php echo site_url("diskusi_bimbingan")?>"">Diskusi Bimbingan 1</a></td>
     </tbody>
   </table>
 </div>
@@ -63,7 +63,7 @@
 </div>
  -->
 <!-- MODAL TAMBAH LAPORAN BIMBINGAN -->
-<!-- <div class="modal fade" id="modal-tambah">
+<div class="modal fade" id="modal-tambah">
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
@@ -100,10 +100,19 @@
 		</form>
 	</div>
 </div>
- --><!-- TUTUP MODAL TAMBAH DATA -->
+<!--  TUTUP MODAL TAMBAH DATA -->
 
-<!-- MODAL EDIT DATA -->
-<!-- <div class="modal fade" id="modal-edit">
+<script type="text/javascript">
+	$('#add-button').click(function(){
+        $('#user_form')[0].reset();
+        $('#action').val('Add');
+        $('#data_action').val("insertRiwayat");
+        $('#modal-tambah').modal('show');
+    });
+</script>
+
+<!-- MODAL EDIT DATA
+ --><!-- <div class="modal fade" id="modal-edit">
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
@@ -139,107 +148,102 @@
 		</form>
 	</div>
 </div>
- --><!-- TUTUP MODAL EDIT DATA -->
+ --><!-- TUTUP MODAL EDIT DATA
 
 
-<!-- <script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript">
 
-	$(document).ready(function(){
+	// $(document).ready(function(){
 		
-		function getRiwayatBimbingan()
-		{
-			$.ajax({
-				url:"<?php echo base_url(); ?>test_api/action",
-				method:"POST",
-				data:{data_action:'getRiwayatBimbingan'},
-				success:function(data)
-				{
-					$('#card_riwayat').html(data);
-				}
-			});
-		}
+	// 	function getRiwayatBimbingan()
+	// 	{
+	// 		$.ajax({
+	// 			url:"<?php echo base_url(); ?>test_api/action",
+	// 			method:"POST",
+	// 			data:{data_action:'getRiwayatBimbingan'},
+	// 			success:function(data)
+	// 			{
+	// 				$('#card_riwayat').html(data);
+	// 			}
+	// 		});
+	// 	}
 
 		getRiwayatBimbingan();
 
-		$('#add-button').click(function(){
-        $('#user_form')[0].reset();
-        $('#action').val('Add');
-        $('#data_action').val("insertRiwayat");
-        $('#modal-tambah').modal('show');
-    });
+		
+          });
 
-	$(document).on('submit', '#user_form', function(event){
-        event.preventDefault();
-        $.ajax({
-            url:"<?php echo base_url() . 'test_api/action' ?>",
-            method:"POST",
-            data:$(this).serialize(),
-            dataType:"json",
-            success:function(data)
-            {
-                if(data.success)
-                {
-                    $('#user_form')[0].reset();
-                    $('#modal-tambah').modal('hide');
-                    getRiwayatBimbingan();
-                    if($('#data_action').val() == "insertRiwayat")
-                    {
-                        $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
-                    }
-                }
+	// $(document).on('submit', '#user_form', function(event){
+ //        event.preventDefault();
+ //        $.ajax({
+ //            url:"<?php echo base_url() . 'test_api/action' ?>",
+ //            method:"POST",
+ //            data:$(this).serialize(),
+ //            dataType:"json",
+ //            success:function(data)
+ //            {
+ //                if(data.success)
+ //                {
+ //                    $('#user_form')[0].reset();
+ //                    $('#modal-tambah').modal('hide');
+ //                    getRiwayatBimbingan();
+ //                    if($('#data_action').val() == "insertRiwayat")
+ //                    {
+ //                        $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
+ //                    }
+ //                }
 
-                if(data.error)
-                {
-                    $('#first_name_error').html(data.first_name_error);
-                    $('#last_name_error').html(data.last_name_error);
-                }
-            }
-        })
-    });
+ //                if(data.error)
+ //                {
+ //                    $('#first_name_error').html(data.first_name_error);
+ //                    $('#last_name_error').html(data.last_name_error);
+ //                }
+ //            }
+ //        })
+ //    });
 
-	$(document).on('click', '.edit', function(){
-        var id = $(this).attr('id');
-        $.ajax({
-            url:"<?php echo base_url(); ?>test_api/action",
-            method:"POST",
-            data:{id:id, data_action:'tampilRiwayat'},
-            dataType:"json",
-            success:function(data)
-            {
-				$('#modal-tambah').modal('show');           
-                $('#nim').val(data.nim);
-                $('#nilai').val(data.nilai);
-                $('.modal-title').text('Edit Riwayat Bimbingan');
-                $('#user_id').val(id);
-                $('#action').val('Edit');
-				$('#data_action').val('updateRiwayat');
+	// $(document).on('click', '.edit', function(){
+ //        var id = $(this).attr('id');
+ //        $.ajax({
+ //            url:"<?php echo base_url(); ?>test_api/action",
+ //            method:"POST",
+ //            data:{id:id, data_action:'tampilRiwayat'},
+ //            dataType:"json",
+ //            success:function(data)
+ //            {
+	// 			$('#modal-tambah').modal('show');           
+ //                $('#nim').val(data.nim);
+ //                $('#nilai').val(data.nilai);
+ //                $('.modal-title').text('Edit Riwayat Bimbingan');
+ //                $('#user_id').val(id);
+ //                $('#action').val('Edit');
+	// 			$('#data_action').val('updateRiwayat');
 
-			}
-        })
-    });
+	// 		}
+ //        })
+ //    });
 
-	$(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-        if(confirm("Are you sure you want to delete this?"))
-        {
-            $.ajax({
-                url:"<?php echo base_url(); ?>test_api/action",
-                method:"POST",
-                data:{id:id, data_action:'deleteRiwayat'},
-                dataType:"JSON",
-                success:function(data)
-                {
-                    if(data.success)
-                    {
-                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getRiwayatBimbingan();
-                    }
-                }
-            })
-        }
-    });
-	});
+	// $(document).on('click', '.delete', function(){
+ //        var id = $(this).attr('id');
+ //        if(confirm("Are you sure you want to delete this?"))
+ //        {
+ //            $.ajax({
+ //                url:"<?php echo base_url(); ?>test_api/action",
+ //                method:"POST",
+ //                data:{id:id, data_action:'deleteRiwayat'},
+ //                dataType:"JSON",
+ //                success:function(data)
+ //                {
+ //                    if(data.success)
+ //                    {
+ //                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+ //                        getRiwayatBimbingan();
+ //                    }
+ //                }
+ //            })
+ //        }
+ //    });
+	// });
 
 
 </script>
- -->
