@@ -25,7 +25,6 @@
 </div>
 </div>
 
-
 <!-- MODAL TAMBAH DATA -->
 <div class="modal fade" id="modal-tambah">
 <div class="modal-dialog">
@@ -161,10 +160,6 @@
             }
         })
     });
-
 });
-
 </script>
-
-
 
