@@ -31,6 +31,11 @@
 	<!-- AdminLTE for demo purposes -->
   <script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/demo.js"></script>
 
+<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
 
 
   
@@ -137,15 +142,6 @@
   </nav>
 </div>
 
-<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url();?>assets/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script>
-$(document).ready(function(){
-    $('#example1').DataTable()
-});
-</script>
 <!-- <script>
   $(function () {
     $("#example1").DataTable({

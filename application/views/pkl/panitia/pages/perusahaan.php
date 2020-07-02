@@ -63,10 +63,11 @@
 
 
 <script type="text/javascript" language="javascript">
-    // $(document).ready(function(){
-    // $('#example1').DataTable()
-    // });
 
+
+	$(document).ready(function(){
+		$('#example1').DataTable()
+	});
 
 	$(document).ready(function(){
 
