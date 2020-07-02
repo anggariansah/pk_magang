@@ -61,42 +61,10 @@
 <!-- TUTUP MODAL TAMBAH DATA -->
 
 
-<!-- MODAL EDIT DATA -->
-<div class="modal fade" id="modal-edit">
-<div class="modal-dialog">
-	<div class="modal-content">
-	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form method="post" id="user_form">
-		<div class="form-group">
-			<select id="nim" name="nim" class="custom-select">
-				
-			</select>
-		</div>
-		<div class="form-group">
-			<input type="number" id="nilai" name="nilai" class="form-control" placeholder="Nilai" value="">
-		</div>
-		<div class="modal-footer">
-			<input type="hidden" name="user_id" id="user_id" />
-            <input type="hidden" name="data_action" id="data_action" value="Insert" />
-            <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-		</div>
-		</form>
-	</div>
-	</div>
-</div>
-</div>
-
-<!-- TUTUP MODAL EDIT DATA -->
-
 <script type="text/javascript" language="javascript">
+	
+	var nip = "12345";
+	
 	$(document).ready(function(){
 
 		function getNilaiMahasiswa()
@@ -104,7 +72,7 @@
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getNilai'},
+				data:{nip:nip, data_action:'getNilaiPembimbing'},
 				success:function(data)
 				{
 					$('tbody').html(data);
@@ -117,7 +85,7 @@
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getNim'},
+				data:{nip:nip, data_action:'getNimPembimbing'},
 				success:function(data)
 				{
 					$('#nim').html(data);
@@ -172,21 +140,22 @@
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
             method:"POST",
-            data:{id:id, data_action:'tampilNilai'},
+            data:{id:id, data_action:'tampilSingleNilai'},
             dataType:"json",
             success:function(data)
             {
-				$('#modal-tambah').modal('show');           
-                $('#nim').val(data.nim);
-                $('#nilai').val(data.nilai);
+                $('#modal-tambah').modal('show');
+
+               	$('#nim').html('<select id="nim" name="nim" class="custom-select" class="custom-select"><option value="'+id+'">'+data.nim+'</option></select>');
+				$('#nilai').val(data.nilai);
                 $('.modal-title').text('Edit Nilai');
                 $('#user_id').val(id);
                 $('#action').val('Edit');
 				$('#data_action').val('updateNilai');
-
-			}
+            }
         })
     });
+
 
 	$(document).on('click', '.delete', function(){
         var id = $(this).attr('id');

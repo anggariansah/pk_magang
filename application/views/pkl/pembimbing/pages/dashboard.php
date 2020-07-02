@@ -33,14 +33,17 @@
 </div>
 
 <script type="text/javascript" language="javascript">
-	$(document).ready(function(){
 
+	var nip = "12345";
+
+	$(document).ready(function(){
+	
 		function getJumlahMahasiswa()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'jumlahMahasiswa'},
+				data:{nip:nip, data_action:'jumlahMahasiswaPembimbing'},
 				success:function(data)
 				{
 					$('#jmh_mahasiswa').html(data);
@@ -58,7 +61,7 @@
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'jumlahBimbingan'},
+				data:{nip:nip, data_action:'jumlahBimbinganPembimbing'},
 				success:function(data)
 				{
 					$('#jmh_bimbingan').html(data);

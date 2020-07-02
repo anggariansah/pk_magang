@@ -13,7 +13,7 @@
 	<table class="table table-bordered table-striped" id="example1">
 	<thead>
 			<tr>
-				<th>No.</th>
+				<th>Nim</th>
 				<th>Nama Mahasiswa</th>
 				<th>Kelas</th>
 				<th>Perusahaan</th>
@@ -28,12 +28,12 @@
 </div>
 
 
-<!-- MODAL TAMBAH DATA -->
+<<!-- MODAL DETAIL -->
 <div class="modal fade" id="modal-detail">
 <div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
-		<h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+		<h5 class="modal-title" id="exampleModalLabel">Tambah Mahasiswa</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
@@ -46,34 +46,22 @@
     <h2 class="text-center font-weight-bold pt-4 pb-5"><strong>Status Mahasiswa</strong></h2>
     <!-- Stepper -->
      <!-- Stepper -->
-		 <div class="steps-form">
+		 <div class="steps-form" id="step-status">
       <div class="steps-row setup-panel">
         <div class="steps-step">
-          <a href="#step-9" type="button" class="btn btn-success btn-circle">1</a>
+          <a id="step-1"></a>
           <p>Magang</p>
         </div>
         <div class="steps-step">
-          <a href="#step-10" type="button" class="btn btn-success btn-circle" disabled="disabled">2</a>
-          <p>Bimbingan 1</p>
+          <a id="step-2"></a>
+          <p>Bimbingan</p>
         </div>
         <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 2</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-          <p>Bimbingan 3</p>
-        </div>
-        <div class="steps-step">
-          <a href="#step-11" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+          <a id="step-3"></a>
           <p>Sidang</p>
         </div>
       </div>
     </div>
-
-    <form role="form" action="" method="post">
-
-    </form>
 
   </div>
     </div>
@@ -85,21 +73,25 @@
 				<h3 class="card-title"> <strong> Detail Mahasiswa </strong></h3>
 			</div>
 			<ul class="list-group list-group-flush">
-				<p id="nim" name="nim"> </p>
-				<p id="nama" name="nama"> </p>
-				<li class="list-group-item">kelas		: TI 6A</li>
+				<p id="nim-detail" name="nim-detail"> </p>
+				<p id="nama-detail" name="nama-detail"> </p>
+				<p id="kelas-detail" name="kelas-detail"> </p>
 			</ul>
 		</div>
 
+		<input type="hidden" name="status-id" id="status-id" />
+
 	</div>
 	</div>
 </div>
 </div>
 
-<!-- TUTUP MODAL TAMBAH DATA -->
-
+<!-- TUTUP MODAL DETAIL -->
 
 <script type="text/javascript" language="javascript">
+
+	var nip = "12345";
+
 	$(document).ready(function(){
 
 		function tampilDataMahasiswa()
@@ -107,7 +99,7 @@
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'getMahasiswa'},
+				data:{nip:nip, data_action:'getMahasiswaPembimbing'},
 				success:function(data)
 				{
 					$('tbody').html(data);
@@ -119,18 +111,45 @@
 
 
 		$(document).on('click', '.detail', function(){
-        var nim = $(this).attr('id');
+        var id = $(this).attr('id');
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
             method:"POST",
-            data:{nim:nim, data_action:'tampilDetailMahasiswa'},
+            data:{id:id, data_action:'tampilDetailMahasiswa'},
             dataType:"json",
             success:function(data)
             {
 							$('#modal-detail').modal('show'); 
-							$('#nim').html('<li class="list-group-item" id="nim" name="nim">Nim : '+nim+'</li>');          
-							$('#nama').html('<li class="list-group-item" id="nama" name="nama">Nama : '+data.nama+'</li>');
+							$('#status-id').val(data.status); 
+							$('#nim-detail').html('<li class="list-group-item" id="nim" name="nim">Nim : '+data.nim+'</li>');          
+							$('#nama-detail').html('<li class="list-group-item" id="nama" name="nama">Nama : '+data.nama+'</li>');
+							$('#kelas-detail').html('<li class="list-group-item" id="kelas" name="kelas">Kelas : '+data.kelas+'</li>');
 							$('.modal-title').text('Detail Mahasiswa');
+
+
+							var status = document.getElementById('status-id').value;
+
+							if(status == '1'){
+								$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
+								$('#step-2').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-2">2</a>');
+								$('#step-3').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
+							}
+							else if(status == '2'){
+								$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
+								$('#step-2').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-2">2</a>');
+								$('#step-3').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
+							}
+							else if(status == '3'){
+								$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
+								$('#step-2').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-2">2</a>');
+								$('#step-3').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-3">3</a>');
+							}
+							else{
+								$('#step-1').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-1">1</a>');
+								$('#step-2').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-2">2</a>');
+								$('#step-3').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
+							}
+
 						}
         })
     });

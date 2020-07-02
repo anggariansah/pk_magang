@@ -22,6 +22,12 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
+	function jumlah_dosen()
+	{
+		$query = $this->db->get('pkl_mhs_dosen');
+		return $query;
+	}
+
 	function get_riwayat_bimbingan()
 	{
 		$query = $this->db->query('SELECT r.id as id, r.judul as judul, r.tanggal as tanggal, m.nama_mhs as nama, r.deskripsi as deskripsi FROM riwayat_bimbingan_pkl r JOIN mahasiswa m ON r.nim = m.nim');
@@ -48,11 +54,7 @@ class Model_pkl extends CI_Model
 		}
 	}
 
-	function update_nilai($id, $data)
-	{
-		$this->db->where("id", $id);
-		$this->db->update("nilai_pkl", $data);
-	}
+	
 
 	
 
@@ -70,23 +72,60 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+
 	//Pembimbing
-	function get_nilai()
+
+	function jumlah_mahasiswa_pembimbing($nip)
 	{
-		$query = $this->db->query('SELECT n.id as id, m.nim as nim, m.nama_mhs as nama_mhs, k.namaklas as nama_kelas, n.nilai as nilai FROM mahasiswa m JOIN nilai_pkl n ON m.nim = n.nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas');
+		$this->db->where('staff_nip', $nip);
+		$query = $this->db->get('pkl_mhs_dosen');
 		return $query;
 	}
 
-	function jumlah_mahasiswa()
+	function jumlah_bimbingan_pembimbing($nip)
 	{
-		$query = $this->db->get('mahasiswa');
-		return $query;
-	}
-
-	function jumlah_bimbingan()
-	{
+		$this->db->where('nip', $nip);
 		$query = $this->db->get('riwayat_bimbingan_pkl');
 		return $query;
+	}
+
+
+	function get_mahasiswa_pembimbing($nip)
+	{
+		$this->db->select('p.kode_pkl as id, m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri, p.status as status');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('mahasiswa as m', 'm.nim = p.mahasiswa_nim');
+		$this->db->join('kelas as k', 'm.kelas_kodeklas = k.kodeklas');
+		$this->db->join('industri as i', 'p.id_industri = i.industri_id');
+		$this->db->where('staff_nip', $nip);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function get_nilai_pembimbing($nip)
+	{
+		$this->db->select('n.kode_pkl as id, m.nim as nim, m.nama_mhs as nama_mhs, k.namaklas as nama_kelas, n.nilai as nilai');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('mahasiswa as m', 'p.mahasiswa_nim = m.nim');
+		$this->db->join('nilai_pkl as n', 'p.kode_pkl = n.kode_pkl');
+		$this->db->join('kelas as k', 'm.kelas_kodeklas = k.kodeklas');
+		$this->db->where('p.staff_nip', $nip);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function delete_nilai($id)
+	{
+		$this->db->where("kode_pkl", $id);
+		$this->db->delete("nilai_pkl");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	function insert_nilai($data)
@@ -100,6 +139,64 @@ class Model_pkl extends CI_Model
 		{
 			return false;
 		}
+	}
+
+	
+	function tampil_single_nilai($id)
+	{
+		$this->db->select('p.mahasiswa_nim as nim, n.nilai as nilai');
+		$this->db->from('nilai_pkl n');
+		$this->db->join('pkl_mhs_dosen as p', 'n.kode_pkl = p.kode_pkl');
+		$this->db->where("n.kode_pkl", $id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	function update_nilai($id, $data)
+	{
+		$this->db->where("kode_pkl", $id);
+		$this->db->update("nilai_pkl", $data);
+
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	//TUTUP PEMBIMBING
+
+
+
+
+
+
+
+	function get_nilai()
+	{
+		$this->db->select('n.id as id, m.nim as nim, m.nama_mhs as nama_mhs, k.namaklas as nama_kelas, n.nilai as nilai');
+		$this->db->from('mahasiswa as m');
+		$this->db->join('nilai_pkl as n', 'm.nim = n.nim');
+		$this->db->join('kelas as k', 'm.kelas_kodeklas = k.kodeklas');
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function jumlah_mahasiswa()
+	{
+		$query = $this->db->get('pkl_mhs_dosen');
+		return $query;
+	}
+
+
+	function jumlah_bimbingan()
+	{
+		$query = $this->db->get('riwayat_bimbingan_pkl');
+		return $query;
 	}
 
 
@@ -206,7 +303,12 @@ class Model_pkl extends CI_Model
 
 	function get_mahasiswa()
 	{
-		$query = $this->db->query('SELECT m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas JOIN industri i ON p.id_industri = i.industri_id');
+		$this->db->select('p.kode_pkl as id, m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri, p.status as status');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('mahasiswa as m', 'm.nim = p.mahasiswa_nim');
+		$this->db->join('kelas as k', 'm.kelas_kodeklas = k.kodeklas');
+		$this->db->join('industri as i', 'p.id_industri = i.industri_id');
+		$query = $this->db->get();
 		return $query;
 	}
 
@@ -216,24 +318,12 @@ class Model_pkl extends CI_Model
 		return $query;
 	}
 
-	function delete_nilai($id)
-	{
-		$this->db->where("id", $id);
-		$this->db->delete("nilai_pkl");
-		if($this->db->affected_rows() > 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+	
 
 	function delete_mahasiswa($id)
 	{
-		$this->db->where("id", $id);
-		$this->db->delete("mahasiswa");
+		$this->db->where("kode_pkl", $id);
+		$this->db->delete("pkl_mhs_dosen");
 		if($this->db->affected_rows() > 0)
 		{
 			return true;
@@ -304,14 +394,6 @@ class Model_pkl extends CI_Model
 	}
 
 
-	
-
-	function tampil_single_nilai($id)
-	{
-		$this->db->where("id", $id);
-		$query = $this->db->get('nilai_pkl');
-		return $query->result_array();
-	}
 
 	function tampil_single_perusahaan($id)
 	{
@@ -329,22 +411,44 @@ class Model_pkl extends CI_Model
 
 	function get_sidang_mahasiswa($id)
 	{
-		$this->db->where("id_jadwal", $id);
-		$query = $this->db->query('SELECT s.id as id, m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri FROM sidang_pkl_mahasiswa s JOIN pkl_mhs_dosen p ON s.nim = p.mahasiswa_nim JOIN mahasiswa m ON m.nim = p.mahasiswa_nim JOIN kelas k ON m.kelas_kodeklas = k.kodeklas JOIN industri i ON p.id_industri = i.industri_id where s.id_jadwal');
+		$this->db->select('s.id as id, m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , i.nama_perusahaan as industri');
+		$this->db->from('sidang_pkl_mahasiswa as s');
+		$this->db->join('pkl_mhs_dosen as p', 's.nim = p.mahasiswa_nim');
+		$this->db->join('mahasiswa as m', 'm.nim = p.mahasiswa_nim');
+		$this->db->join('kelas as k', 'm.kelas_kodeklas = k.kodeklas');
+		$this->db->join('industri as i', 'p.id_industri = i.industri_id');
+		$this->db->where("s.id_jadwal", $id);
+		$query = $this->db->get();
 		return $query;
 	}
 
 	function get_sidang_penguji($id)
 	{
-		$this->db->where("id_jadwal", $id);
-		$query = $this->db->query('SELECT p.id as id, s.nip as nip , s.nama as nama FROM sidang_pkl_penguji p JOIN staff s ON p.nip = s.nip');
+		$this->db->select('p.id as id, s.nip as nip , s.nama as nama');
+		$this->db->from('sidang_pkl_penguji as p');
+		$this->db->join('staff as s','p.nip = s.nip');
+		$this->db->where("p.id_jadwal", $id);
+		$query = $this->db->get();
 		return $query;
 	}
 
-	function tampil_detail_mahasiswa($nim)
+	function tampil_detail_mahasiswa($id)
 	{
-		$this->db->where("nim", $nim);
-		$query = $this->db->get('mahasiswa');
+		$this->db->select('p.kode_pkl as id, m.nim as nim, m.nama_mhs as nama, CONCAT(k.namaklas," ",jns_kls_nama_jnskls) as kelas , p.status as status , i.nama_perusahaan as industri');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('mahasiswa as m','m.nim = p.mahasiswa_nim');
+		$this->db->join('kelas as k','m.kelas_kodeklas = k.kodeklas');
+		$this->db->join('industri as i','p.id_industri = i.industri_id');
+		$this->db->where("p.kode_pkl", $id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+
+	function tampil_nama_mahasiswa($id)
+	{
+		$this->db->where("nim", $id);
+		$query = $this->db->get("mahasiswa");
 		return $query->result_array();
 	}
 
@@ -354,6 +458,13 @@ class Model_pkl extends CI_Model
 		$this->db->where("id", $id);
 		$this->db->update("sidang_pkl", $data);
 	}
+
+	function update_status_mahasiswa($id, $data)
+	{
+		$this->db->where("kode_pkl", $id);
+		$this->db->update("pkl_mhs_dosen", $data);
+	}
+
 
 	function update_perusahaan($id, $data)
 	{
@@ -369,30 +480,26 @@ class Model_pkl extends CI_Model
 
 	function tampil_data_dosen_mhs()
 	{
-		$query = $this->db->query('SELECT p.kode_pkl as id, p.mahasiswa_nim as nim, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim LEFT JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		$this->db->select('p.kode_pkl as id, p.mahasiswa_nim as nim, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('mahasiswa as m','m.nim = p.mahasiswa_nim');
+		$this->db->join('dsn_indstri as i','p.dsn_indstri_kd_dsn = i.kd_dsn','left');
+		$this->db->join('staff as s','p.staff_nip = s.nip');
+		$query = $this->db->get();
 		return $query;
 	}
 
 	function tampil_single_dosen_mhs($id)
 	{
-		$this->db->where("kode_pkl", $id);
-		$query = $this->db->query('SELECT p.kode_pkl as id, p.mahasiswa_nim as nim, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri FROM pkl_mhs_dosen p JOIN mahasiswa m ON m.nim = p.mahasiswa_nim LEFT JOIN dsn_indstri i ON p.dsn_indstri_kd_dsn = i.kd_dsn JOIN staff s ON p.staff_nip = s.nip');
+		$this->db->select('p.kode_pkl as id, p.mahasiswa_nim as nim, m.nama_mhs as nama_mhs, s.nama as dosen_pembimbing, i.nama as dosen_industri');
+		$this->db->from('pkl_mhs_dosen as p');
+		$this->db->join('mahasiswa as m','m.nim = p.mahasiswa_nim');
+		$this->db->join('dsn_indstri as i','p.dsn_indstri_kd_dsn = i.kd_dsn','left');
+		$this->db->join('staff as s',' p.staff_nip = s.nip');
+		$this->db->where('p.kode_pkl', $id);
+		$query = $this->db->get();
 		return $query->result_array();
 	}
 
 	
-	
-	// function delete_single_user($user_id)
-	// {
-	// 	$this->db->where("id", $user_id);
-	// 	$this->db->delete("tbl_sample");
-	// 	if($this->db->affected_rows() > 0)
-	// 	{
-	// 		return true;
-	// 	}
-	// 	else
-	// 	{
-	// 		return false;
-	// 	}
-	// }
 }

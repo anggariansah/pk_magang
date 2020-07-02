@@ -110,7 +110,7 @@
         $.ajax({
             url:"<?php echo base_url(); ?>test_api/action",
             method:"POST",
-            data:{nim:nim, data_action:'tampilDetailMahasiswa'},
+            data:{nim:nim, data_action:'tampilNamaMahasiswa'},
             dataType:"json",
             success:function(data)
             {

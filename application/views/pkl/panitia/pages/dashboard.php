@@ -19,7 +19,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3 id="jmh_bimbingan"></h3>
+                <h3 id="jmh_dosen"></h3>
                 <p>Jumlah Dosen</p>
               </div>
               <div class="icon">
@@ -67,20 +67,20 @@
 
 	$(document).ready(function(){
 		
-		function getJumlahBimbingan()
+		function getJumlahDosen()
 		{
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
-				data:{data_action:'jumlahBimbingan'},
+				data:{data_action:'jumlahDosen'},
 				success:function(data)
 				{
-					$('#jmh_bimbingan').html(data);
+					$('#jmh_dosen').html(data);
 				}
 			});
 		}
 
-		getJumlahBimbingan();
+		getJumlahDosen();
 	});
 
 	$(document).ready(function(){
