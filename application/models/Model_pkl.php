@@ -177,8 +177,11 @@ class Model_pkl extends CI_Model
 
 	function jumlah_bimbingan_pembimbing($nip)
 	{
-		$this->db->where('nip', $nip);
-		$query = $this->db->get('riwayat_bimbingan_pkl');
+		$this->db->select('*');
+		$this->db->from('logbook l');
+		$this->db->join('pkl_mhs_dosen p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl');
+		$this->db->where('p.staff_nip', $nip);
+		$query = $this->db->get();
 		return $query;
 	}
 
@@ -286,10 +289,13 @@ class Model_pkl extends CI_Model
 	}
 
 
-	function jumlah_bimbingan($nim)
+	function jumlah_bimbingan($id)
 	{
-		$this->db->where('nim', $nim);
-		$query = $this->db->get('riwayat_bimbingan_pkl');
+		$this->db->select('*');
+		$this->db->from('logbook l');
+		$this->db->join('pkl_mhs_dosen p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl');
+		$this->db->where('p.kode_pkl', $id);
+		$query = $this->db->get();
 		return $query;
 	}
 
