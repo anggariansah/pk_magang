@@ -43,7 +43,7 @@
 		<div class="form-group">
 			<input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" value="">
 		</div>
-		<div class="form-group">
+        		<div class="form-group">
 			<input type="number" id="tlpn_hotline" name="tlpn_hotline" class="form-control" placeholder="No Telp" value="">
 		</div>
 		<div class="modal-footer">
@@ -60,7 +60,6 @@
 </div>
 
 <!-- TUTUP MODAL TAMBAH DATA -->
-
 
 <script type="text/javascript" language="javascript">
 

@@ -197,6 +197,10 @@
 
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
+		$('#example1').DataTable()
+	});
+
+	$(document).ready(function(){
 
 		function getListPerusahaan()
 		{
@@ -515,6 +519,10 @@
 
     $('div.setup-panel div a.btn-indigo').trigger('click');
 });
+
+	$(document).ready(function(){
+			$('#example1').DataTable()
+		});
 
 </script>
 

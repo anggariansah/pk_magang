@@ -142,7 +142,6 @@
   </nav>
 </div>
 
-
 <!-- <script>
   $(function () {
     $("#example1").DataTable({
