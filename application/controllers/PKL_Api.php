@@ -60,30 +60,99 @@ class PKL_Api extends CI_Controller {
 		echo json_encode($array, true);
 	}
 
+
+	function insertLogbook()
+	{
+		$this->form_validation->set_rules("judul", "judul", "required");
+		$this->form_validation->set_rules("tanggal", "tanggal", "required");
+		$this->form_validation->set_rules("id", "id", "required");
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'uraian' => trim($this->input->post('judul')),
+				'tgl' => trim($this->input->post('tanggal')),
+				'pkl_mhs_dosen_kode_pkl' => trim($this->input->post('id'))
+			);
+			$this->model_pkl->insert_logbook($data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{
+			$array = array(
+				'error'    => true,
+				'judul' => form_error('judul'),
+				'tanggal' => form_error('tanggal'),
+				'id' => form_error('id')
+			);
+		}
+		echo json_encode($array, true);
+	}
+
+
+	function deleteLogbook()
+	{
+		if($this->input->post('id'))
+		{
+			if($this->model_pkl->delete_logbook($this->input->post('id')))
+			{
+				$array = array(
+				'success' => true
+				);
+			}
+			else
+			{
+				$array = array(
+				'error' => true
+				);
+			}
+			echo json_encode($array);
+		}
+	}
+
+
+	function getLogbook()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->get_logbook($this->input->post('id'));
+			echo json_encode($data->result_array());
+		}
+	}
+
+	function getLogbookPembimbing()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->get_logbook_pembimbing($this->input->post('id'));
+			echo json_encode($data->result_array());
+		}
+	}
+
+	
+	
+
 	function getRiwayatBimbingan()
 	{
 		$data = $this->model_pkl->get_riwayat_bimbingan();
-
 		echo json_encode($data->result_array());
 	}
  
 
 	function insertRiwayat()
 	{
-		$this->form_validation->set_rules("judul", "judul", "required");
-		$this->form_validation->set_rules("date", "date", "required");
-		$this->form_validation->set_rules("nim", "nim", "required");
-		$this->form_validation->set_rules("nip", "nip", "required");
+		$this->form_validation->set_rules("id_logbook", "id_logbook", "required");
 		$this->form_validation->set_rules("deskripsi", "deskripsi", "required");
 		$array = array();
 		if($this->form_validation->run())
 		{
 			$data = array(
-				'judul' => trim($this->input->post('judul')),
-				'date' => trim($this->input->post('date')),
-				'nim' => trim($this->input->post('nim')),
-				'nip' => trim($this->input->post('nip')),
-				'deskripsi'  => trim($this->input->post('deskripsi'))
+				'id_logbook' => trim($this->input->post('id_logbook')),
+				'deskripsi'  => trim($this->input->post('deskripsi')),
+				'url_file'  => base64_decode($this->input->post('file')),
+				'pengirim'  => "mahasiswa"
 			);
 			$this->model_pkl->insert_riwayat($data);
 			$array = array(
@@ -94,10 +163,36 @@ class PKL_Api extends CI_Controller {
 		{
 			$array = array(
 				'error'    => true,
-				'judul' => form_error('judul'),
-				'date' => form_error('date'),
-				'nim' => form_error('nim'),
-				'nip' => form_error('nip'),
+				'id_logbook' => form_error('id_logbook'),
+				'deskripsi' => form_error('deskripsi')
+			);
+		}
+		echo json_encode($array, true);
+	}
+
+
+	function insertRiwayatPembimbing()
+	{
+		$this->form_validation->set_rules("id_logbook", "id_logbook", "required");
+		$this->form_validation->set_rules("deskripsi", "deskripsi", "required");
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$data = array(
+				'id_logbook' => trim($this->input->post('id_logbook')),
+				'deskripsi'  => trim($this->input->post('deskripsi')),
+				'pengirim'  => "dosen"
+			);
+			$this->model_pkl->insert_riwayat_pembimbing($data);
+			$array = array(
+				'success'  => true
+			);
+		}
+		else
+		{
+			$array = array(
+				'error'    => true,
+				'id_logbook' => form_error('id_logbook'),
 				'deskripsi' => form_error('deskripsi')
 			);
 		}
@@ -109,58 +204,10 @@ class PKL_Api extends CI_Controller {
 		if($this->input->post('id'))
 		{
 			$data = $this->model_pkl->tampil_riwayat_bimbingan($this->input->post('id'));
-			foreach($data as $row)
-			{
-				$output['judul'] = $row["judul"];
-				$output['date'] = $row["date"];
-				$output['nim'] = $row["nim"];
-				$output['nip'] = $row["nip"];
-				$output['deskripsi'] = $row["deskripsi"];
-			}
-			echo json_encode($output);
+			echo json_encode($data->result_array());
 		}
 	}
 
-	function updateRiwayat()
-	{
-		$this->form_validation->set_rules("judul", "judul", "required");
-		$this->form_validation->set_rules("date", "date", "required");
-		$this->form_validation->set_rules("nim", "nim", "required");
-		$this->form_validation->set_rules("nip", "nip", "required");
-		$this->form_validation->set_rules("deskripsi", "deskripsi", "required");
-
-		$array = array();
-		if($this->form_validation->run())
-		{
-			$data = array(
-
-				'judul' => trim($this->input->post('judul')),
-				'date' => trim($this->input->post('date')),
-				'nim' => trim($this->input->post('nim')),
-				'nip' => trim($this->input->post('nip')),
-				'deskripsi'  => trim($this->input->post('deskripsi'))
-			);
-		
-			$this->model_pkl->update_riwayat($this->input->post('id'), $data);
-
-			$array = array(
-				'success'  => true
-			);
-		}
-		else
-		{
-			$array = array(
-				'error'    => true,
-				'judul' => form_error('judul'),
-				'date' => form_error('date'),
-				'nim' => form_error('nim'),
-				'nip' => form_error('nip'),
-				'deskripsi' => form_error('deskripsi')
-
-			);
-		}
-		echo json_encode($array, true);
-	}
 
 	function deleteRiwayat()
 	{
@@ -179,6 +226,16 @@ class PKL_Api extends CI_Controller {
 				);
 			}
 			echo json_encode($array);
+		}
+	}
+
+	
+	function tampilRiwayatPembimbing()
+	{
+		if($this->input->post('id'))
+		{
+			$data = $this->model_pkl->tampil_riwayat_pembimbing($this->input->post('id'));
+			echo json_encode($data->result_array());
 		}
 	}
 

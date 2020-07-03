@@ -36,9 +36,14 @@ class Model_pkl extends CI_Model
 
 	function tampil_riwayat_bimbingan($id)
 	{
-		$this->db->where("id", $id);
-		$query = $this->db->get('riwayat_bimbingan_pkl');
-		return $query->result_array();
+		$this->db->select('r.id as id, r.pengirim as pengirim, s.nama as nama, r.deskripsi as deskripsi');
+		$this->db->from('riwayat_bimbingan_pkl r');
+		$this->db->join('logbook as l', 'l.id = r.id_logbook');
+		$this->db->join('pkl_mhs_dosen as p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl');
+		$this->db->join('staff as s', 's.nip = p.staff_nip');
+		$this->db->where('id_logbook', $id);
+		$query = $this->db->get();
+		return $query;
 	}
 
 	function insert_riwayat($data)
@@ -54,9 +59,57 @@ class Model_pkl extends CI_Model
 		}
 	}
 
+	function upload_file(){
+		$config['upload_path']          = './upload/product/';
+		$config['overwrite']			= true;
+		$config['max_size']             = 1024;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('image')) {
+			return $this->upload->data("file_name");
+		}
+
+		return NULL;
+	}
+
+
+	function insert_logbook($data)
+	{
+		$this->db->insert('logbook', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function get_logbook($id)
+	{
+		$this->db->where("pkl_mhs_dosen_kode_pkl", $id);
+		$query = $this->db->get('logbook');
+		return $query;
+	}
+
+	function delete_logbook($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->delete("logbook");
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
 
-	
+
 
 	function delete_riwayat($id)
 	{
@@ -71,6 +124,46 @@ class Model_pkl extends CI_Model
 			return false;
 		}
 	}
+
+
+	function get_logbook_pembimbing($id)
+	{
+		$this->db->select('l.id as id, l.tgl as tgl, l.uraian as uraian, m.nama_mhs as nama');
+		$this->db->from('logbook l');
+		$this->db->join('pkl_mhs_dosen as p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl');
+		$this->db->join('mahasiswa as m', 'm.nim = p.mahasiswa_nim');
+		$this->db->where('l.pkl_mhs_dosen_kode_pkl', $id);
+		$query = $this->db->get();
+		return $query;
+	}
+
+
+	function tampil_riwayat_pembimbing($id)
+	{
+		$this->db->select('r.id as id, r.pengirim as pengirim, m.nama_mhs as nama, r.deskripsi as deskripsi');
+		$this->db->from('riwayat_bimbingan_pkl r');
+		$this->db->join('logbook as l', 'l.id = r.id_logbook');
+		$this->db->join('pkl_mhs_dosen as p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl');
+		$this->db->join('mahasiswa as m', 'm.nim = p.mahasiswa_nim');
+		$this->db->where('id_logbook', $id);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function insert_riwayat_pembimbing($data)
+	{
+		$this->db->insert('riwayat_bimbingan_pkl', $data);
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	
 
 
 	//Pembimbing
@@ -505,7 +598,7 @@ class Model_pkl extends CI_Model
 		return $query->result_array();
 	}
 
-	
+
 	function get_profile_dosen($nip)
 	{
 		$this->db->where("nip", $nip);

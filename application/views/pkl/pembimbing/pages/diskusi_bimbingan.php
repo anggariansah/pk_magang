@@ -48,7 +48,7 @@
 					<textarea type="text" class="form-control" id="deskripsi" name="deskripsi"></textarea>
 				</div>
 				<div class="form-group">
-					<input type="file" id="file" name="file">
+						<input type="file" id="InputFile" name="file">
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" name="user_id" id="user_id" />
@@ -68,12 +68,12 @@
 
 $(document).ready(function(){
 
-	function getRiwayatBimbingan()
+	function getRiwayatPembimbing()
 	{
 		$.ajax({
 			url:"<?php echo base_url(); ?>test_api/action",
 			method:"POST",
-			data:{id:<?php echo $_GET['id']; ?>, data_action:'tampilRiwayat'},
+			data:{id:<?php echo $_GET['id']; ?>, data_action:'tampilRiwayatPembimbing'},
 			success:function(data)
 			{
 				$('#diskusi').html(data);
@@ -81,13 +81,13 @@ $(document).ready(function(){
 		});
 	}
 
-	getRiwayatBimbingan();
+	getRiwayatPembimbing();
 
 	$('#add-button').click(function(){
 			$('#user_form')[0].reset();
 			$('#action').val('Add');
 			$('#id_logbook').val(<?php echo $_GET['id']; ?>);
-			$('#data_action').val("insertRiwayat");
+			$('#data_action').val("insertRiwayatPembimbing");
 			$('#modal-tambah').modal('show');
 	});
 
@@ -105,9 +105,9 @@ $(document).ready(function(){
                 {
                     $('#user_form')[0].reset();
                     $('#modal-tambah').modal('hide');
-					getRiwayatBimbingan();
+					getRiwayatPembimbing();
                 
-                    if($('#data_action').val() == "insertRiwayat")
+                    if($('#data_action').val() == "insertRiwayatPembimbing")
                     {
                         $('#success_message').html('<div class="alert alert-success">Data Inserted</div>');
                     }
@@ -122,28 +122,28 @@ $(document).ready(function(){
         })
     });
 
-		$(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-        if(confirm("Are you sure you want to delete this?"))
-        {
-            $.ajax({
-                url:"<?php echo base_url(); ?>test_api/action",
-                method:"POST",
-                data:{id:id, data_action:'deleteRiwayat'},
-                dataType:"JSON",
-                success:function(data)
-                {
-                    if(data.success)
-                    {
-                        $('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
-                        getRiwayatBimbingan();
-                    }
-                }
-            })
-        }
-    });
-
+	$(document).on('click', '.delete', function(){
+		var id = $(this).attr('id');
+		if(confirm("Are you sure you want to delete this?"))
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{id:id, data_action:'deleteRiwayat'},
+				dataType:"JSON",
+				success:function(data)
+				{
+					if(data.success)
+					{
+						$('#success_message').html('<div class="alert alert-success">Data Deleted</div>');
+						getRiwayatPembimbing();
+					}
+				}
+			})
+		}
 	});
+
+});
 
 </script>
 

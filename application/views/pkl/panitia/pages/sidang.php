@@ -1,26 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-
-<script src="<?php echo base_url();?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-  $(function () {
-    $("#example").dataTable();
-  });
-</script>
-
-<script>
-  $(document).ready(function() {
-    $('table.display').DataTable();
-  });
-</script>
-
-</head>
-<body>
-
 
 <div class="container-fluid"> 
 

@@ -61,6 +61,14 @@ class PKL_Mahasiswa extends CI_Controller {
         $this->load->view('pkl/mahasiswa/template/footer');
 	}
 
+	public function diskusi_bimbingan(){
+		$data['title'] = "Riwayat Bimbingan";
+		$this->load->view('pkl/mahasiswa/template/header');
+		$this->load->view('pkl/mahasiswa/template/sidebar',$data);
+        $this->load->view('pkl/mahasiswa/pages/diskusi_bimbingan');
+        $this->load->view('pkl/mahasiswa/template/footer');
+	}
+
 	
 
 }

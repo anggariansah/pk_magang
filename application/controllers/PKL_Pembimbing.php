@@ -46,6 +46,14 @@ class PKL_Pembimbing extends CI_Controller {
         $this->load->view('pkl/pembimbing/template/footer');
 	}
 
+	public function diskusi_bimbingan(){
+		$data['title'] = "Riwayat Bimbingan";
+		$this->load->view('pkl/pembimbing/template/header');
+		$this->load->view('pkl/pembimbing/template/sidebar',$data);
+        $this->load->view('pkl/pembimbing/pages/diskusi_bimbingan');
+        $this->load->view('pkl/pembimbing/template/footer');
+	}
+
 }
 
 /* End of file Controllername.php */
