@@ -77,11 +77,10 @@
 
 <script type="text/javascript" language="javascript">
 
-	var id = "17";
-
+	var id;	
+	var nim = <?php echo $this->session->userdata('nim');?>
 
 	$(document).ready(function(){
-
 
 		function getDetailMahasiswa()
 		{
@@ -92,15 +91,40 @@
 				dataType:"json",
 				success:function(data)
 				{
-					$('#nim-detail').html('<li class="list-group-item" id="nim" name="nim">Nim : '+data.nim+'</li>');          
+					$('#nim-detail').html('<li class="list-group-item" id="nim" name="nim">Nim : '+data.nim+'</li>');
 					$('#nama-detail').html('<li class="list-group-item" id="nama" name="nama">Nama : '+data.nama+'</li>');
 					$('#kelas-detail').html('<li class="list-group-item" id="kelas" name="kelas">Kelas : '+data.kelas+'</li>');
 				}
 			});
 		}
 
+
+		function getIdFromNim()
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>test_api/action",
+				method:"POST",
+				data:{nim:nim, data_action:'getIdFromNim'},
+				dataType:"json",
+				success:function(data)
+				{
+
+					 id = data.id;
+
+					 getDetailMahasiswa();
+					getDetailPerusahaanMahasiswa();
+					getJumlahBimbingan();
+					getStatusMahasiswa();
+				}
+			});
+		}
+
+		getIdFromNim();
+
+
 		function getDetailPerusahaanMahasiswa()
 		{
+			
 			$.ajax({
 				url:"<?php echo base_url(); ?>test_api/action",
 				method:"POST",
@@ -114,12 +138,6 @@
 				}
 			});
 		}
-
-		getDetailMahasiswa();
-		getDetailPerusahaanMahasiswa();
-		getJumlahBimbingan();
-		getStatusMahasiswa();
-
 
 		
 		function getJumlahBimbingan()
@@ -147,32 +165,28 @@
 					var status = data.status;
 
 					if(status == '1'){
-						$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
+						$('#step-1').html('<a href="http://[::1]/pk_magang/pkl_mahasiswa/dashboard" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
 						$('#step-2').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-2">2</a>');
 						$('#step-3').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
 					}
 					else if(status == '2'){
-						$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
-						$('#step-2').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-2">2</a>');
+						$('#step-1').html('<a href="http://[::1]/pk_magang/pkl_mahasiswa/dashboard" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
+						$('#step-2').html('<a href="http://[::1]/pk_magang/pkl_mahasiswa/riwayat_bimbingan" type="button" class="btn btn-success btn-circle" id="step-2">2</a>');
 						$('#step-3').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
 					}
 					else if(status == '3'){
-						$('#step-1').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
-						$('#step-2').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-2">2</a>');
-						$('#step-3').html('<a href="#step-9" type="button" class="btn btn-success btn-circle" id="step-3">3</a>');
+						$('#step-1').html('<a href="http://[::1]/pk_magang/pkl_mahasiswa/dashboard" type="button" class="btn btn-success btn-circle" id="step-1">1</a>');
+						$('#step-2').html('<a href="http://[::1]/pk_magang/pkl_mahasiswa/riwayat_bimbingan" type="button" class="btn btn-success btn-circle" id="step-2">2</a>');
+						$('#step-3').html('<a href="http://[::1]/pk_magang/pkl_mahasiswa/jadwalsidang" type="button" class="btn btn-success btn-circle" id="step-3">3</a>');
 					}
 					else{
-						$('#step-1').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-1">1</a>');
-						$('#step-2').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-2">2</a>');
-						$('#step-3').html('<a href="#step-9" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
+						$('#step-1').html('<a href="" type="button" class="btn btn-default btn-circle" id="step-1">1</a>');
+						$('#step-2').html('<a href="" type="button" class="btn btn-default btn-circle" id="step-2">2</a>');
+						$('#step-3').html('<a href="" type="button" class="btn btn-default btn-circle" id="step-3">3</a>');
 					}
 				}
 			});
 		}
-
-		
-
-
 
 
 	});

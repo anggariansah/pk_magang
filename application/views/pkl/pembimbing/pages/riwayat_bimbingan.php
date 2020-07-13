@@ -69,11 +69,9 @@
 
 <script type="text/javascript">
 
-var id = "17";
+var id = "24";
 
 $(document).ready(function(){
-
-
 
 	function getLogbookPembimbing()
 	{

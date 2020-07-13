@@ -6,7 +6,7 @@
 	<button id="add-button" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus-circle"></i> Tambah Dosen</button>
 	<br>
 	<br>
-	<table class="table table-bordered table-striped" id="example1">
+	<table class="table table-bordered table-striped">
 	<thead>
 			<tr>
 				<th>Id PKLs</th>
@@ -56,7 +56,7 @@
               	<div class="modal-footer">
 			 	<input type="hidden" name="user_id" id="user_id" />
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<input type="hidden" name="data_action" id="data_action" value="Insert" />
+				<input type="hidden" name="data_action" id="data_action" value="insertDosenPembimbing" />
 				<input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
 				</div>
             </form>
@@ -67,10 +67,6 @@
         <!-- TUTUP MODAL TAMBAH DATA -->
 
 <script type="text/javascript" language="javascript">
-
-    $(document).ready(function(){
-		$('#example1').DataTable()
-	});
 
 	$(document).ready(function(){
 
@@ -121,17 +117,19 @@
             {
 
 				if(data.error == "true"){
-
-					$('#nama').val("");
+					
+					$('#nama').val("");			
 
 				}else{
 
 					$('#nama').val(data.nama);
-				}
 
+				}
+			
 			}
         })
     });
+
 
 	$(document).on('click', '.edit', function(){
         var id = $(this).attr('id');

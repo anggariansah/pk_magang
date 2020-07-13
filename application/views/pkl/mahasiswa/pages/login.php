@@ -1,17 +1,17 @@
+<!-- Font Awesome -->  <!-- Ionicons -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-</body>
+	<!-- jQuery -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/demo.js"></script>
 </head>
-</html>
 	<title>LOGIN SIAPKL</title>
 <style>
 	body {
@@ -24,7 +24,7 @@
         background: #fbfbfb;;
         border-radius: 8px;
         box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-        height: 440px;
+        height: 550px;
         margin: 6rem auto 8.1rem auto;
         width: 365px;
 	}
@@ -104,24 +104,26 @@ label {
 </head>
 <body>
 <div id="login">
+<span id="success_message"></span>
 <div id="card-content">
   <div id="card-title">
     <h2>LOGIN</h2>
     <div class="underline-title"></div>
   </div><br>
 
-  <label for="user-email">&nbsp;NIP</label><br>
+  <form method="post" id="login_form">
+  <label for="nim">&nbsp;NIM</label><br>
   <input
-   id="user-email"
+   id="nim"
    class="form-content"
-   type="email"
-   name="email"
+   type="nim"
+   name="nim"
    required />
   <div class="form-border"></div><br>
 
-  <label for="user-password">&nbsp;Password</label><br>
+  <label for="password">&nbsp;Password</label><br>
   <input
-   id="user-password"
+   id="password"
    class="form-content"
    type="password"
    name="password"
@@ -129,11 +131,47 @@ label {
   <div class="form-border"></div>
 
 <a href="#"><legend id="forgot-pass">Lupa password?</legend></a>
-<input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-<a href="<?php echo site_url("daftar")?>" id="signup"><br>Belum punya akun?</a>
+<input type="hidden" name="data_action" id="data_action" value="LoginMahasiswa" />
+<input type="submit" name="action" id="submit-btn" class="btn btn-success" value="Login" />
+<a href="<?php echo site_url("daftar")?>" id="signup"><br>Belum Daftar PKL? Daftar Disini</a>
+</form>
+
 </div>
 
 	
 </div>
-</body>
-</html>
+
+<script type="text/javascript" language="javascript">
+
+$(document).ready(function(){
+
+	$(document).on('submit', '#login_form', function(event){
+        event.preventDefault();
+        $.ajax({
+            url:"<?php echo base_url() . 'test_api/action' ?>",
+            method:"POST",
+            data:$(this).serialize(),
+            dataType:"json",
+            success:function(data)
+            {
+							
+                if($('#data_action').val() == "LoginMahasiswa")
+				{
+					if(data.error == "true"){
+						$('#success_message').html('<div class="alert alert-danger">Nim Atau Password Salah!</div>');
+					}else{
+						window.location.href="http://[::1]/pk_magang/pkl_mahasiswa";
+					}
+				}
+            }
+        })
+    });
+
+		
+
+});
+
+</script>
+
+
+

@@ -104,7 +104,8 @@
 
       <script type="text/javascript" language="javascript">
 
-				var id = "17";
+				var id;
+				var nim = <?php echo $this->session->userdata('nim');?>
 
       
 				function getListPerusahaan()
@@ -189,9 +190,27 @@
 				}
 
 
-				getListPerusahaan();
-				getDetailDosenIndustri();
-				getDetailDosenPembimbing();
+				function getIdFromNim()
+				{
+					$.ajax({
+						url:"<?php echo base_url(); ?>test_api/action",
+						method:"POST",
+						data:{nim:nim, data_action:'getIdFromNim'},
+						dataType:"json",
+						success:function(data)
+						{
+
+							id = data.id;
+
+							getListPerusahaan();
+							getDetailDosenIndustri();
+							getDetailDosenPembimbing();
+
+						}
+					});
+				}
+
+				getIdFromNim();
 
 				$(document).on('submit', '#user_form', function(event){
     				event.preventDefault();

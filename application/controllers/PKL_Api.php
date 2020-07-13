@@ -985,6 +985,27 @@ class PKL_Api extends CI_Controller {
 		}
 	}
 
+	function getIdFromNim()
+	{
+		if($this->input->post('nim'))
+		{
+			$data = $this->model_pkl->get_id_from_nim($this->input->post('nim'));
+
+			if(count($data) > 0){
+				foreach($data as $row)
+				{
+					$output['error'] = "false";
+
+					$output['id'] = $row["kode_pkl"];
+				}
+			}else {
+					$output['error'] = "true";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
 	function getDetailPerusahaanMahasiswa()
 	{
 		if($this->input->post('id'))
@@ -1088,6 +1109,87 @@ class PKL_Api extends CI_Controller {
 				}
 			}else {
 					$output['error'] = "true";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
+
+	function LoginMahasiswa()
+	{	
+		$this->form_validation->set_rules("nim", "nim", "required");
+		$this->form_validation->set_rules("password", "password", "required");
+
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$nim = trim($this->input->post('nim'));
+			$password  = trim($this->input->post('password'));
+	
+			$data = $this->model_pkl->login_mahasiswa($nim, $password);
+
+			if(count($data) > 0){
+			
+				$output['error'] = "false";
+				
+			}else {
+
+				$output['error'] = "true";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
+
+	function LoginPanitia()
+	{	
+		$this->form_validation->set_rules("nip", "nip", "required");
+		$this->form_validation->set_rules("password", "password", "required");
+
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$nip = trim($this->input->post('nip'));
+			$password  = trim($this->input->post('password'));
+	
+			$data = $this->model_pkl->login_panitia($nip, $password);
+
+			if(count($data) > 0){
+			
+				$output['error'] = "false";
+				
+			}else {
+
+				$output['error'] = "true";
+			}
+			
+			echo json_encode($output);
+		}
+	}
+
+
+	function LoginPembimbing()
+	{	
+		$this->form_validation->set_rules("nip", "nip", "required");
+		$this->form_validation->set_rules("password", "password", "required");
+
+		$array = array();
+		if($this->form_validation->run())
+		{
+			$nip = trim($this->input->post('nip'));
+			$password  = trim($this->input->post('password'));
+	
+			$data = $this->model_pkl->login_pembimbing($nip, $password);
+
+			if(count($data) > 0){
+			
+				$output['error'] = "false";
+				
+			}else {
+
+				$output['error'] = "true";
 			}
 			
 			echo json_encode($output);

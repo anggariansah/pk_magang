@@ -6,6 +6,7 @@ class Test_api extends CI_Controller {
  function index()
  {
   $this->load->view('api_view');
+  $this->load->library('session');
  } 
 
  function action(){
@@ -905,6 +906,24 @@ class Test_api extends CI_Controller {
 
 			}
 
+			if($data_action == "getIdFromNim")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/getIdFromNim";
+				$form_data = array(
+					'nim'  => $this->input->post('nim')
+				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
 			if($data_action == "getDetailPerusahaanMahasiswa")
 			{
 				$api_url = "http://localhost/pk_magang/pkl_api/getDetailPerusahaanMahasiswa";
@@ -986,6 +1005,70 @@ class Test_api extends CI_Controller {
 				$form_data = array(
 					'nim'  => $this->input->post('nim')
 				);
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+
+			if($data_action == "LoginMahasiswa")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/LoginMahasiswa";
+				$form_data = array(
+					'nim'  => $this->input->post('nim'),
+					'password'  => $this->input->post('password')
+				);
+
+				$this->session->set_userdata('nim',$this->input->post('nim'));
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "LoginPanitia")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/LoginPanitia";
+				$form_data = array(
+					'nip'  => $this->input->post('nip'),
+					'password'  => $this->input->post('password')
+				);
+
+				$this->session->set_userdata('nip_panitia',$this->input->post('nip'));
+
+				$client = curl_init($api_url);
+				curl_setopt($client, CURLOPT_POST, true);
+				curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+				curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($client);
+				curl_close($client);
+
+				echo $response;
+
+			}
+
+			if($data_action == "LoginPembimbing")
+			{
+				$api_url = "http://localhost/pk_magang/pkl_api/LoginPembimbing";
+				$form_data = array(
+					'nip'  => $this->input->post('nip'),
+					'password'  => $this->input->post('password')
+				);
+
+				$this->session->set_userdata('nip_pembimbing',$this->input->post('nip'));
 
 				$client = curl_init($api_url);
 				curl_setopt($client, CURLOPT_POST, true);
@@ -1187,7 +1270,7 @@ class Test_api extends CI_Controller {
 				else{
 						$output .= '
 						<tr>
-							<td colspan="2" align="center">No Data Found</td>
+							<td colspan="4" align="center">No Data Found</td>
 						</tr>
 						';
 				}

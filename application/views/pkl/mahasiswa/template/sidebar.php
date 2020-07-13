@@ -79,10 +79,30 @@
 
 <script type="text/javascript" language="javascript">
 
-var id = "1";
-
+var id;
+var nim = <?php echo $this->session->userdata('nim');?>;
 
 $(document).ready(function(){
+
+	function getIdFromNim()
+	{
+		$.ajax({
+			url:"<?php echo base_url(); ?>test_api/action",
+			method:"POST",
+			data:{nim:nim, data_action:'getIdFromNim'},
+			dataType:"json",
+			success:function(data)
+			{
+
+				id = data.id;
+
+				getDetailMahasiswa();
+
+			}
+		});
+	}
+
+	getIdFromNim();
 
 		function getDetailMahasiswa()
 		{
@@ -98,7 +118,6 @@ $(document).ready(function(){
 			});
 		}
 
-		getDetailMahasiswa();
 
 });
 

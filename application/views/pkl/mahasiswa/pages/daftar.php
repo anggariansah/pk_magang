@@ -82,7 +82,7 @@
 
     	<div class="card-footer">
 		<input type="hidden" name="data_action" id="data_action" value="insertPendaftaran" />
-		<input type="submit" name="btn-daftar" id="btn-daftar" class="btn btn-primary" value="Add" />
+		<input type="submit" name="btn-daftar" id="btn-daftar" class="btn btn-primary" value="Daftar" />
       </div>
     </form>
     </div>
@@ -199,11 +199,11 @@
                 if(data.success)
                 {
 									
-                    $('#daftar_form')[0].reset();
-					window.location.href="http://[::1]/pk_magang/pkl_mahasiswa";
-                    fetch_data();
                     if($('#data_action').val() == "insertPendaftaran")
                     {
+
+						$('#daftar_form')[0].reset();
+						window.location.href="http://[::1]/pk_magang/login/login_mahasiswa";
 						
                     }
                 }

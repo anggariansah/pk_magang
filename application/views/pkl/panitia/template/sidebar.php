@@ -95,7 +95,7 @@
 
 <script type="text/javascript" language="javascript">
 
-var nip = "12345";
+var nip = <?php echo $this->session->userdata('nip_panitia');?>;
 
 
 $(document).ready(function(){

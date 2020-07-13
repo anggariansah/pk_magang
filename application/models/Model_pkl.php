@@ -37,10 +37,10 @@ class Model_pkl extends CI_Model
 	function tampil_riwayat_bimbingan($id)
 	{
 		$this->db->select('r.id as id, r.pengirim as pengirim, s.nama as nama, r.deskripsi as deskripsi');
-		$this->db->from('riwayat_bimbingan_pkl r');
-		$this->db->join('logbook as l', 'l.id = r.id_logbook');
-		$this->db->join('pkl_mhs_dosen as p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl');
-		$this->db->join('staff as s', 's.nip = p.staff_nip');
+		$this->db->from('riwayat_bimbingan_pkl r','left');
+		$this->db->join('logbook as l', 'l.id = r.id_logbook', 'left');
+		$this->db->join('pkl_mhs_dosen as p', 'p.kode_pkl = l.pkl_mhs_dosen_kode_pkl','left');
+		$this->db->join('staff as s', 's.nip = p.staff_nip','left');
 		$this->db->where('id_logbook', $id);
 		$query = $this->db->get();
 		return $query;
@@ -582,6 +582,13 @@ class Model_pkl extends CI_Model
 		return $query->result_array();
 	}
 
+	function get_id_from_nim($nim)
+	{
+		$this->db->where("mahasiswa_nim", $nim);
+		$query = $this->db->get("pkl_mhs_dosen");
+		return $query->result_array();
+	}
+
 	function tampil_detail_perusahaan_mahasiswa($id)
 	{
 		$this->db->select('i.nama_perusahaan as nama, i.alamat as alamat, i.tlpn_hotline as telp');
@@ -630,6 +637,34 @@ class Model_pkl extends CI_Model
 		$query = $this->db->get("mahasiswa");
 		return $query->result_array();
 	}
+
+	function login_mahasiswa($nim, $password)
+	{
+		$this->db->select('*');
+		$this->db->from('pkl_mhs_dosen p');
+		$this->db->join('mahasiswa m','p.mahasiswa_nim = m.nim');
+		$this->db->where('m.nim', $nim);
+		$this->db->where('m.password', $password);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	function login_panitia($nip, $password)
+	{
+		$this->db->where("nip", $nip);
+		$this->db->where("password", $password);
+		$query = $this->db->get("staff");
+		return $query->result_array();
+	}
+
+	function login_pembimbing($nip, $password)
+	{
+		$this->db->where("nip", $nip);
+		$this->db->where("password", $password);
+		$query = $this->db->get("staff");
+		return $query->result_array();
+	}
+
 
 
 	function update_sidang($id, $data)
